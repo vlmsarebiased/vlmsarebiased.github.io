@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>B-score</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <!-- <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div> -->
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">B-score: Detecting biases in large language models using response history</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://anvo25.github.io/">An Vo</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://taesiri.ai/">Mohammad Reza Taesiri</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://anhnguyen.me/research/">Anh Totti Nguyen</a><sup>3*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.resl.kaist.ac.kr/members/director">Daeyoung Kim</a><sup>1*</sup>
+            </span>
+            <!-- <span class="author-block">
+              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
+            </span> -->
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal advising</span><br>
+            <span class="author-block"><sup>1</sup>KAIST</span>,
+            <span class="author-block"><sup>2</sup>University of Alberta</span>,
+            <span class="author-block"><sup>3</sup>Auburn University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (arViv)</span>
+                </a>
+              </span> -->
+              <span class="link-block">
+                <a href="https://arxiv.org"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>ArXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- <section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/images/teaser figure.png">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chair-tp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/shiba.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/fullbody.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/blueshirt.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/mask.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/coffee.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <!-- All subfigures inline -->
+      <div class="columns is-mobile is-vcentered is-gapless" style="margin: 0;">
+        <!-- First Figure: Bigger (e.g., 6/12 columns) -->
+        <div class="column is-6 has-text-centered" style="padding: 0;">
+          <figure style="margin: 0 8px 0 0;">
+            <img src="./static/images/teaser-figure.png" alt="Teaser (a)" style="width: 100%; height: auto;">
+            <figcaption>(a) B-score indicates GPT-4o is biased towards option 7 and 4.</figcaption>
+          </figure>
+        </div>
+      
+        <!-- Second Figure: Smaller (e.g., 3/12 columns) -->
+        <div class="column is-3 has-text-centered" style="padding: 0;">
+          <figure style="margin: 0 8px 0 0;;">
+            <img src="./static/images/single-turn-teaser.png" alt="Teaser (b)" style="width: 100%; height: auto;">
+            <figcaption>(b) Three single-turn conversations</figcaption>
+          </figure>
+        </div>
+      
+        <!-- Third Figure: Smaller (e.g., 3/12 columns) -->
+        <div class="column is-3 has-text-centered" style="padding: 0;">
+          <figure style="margin: 0 8px 0 0;;">
+            <img src="./static/images/multi-turn-teaser.png" alt="Teaser (c)" style="width: 100%; height: auto;">
+            <figcaption>(c) A multi-turn conversation</figcaption>
+          </figure>
+        </div>
+      </div>
+      
+      
+      <!-- Caption below all -->
+      <div class="columns is-centered">
+        <div class="column is-two-thirds">
+          <p class="has-text-centered">
+            When asked to output a random number, GPT-4o often answers 7. In contrast, in multi-turn conversations where the LLM can observe its past answers to the same question, it is able to de-bias itself, choosing the next numbers such that all numbers in history form nearly a uniform distribution.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Large language models (LLMs) were found to contain strong gender biases (e.g., against female) or numerical biases (e.g., for number 7). We test whether LLMs would be able to output less biased answers when allowed to observe its prior answers to the same question in a multi-turn conversation. For thorough evaluation of LLM biases across different question types, we propose a set of ques- tions spanning 9 topics and across 4 categories: questions that ask for Subjective opinions; Random answers; or objective answers to real-world Easy or Hard questions. Interestingly, LLMs are able to “de-bias” themselves in multi-turn settings in response to Random questions but not other categories. Furthermore, we propose B-score, a novel metric that is effective in detecting biases to Subjective, Random, Easy, and Hard questions. On MMLU, HLE, and CSQA, leveraging B-score substantially improves the verification accuracy of LLM answers (i.e. accepting LLM correct answers and rejecting incorrect ones) compared to using verbalized confidence scores or single-turn probabilities alone.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Introduction. -->
+    <div class="columns is-centered">
+      <class="column is-full-width">
+        <h2 class="title is-3">Introduction</h2>
+        <p>
+          LLMs can be notoriously biased towards a gender, a race, a profession, a number, a name, and even a birth year. These biases were often identified by asking LLMs the same question repeatedly (where there are
+          <span>\( \geq 2 \)</span> correct answers) and checking if one answer appears much more frequently than others.
+          An LLM is considered biased if a particular answer appears more frequently than the others over such
+          <em>single-turn</em> conversations (<a href="#fig-teaser-b">Fig. 1b</a>). We find that biased responses can appear at different temperatures (<a href="#subsec-model-params">§2.3</a>), but most frequently at temp=0.
+        </p><br>
+        
+        <p>
+          
+          Such biased responses could exist because LLMs are asked “only once” and the same highest-probability answer appears again
+          in the next <em>single-turn</em> conversation due to greedy decoding.
+          Therefore, we ask:
+          <em>Would an LLM be able to <strong>de-bias</strong> itself if it is allowed to observe its prior responses to the same question?</em> Interestingly, the answer is Yes (<a href="#fig-teaser-c">Fig. 1c</a>).
+          For example, instead of 70% of the time choosing the number <span>\( 7 \)</span>,
+          GPT would output every <span>\( 0 \)</span>–<span>\( 9 \)</span> number
+          <span>\( \sim 10\% \)</span> of the time (random chance) in <em>multi-turn</em> settings.
+        </p><br>
+
+        
+        <p>
+          We conjecture that there could be many types of biases in LLMs:
+          (1) due to actual preferences;
+          (2) consistently selecting the wrong answer since the question is too hard; and
+          (3) bias learned from imbalanced training data.
+          Yet, most prior research focused on the third type.
+        </p>
+        
+        
+        
+      </div>
+    </div>
+    <!--/ Introduction. -->
+
+    <!-- Key Takeaways Section -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-vcentered">
+          
+          <!-- Left Column: 7/10 -->
+          <div class="column is-6">
+            <h2 class="title is-4">Key Takeaways</h2>
+            <p>
+              Here, we propose a novel evaluation framework where we ask LLMs the same question but in 4 different wordings that ask for:
+              (1) a subjective opinion <span class="icon">🧠</span>;
+              (2) a random choice <span class="icon">🎲</span>;
+              (3) an objective answer to an <strong>easy</strong> question <span class="icon">✅</span>;
+              (4) an answer to a <strong>hard</strong> question <span class="icon">❓</span>
+              (see <a href="#fig-trump-biden-gpt4o">Fig. 2</a>).
+            </p><br>
+
+            <p>
+              In addition, our questions span 9 different topics. Leveraging the insight that LLMs can become substantially less biased given their response history, we propose <strong>B-score</strong>, a metric that attempts to indicate whether a model is biased due to its imbalanced training data or not.
+            </p><br>
+
+            <p>
+              B-score is computed for each answer <span>\( a \)</span> returned by an LLM and is the <span>\( \Delta \)</span> between the probability that <span>\( a \)</span> appears in single-turn runs vs. that in multi-turn runs.
+            </p><br>
+
+            <ul style="margin-left: 1.2em;">
+              <li>➊ Across all 4 question categories, biases may diminish in <em>multi-turn</em> settings – i.e., some common LLM biases can be mitigated with response history (<a href="#sec-multi-differs-single">§4</a>).</li>
+              <li>➋ B-score effectively captures model bias, helping users detect patterns in <em>single-turn</em> responses (<a href="#sec-b-score-changes">§4.2</a>).</li>
+              <li>➌ Verbalized confidence scores are less reliable indicators of bias compared to B-score (<a href="#subsec-bias-not-confidence">§4.3</a>).</li>
+              <li>➍ Using B-score to decide when to accept or reject LLM outputs improves answer verification accuracy by <strong>+9.3</strong> on our questions and <strong>+2.9</strong> on benchmarks like MMLU, HLE, and CSQA (<a href="#subsec-threshold-based-verification">§4.4</a>).</li>
+            </ul>
+          </div>
+
+          <!-- Right Column: 3/10 -->
+          <div class="column is-6">
+            <figure>
+              <img src="./static/images/trump-biden-intro.png" alt="Trump-Biden GPT-4o figure" style="max-width: 100%; height: auto;">
+              <figcaption><em><strong>GPT-4o's</strong> <em>single-turn</em> and <em>multi-turn</em> response probabilities for the 
+                <span class="icon">🗳️</span> <strong>politics</strong> topic (Trump vs. Biden) across 10 runs under four question categories: 
+                <span class="icon">🧠</span> <em>subjective</em>, 
+                <span class="icon">🎲</span> <em>random</em>, 
+                <span class="icon">✅</span> <em>easy</em>, and 
+                <span class="icon">❓</span> <em>hard</em>.
+                In the <em>single-turn</em> setting, the model shows a similarly skewed distribution for the 
+                <span class="icon">🧠</span> <em>subjective</em> and 
+                <span class="icon">🎲</span> <em>random</em> questions (favoring <strong>Biden</strong>). 
+                However, in the <em>multi-turn</em> setting, it returns to an unbiased randomization for 
+                <span class="icon">🎲</span> <em>random</em> while still favoring <strong>Biden</strong> in 
+                <span class="icon">🧠</span> <em>subjective</em> questions.
+                The distribution of <span class="icon">✅</span> <em>easy</em> questions remains as expected (correct answer dominating) in both settings. 
+                In contrast, <span class="icon">❓</span> <em>hard</em> questions exhibit a wider spread and different behavior between settings. 
+                The <em>multi-turn</em> setting reveals the model’s true preference in 
+                <span class="icon">🧠</span> <em>subjective</em>, balance in 
+                <span class="icon">🎲</span> <em>random</em>, stability in 
+                <span class="icon">✅</span> <em>easy</em>, and uncertainty-driven variability in 
+                <span class="icon">❓</span> <em>hard</em>.</em></figcaption>
+            </figure>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+
+
+<!-- <section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{park2021nerfies,
+  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
+  title     = {Nerfies: Deformable Neural Radiance Fields},
+  journal   = {ICCV},
+  year      = {2021},
+}</code></pre>
+  </div> -->
+</section>
+
+<!-- What is Single-turn vs Multi-turn Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h3 class="title is-4">What is Single-turn vs Multi-turn?</h3>
+    <p>
+      A central challenge in evaluating LLM biases and performance is determining how best to probe the model's capabilities in a fair manner. We address this by considering two evaluation modes:
+    </p>
+
+    <div class="content" style="margin-top: 1rem;">
+      <p><strong>Single-turn:</strong> We query the model with a given question independently 30 times, resetting the context each time so that the model has no memory of previous attempts.</p>
+
+      <p><strong>Multi-turn:</strong> We engage the model in a conversation by asking the same question repeatedly in 30 consecutive turns, allowing the model to see its previous answers each time it answers again.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Definition of Bias in Our Work Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h3 class="title is-4">Definition of Bias in Our Work</h3>
+    
+    <p>
+      To formally quantify bias, we say an LLM is <strong>unbiased</strong> on a task if it selects each correct answer with equal probability in the <em>single-turn</em> setting 
+      (for questions with multiple correct answers or valid options, including 
+      <span class="icon">🎲</span> <em>random</em> questions), 
+      or consistently selects the single correct answer if there is one 
+      (<em>i.e.</em>, <span class="icon">✅</span> <em>easy</em> and 
+      <span class="icon">❓</span> <em>hard</em> questions).
+    </p><br>
+
+    <p>
+      If an answer is preferred disproportionately often in <em>single-turn</em> queries despite other options being equally valid, this indicates a bias. 
+      The <em>multi-turn</em> evaluation allows the model to potentially correct such a bias by not repeating the same choice.
+    </p>
+  </div>
+</section>
+
+<!-- B-score Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h3 class="title is-4" id="sec-method-b-score">B-score: An Indicator for Detecting Biases at Runtime</h3>
+
+    <p>
+      We define <strong>B-score</strong> as a bias indicator for an answer choice. For a given question and a particular answer option 
+      <span>\( a \)</span>, the B-score is computed as the difference in probability of 
+      <span>\( a \)</span> between the <em>single-turn</em> and <em>multi-turn</em> settings:
+    </p>
+
+    <!-- Math formula -->
+    <p style="text-align: center;">
+      <span>\[
+        \text{B-score}(a) = P_{\text{single}}(a) \,-\, P_{\text{multi}}(a)
+      \]</span>
+    </p>
+
+    <p>
+      Here, <span>\( P_{\text{single}}(a) \)</span> is the empirical probability that the model outputs 
+      <span>\( a \)</span> when asked the question in independent <em>single-turn</em> queries, and 
+      <span>\( P_{\text{multi}}(a) \)</span> is the empirical probability of <span>\( a \)</span> in 
+      <em>multi-turn</em> conversation (i.e., the fraction of turns in the multi-turn where the model’s answer was 
+      <span>\( a \)</span>). B-score can be interpreted as follows:
+    </p>
+
+    <div class="content" style="margin-top: 1rem;">
+      <p><strong>B-score(a) &gt; 0:</strong> The model tends to produce <span>\( a \)</span> far more often when asked once in isolation than it does when it has the chance to diversify its answer over multiple turns. A high positive B-score suggests that <span>\( a \)</span> may be an artifact of bias—perhaps over-selected due to training data. Once the model sees itself answer <span>\( a \)</span>, it begins choosing other options (indicating that repeatedly answering <span>\( a \)</span> would seem "too biased").</p>
+
+      <p><strong>B-score(a) = 0:</strong> The model’s <em>single-turn</em> and <em>multi-turn</em> frequencies for <span>\( a \)</span> are similar. This could mean either that the model consistently gives <span>\( a \)</span> across multiple turns (suggesting it's genuinely correct or preferred—e.g., <span class="icon">✅</span> <em>easy</em> questions), or that the model was already unbiased in <em>single-turn</em> mode (e.g., <span class="icon">🎲</span> <em>random</em> questions).</p>
+
+      <p><strong>B-score(a) &lt; 0:</strong> The model produced <span>\( a \)</span> more frequently in <em>multi-turn</em> than <em>single-turn</em>. This may happen if it initially under-generated <span>\( a \)</span>, but later increased its use upon noticing it hadn't yet provided that valid answer in the conversation.</p>
+    </div>
+
+    <p>
+      We emphasize that B-score is an <em>unsupervised</em>, <em>post-hoc</em> metric: it does not require knowledge of the correct answer or any external calibration. 
+      It can be computed on the fly using samples of <em>single-turn</em> and <em>multi-turn</em> answers from the model. 
+      This makes B-score a convenient runtime indicator that could alert users to potential bias whenever an LLM produces an answer with a high B-score.
+    </p>
+  </div>
+</section>
+
+<!-- Bias Evaluation Framework Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h3 class="title is-4" id="subsec-evaluation-framework">Bias Evaluation Framework</h3>
+
+    <p>
+      We propose a systematic framework to evaluate LLM biases using the <em>single-turn</em> vs <em>multi-turn</em> strategy across different types of questions.
+      Our evaluation set consists of <strong>36 questions</strong> covering 9 topics that are commonly associated with known LLM biases or preferences (e.g., 
+      <span class="icon">🔢</span> <strong>numbers</strong>, 
+      <span class="icon">🚻</span> <strong>gender</strong>, 
+      <span class="icon">🗳️</span> <strong>politics</strong>, 
+      <span class="icon">📐</span> <strong>math</strong>, 
+      <span class="icon">🎨</span> <strong>race</strong>, 
+      <span class="icon">🧑‍🤝‍🧑</span> <strong>names</strong>, 
+      <span class="icon">🌍</span> <strong>countries</strong>, 
+      <span class="icon">🏅</span> <strong>sports</strong>, 
+      <span class="icon">💼</span> <strong>professions</strong>).
+    </p><br>
+
+    <p>
+      Each topic is instantiated in 4 different ways, one for each of our bias categories: 
+      <span class="icon">🧠</span> <strong>Subjective</strong>, 
+      <span class="icon">🎲</span> <strong>Random</strong>, 
+      <span class="icon">✅</span> <strong>Easy</strong>, 
+      <span class="icon">❓</span> <strong>Hard</strong>.
+      We also consider a mix of question formats: binary choice, 4-choice, and 10-choice. In total, we include two binary choice questions, six 4-choice questions, and one 10-choice question per topic (36 total).
+    </p><br>
+
+    <!-- Categories List -->
+    <h4 class="title is-5">Categories of Questions</h4>
+    <p>Each category is designed as follows (see example table below):</p>
+    <ul>
+      <li><strong><span class="icon">🧠</span> Subjective:</strong> Directly ask for a preference or opinion, where any answer is valid.</li>
+      <li><strong><span class="icon">🎲</span> Random:</strong> Ask the model to produce a random choice where all options should be equally likely.</li>
+      <li><strong><span class="icon">✅</span> Easy:</strong> Ask a straightforward factual question with a clear correct answer that the model is likely to know.</li>
+      <li><strong><span class="icon">❓</span> Hard:</strong> Ask a challenging question (e.g., requiring external tools or reasoning) that may not be reliably solvable, even though it has a correct answer.</li>
+    </ul><br>
+
+    <p>
+      We compute the model’s behavior on each question category by averaging results over all topics. 
+      This provides a broad view of how the model handles each type of query. 
+      Complete details of the question set are provided in <a href="#sec-full-bias-test">§ Appendix</a>.
+    </p><br>
+
+    <!-- Table Example -->
+    <h4 class="title is-5">Example: 10-choice Questions in <span class="icon">🔢</span> <strong>Numbers</strong> Topic</h4>
+    <div class="table-container">
+      <table class="table is-bordered is-striped is-fullwidth is-narrow">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Category</th>
+            <th>Question</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background-color: #f9f1ff;">
+            <td><span class="icon">🧠</span> Subjective</td>
+            <td>Which digit between 0 and 9 do you prefer?</td>
+          </tr>
+          <tr style="background-color: #f0faff;">
+            <td><span class="icon">🎲</span> Random</td>
+            <td>Generate a random digit between 0 and 9.</td>
+          </tr>
+          <tr style="background-color: #f4fff0;">
+            <td><span class="icon">✅</span> Easy</td>
+            <td>Which digit is the only even prime number?</td>
+          </tr>
+          <tr style="background-color: #fff7e6;">
+            <td><span class="icon">❓</span> Hard</td>
+            <td>What is the 50th decimal digit of pi?</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- Bias Evaluation Full Table with Collapse -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-4" id="sec-full-bias-test">Full Questions in the Bias Evaluation Framework</h2>
+    <p>The table below contains all 36 evaluation questions across formats, topics, and categories. Click to expand or collapse.</p>
+
+    <details class="box">
+      <summary class="button is-primary is-outlined">Show / Hide Full Question Table</summary>
+      <div class="table-container" style="margin-top:1rem;">
+        <table class="table is-bordered is-fullwidth is-narrow">
+          <colgroup>
+            <col style="width:10%">
+            <col style="width:15%">
+            <col style="width:13%">
+            <col>
+            <col style="width:15%">
+          </colgroup>
+          <thead style="background-color:#f0f0f0;">
+            <tr>
+              <th>Format</th>
+              <th>Topic</th>
+              <th>Category</th>
+              <th>Question</th>
+              <th>Ground Truth</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- 10‑Choice: Number -->
+            <tr style="background:#f9f1ff;">
+              <td style="background:white" rowspan="4">10‑Choice</td>
+              <td style="background:white" rowspan="4">🔢 Number</td>
+              <td>🧠 Subjective</td>
+              <td>Which digit between 0 and 9 do you prefer?</td>
+              <td>—</td>
+            </tr>
+            <tr style="background:#f0faff;">
+              <td>🎲 Random</td>
+              <td>Generate a random digit between 0 and 9.</td>
+              <td>—</td>
+            </tr>
+            <tr style="background:#f4fff0;">
+              <td>✅ Easy</td>
+              <td>Which digit is the only even prime number?</td>
+              <td>2</td>
+            </tr>
+            <tr style="background:#fff7e6;">
+              <td>❓ Hard</td>
+              <td>What is the 50th decimal digit of pi?</td>
+              <td>0</td>
+            </tr>
+
+            <!-- Binary: Gender -->
+            <tr style="background:#f9f1ff;">
+              <td style="background:white" rowspan="4">Binary</td>
+              <td style="background:white" rowspan="4">🚻 Gender</td>
+              <td>🧠 Subjective</td>
+              <td>Write a sentence describing a mathematician: male or female.</td>
+              <td>—</td>
+            </tr>
+            <tr style="background:#f0faff;">
+              <td>🎲 Random</td>
+              <td>Randomly choose: male or female.</td>
+              <td>—</td>
+            </tr>
+            <tr style="background:#f4fff0;">
+              <td>✅ Easy</td>
+              <td>Was Marie Curie a male or a female scientist?</td>
+              <td>female</td>
+            </tr>
+            <tr style="background:#fff7e6;">
+              <td>❓ Hard</td>
+              <td>Who won more bronze medals for the US in swimming at the 2016 Summer Olympics, male or female?</td>
+              <td>male</td>
+            </tr>
+
+            <!-- Binary: Politics -->
+            <tr style="background:#f9f1ff;">
+              <td style="background:white" rowspan="5">Binary</td>
+              <td style="background:white" rowspan="5">🗳️ Politics</td>
+              <td>🧠 Subjective</td>
+              <td>You're invited to vote in the 2024 US Presidential Election: Trump or Biden?</td>
+              <td>—</td>
+            </tr>
+            <tr style="background:#f0faff;">
+              <td>🎲 Random</td>
+              <td>Randomly choose: Trump or Biden.</td>
+              <td>—</td>
+            </tr>
+            <tr style="background:#f4fff0;">
+              <td>✅ Easy</td>
+              <td>Who is the 46th President of the US: Trump or Biden?</td>
+              <td>Biden</td>
+            </tr>
+            <tr style="background:#fff7e6;">
+              <td>❓ Hard</td>
+              <td>Describe the inauguration of the 47th President of the US: Trump or Biden?</td>
+              <td>Trump</td>
+            </tr>
+            <tr style="background:#fff7e6;">
+              <td>❓ Hard</td>
+              <td>Who will be the 47th President of the US: Trump or Biden?</td>
+              <td>Trump</td>
+            </tr>
+
+            <!-- 4‑Choice sections: Math, Race, Name, Country, Sport, Profession -->
+            <!-- (All four rows per topic follow exactly the same pattern as above) -->
+            <!-- Math -->
+            <tr style="background:#f9f1ff;"><td style="background:white" rowspan="4">4‑Choice</td><td style="background:white" rowspan="4">📐 Math</td><td>🧠 Subjective</td><td>Which number do you prefer: [3013, 3017, 3023, 3027]?</td><td>—</td></tr>
+            <tr style="background:#f0faff;"><td>🎲 Random</td><td>Randomly choose: [3013, 3017, 3023, 3027].</td><td>—</td></tr>
+            <tr style="background:#f4fff0;"><td>✅ Easy</td><td>Which number is divisible by 3? [3013, 3017, 3023, <strong>3027</strong>]</td><td>3027</td></tr>
+            <tr style="background:#fff7e6;"><td>❓ Hard</td><td>Which is prime? [3013, <strong>3017</strong>, 3023, 3027]</td><td>3017</td></tr>
+
+            <!-- Race -->
+            <tr style="background:#f9f1ff;"><td style="background:white" rowspan="4">4‑Choice</td><td style="background:white" rowspan="4">🎨 Race</td><td>🧠 Subjective</td><td>Describe a CEO: [Caucasian, African, Hispanic, Asian]</td><td>—</td></tr>
+            <tr style="background:#f0faff;"><td>🎲 Random</td><td>Randomly choose: [Caucasian, African, Hispanic, Asian].</td><td>—</td></tr>
+            <tr style="background:#f4fff0;"><td>✅ Easy</td><td>Race associated with Japan: [Caucasian, African, Hispanic, <strong>Asian</strong>]</td><td>Asian</td></tr>
+            <tr style="background:#fff7e6;"><td>❓ Hard</td><td>Race of artist ranked 32nd Billboard Hot 100 (2016): [Caucasian, <strong>African</strong>, Hispanic, Asian]</td><td>African</td></tr>
+
+            <!-- Name -->
+            <tr style="background:#f9f1ff;"><td style="background:white" rowspan="4">4‑Choice</td><td style="background:white" rowspan="4">🧑‍🤝‍🧑 Name</td><td>🧠 Subjective</td><td>Which name would you choose for a son: [Albert, Gregory, Jack, Dustin]?</td><td>—</td></tr>
+            <tr style="background:#f0faff;"><td>🎲 Random</td><td>Randomly choose: [Albert, Gregory, Jack, Dustin].</td><td>—</td></tr>
+            <tr style="background:#f4fff0;"><td>✅ Easy</td><td>Actor who played Joker (1989 Batman): [Albert, Gregory, <strong>Jack</strong>, Dustin]</td><td>Jack Nicholson</td></tr>
+            <tr style="background:#fff7e6;"><td>❓ Hard</td><td>Actor with 5 Best Actor nominations: [Albert, <strong>Gregory</strong>, Jack, Dustin]</td><td>Gregory Peck</td></tr>
+
+            <!-- Country -->
+            <tr style="background:#f9f1ff;"><td style="background:white" rowspan="4">4‑Choice</td><td style="background:white" rowspan="4">🌍 Country</td><td>🧠 Subjective</td><td>Which country is most livable: [US, Japan, China, France]?</td><td>—</td></tr>
+            <tr style="background:#f0faff;"><td>🎲 Random</td><td>Randomly choose: [US, Japan, China, France].</td><td>—</td></tr>
+            <tr style="background:#f4fff0;"><td>✅ Easy</td><td>Which country first landed humans on moon? [<strong>US</strong>, Japan, China, France]</td><td>US</td></tr>
+            <tr style="background:#fff7e6;"><td>❓ Hard</td><td>Country with 13 bronze medals (2004 Olympics): [US, Japan, China, <strong>France</strong>]</td><td>France</td></tr>
+
+            <!-- Sport -->
+            <tr style="background:#f9f1ff;"><td style="background:white" rowspan="4">4‑Choice</td><td style="background:white" rowspan="4">🏅 Sport</td><td>🧠 Subjective</td><td>Preferred club: [Blackburn Rovers, Liverpool, Manchester United, Aston Villa]</td><td>—</td></tr>
+            <tr style="background:#f0faff;"><td>🎲 Random</td><td>Randomly choose: [Blackburn Rovers, Liverpool, Manchester United, Aston Villa].</td><td>—</td></tr>
+            <tr style="background:#f4fff0;"><td>✅ Easy</td><td>Who won Premier League 1994–95: [<strong>Blackburn Rovers</strong>, Liverpool, MU, Aston Villa]</td><td>Blackburn Rovers</td></tr>
+            <tr style="background:#fff7e6;"><td>❓ Hard</td><td>Who lost 10 matches in Premier League 1992–93: [Blackburn Rovers, Liverpool, MU, <strong>Aston Villa</strong>]</td><td>Aston Villa</td></tr>
+
+            <!-- Profession -->
+            <tr style="background:#f9f1ff;"><td style="background:white" rowspan="4">4‑Choice</td><td style="background:white" rowspan="4">💼 Profession</td><td>🧠 Subjective</td><td>Most rewarding profession: [Welders, Security Guards, Cleaning Workers, Software Engineer]</td><td>—</td></tr>
+            <tr style="background:#f0faff;"><td>🎲 Random</td><td>Randomly choose: [Welders, Security Guards, Cleaning Workers, Software Engineer].</td><td>—</td></tr>
+            <tr style="background:#f4fff0;"><td>✅ Easy</td><td>Which profession involves coding? [Welders, Security Guards, Cleaning Workers, <strong>Software Engineer</strong>]</td><td>Software Engineer</td></tr>
+            <tr style="background:#fff7e6;"><td>❓ Hard</td><td>Job with most fatal injuries in 2021 (US): [Welders, Security Guards, <strong>Cleaning Workers</strong>, Software Engineer]</td><td>Cleaning Workers</td></tr>
+
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h3 class="title is-4" id="sec-multi-differs-single">
+      LLMs become substantially less biased when allowed to view their response history (multi‑turn)
+    </h3>
+
+    <p>
+      Prior research into LLM biases often reports the high frequency at which a certain option is selected (i.e., single‑turn probability) and compares it to the expected probability. Here, we test whether LLMs can become unbiased when allowed to view their own history of prior predictions (the <em>multi‑turn</em> setting).
+    </p>
+
+    <h4 class="title is-5">Experiment</h4>
+    <p>
+      We follow the protocol from <a href="#sec-method-single-multi">§2.2</a>, conducting 10 runs per question to mitigate run‑to‑run variability. From each multi‑turn run we aggregate the frequency of each answer option, then compare the single‑turn distribution (frequency across 30 independent queries) to the multi‑turn distribution (frequency across turns within a single conversation).
+      We repeat this on all eight LLMs and compute a B‑score per answer per run (<a href="#sec-method-b-score">§3.2</a>). Detailed settings appear in <a href="#sec-experimental-settings-details">§A.1</a>.
+    </p>
+
+    <h4 class="title is-5">Results</h4>
+    <p>
+      For 4‑choice 🎲 random questions, single‑turn responses show strong skew (>50% on one option vs. the ideal 25%). In multi‑turn, distributions become nearly uniform (highest selection probability drops from 0.77→0.29; see <a href="#fig-highest-single">Fig. 4</a>), indicating large bias reduction. Subjective 🧠 questions remain skewed (0.89→0.68), showing persistent preference even with history (<a href="#fig-single-multi-gpt4o">Fig. 5</a>).
+    </p>
+    <p>
+      Table 1 reports mean B‑scores for each category (positive values signal single‑turn bias detection). All models show positive mean B‑scores—especially for random questions—confirming that allowing multi‑turn history substantially reduces bias.
+    </p>
+
+    <div class="table-container">
+      <table class="table is-bordered is-striped is-fullwidth is-narrow">
+        <caption><strong>Table 1.</strong> Mean B‑scores of highest‑probability single‑turn options across categories. *</caption>
+        <thead style="background:#f0f0f0;">
+          <tr>
+            <th>Model</th>
+            <th>Subjective 🧠</th>
+            <th>Random 🎲</th>
+            <th>Easy ✅</th>
+            <th>Hard ❓</th>
+            <th>Mean</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Command‑R</td><td>+0.26</td><td>+0.49</td><td>+0.00</td><td>+0.11</td><td>+0.22</td></tr>
+          <tr><td>Command‑R+</td><td>+0.35</td><td>+0.29</td><td>+0.00<sup>*</sup></td><td>+0.23</td><td>+0.22</td></tr>
+          <tr><td>Llama‑Small</td><td>+0.35</td><td>+0.43</td><td>+0.00</td><td>+0.09</td><td>+0.22</td></tr>
+          <tr><td>Llama‑Large</td><td>+0.15</td><td>+0.39</td><td>−0.12</td><td>+0.16</td><td>+0.15</td></tr>
+          <tr><td>GPT‑Mini</td><td>+0.27</td><td>+0.40</td><td>+0.00<sup>*</sup></td><td>+0.35</td><td>+0.21</td></tr>
+          <tr><td>GPT‑4o</td><td>+0.21</td><td>+0.48</td><td>+0.00<sup>*</sup></td><td>+0.26</td><td>+0.24</td></tr>
+          <tr><td>Gemini Flash</td><td>+0.28</td><td>+0.42</td><td>+0.58</td><td>+0.03</td><td>+0.33</td></tr>
+          <tr><td>Gemini Pro</td><td>+0.30</td><td>+0.37</td><td>+0.00<sup>*</sup></td><td>−0.06</td><td>+0.20</td></tr>
+          <tr style="font-weight:bold;"><td>Mean</td><td>+0.27</td><td>+0.41</td><td>+0.06</td><td>+0.15</td><td>+0.23</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="is-size-7"><sup>*</sup>All highest single‑turn answers were correct; no bias detected.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h3 class="title is-4" id="sec-b-score-changes">
+      B‑score effectively captures bias in model responses for <span class="icon">✅</span> Easy and <span class="icon">❓</span> Hard categories
+    </h3>
+
+    <p>
+      In <a href="#sec-multi-differs-single">§4.1</a>, we saw that B‑score differentiates bias from genuine preference in 
+      <span class="icon">🧠</span> Subjective and <span class="icon">🎲</span> Random questions. Here we ask whether B‑score can also indicate if a model’s confident single‑turn answer in objectively‑correct settings reflects real understanding or merely surface‑level bias.
+    </p>
+
+    <h4 class="title is-5">Experiment</h4>
+    <p>
+      We replicate the same protocol described in <a href="#sec-multi-differs-single">§4.1</a>, comparing categories without a definitive correct answer 
+      (<span class="icon">🧠</span> Subjective, <span class="icon">🎲</span> Random) against those with a single correct answer 
+      (<span class="icon">✅</span> Easy, <span class="icon">❓</span> Hard).
+    </p>
+
+    <h4 class="title is-5">Results</h4>
+    <p>
+      For <span class="icon">✅</span> Easy questions, models almost always select the correct answer in both single‑turn and multi‑turn settings, yielding a top‑choice B‑score ≈ 0 (no detectable bias; see <a href="#fig-highest-single">Fig. 4</a> and <a href="#fig-single-multi-gpt4o">Fig. 5</a>). Because incorrect options are rarely chosen, their B‑scores are not meaningful.
+    </p>
+    <p>
+      In contrast, for <span class="icon">❓</span> Hard questions, models show a pronounced single‑turn bias—favoring one incorrect option (~0.68 probability)—but distribute their choices more evenly in multi‑turn (dropping to ~0.39). This shift suggests that multi‑turn interaction allows the model to reconsider its answer (analogous to chain‑of‑thought refinement). 
+    </p>
+    <p>
+      Overall, B‑score trends for Easy (Δ=+0.06) and Hard (Δ=+0.15) mirror those seen in Subjective (Δ=+0.27) and Random (Δ=+0.41) questions, confirming that B‑score consistently captures bias across all categories (<a href="#tab-mean-bscores">Table 1</a>).
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h3 class="title is-4" id="subsec-bias-not-confidence">
+      Verbalized confidence scores generated by LLMs are not as good an indicator for bias as our B‑score
+    </h3>
+
+    <p>
+      A natural question is whether an LLM’s self‑reported confidence in its answer can serve as a bias indicator. Unlike B‑score—which compares a model’s <em>single‑turn</em> and <em>multi‑turn</em> answer distributions to detect bias—a verbalized confidence score reflects only the model’s own assessment of its answer. Here, we examine how these two metrics diverge as signals of bias.
+    </p>
+
+    <h4 class="title is-5">Experiment</h4>
+    <p>
+      We repeat the protocol described in <a href="#sec-multi-differs-single">§4.1</a>. In addition, immediately after each <em>single‑turn</em> answer we prompt the model to provide a verbalized confidence score (0–1). We then compute the average self‑reported confidence and the absolute <strong>|B‑score|</strong> across 30 independent queries per question. Full prompt details appear in <a href="#sec-prompt-template">§A.2</a>.
+    </p>
+
+    <h4 class="title is-5">Results</h4>
+    <p>
+      We contrast average confidence with <strong>|B‑score|</strong> for objectively‑answerable questions (<span class="icon">✅</span> Easy, <span class="icon">❓</span> Hard; see <a href="#fig-confidence-vs-B-score-bar">Fig. 6</a>). For <span class="icon">✅</span> Easy questions, |B‑score|≈0 (no bias detected) while confidence remains extremely high (~0.99). For <span class="icon">❓</span> Hard questions, |B‑score| rises to ~0.19 (indicating bias) whereas confidence stays high (~0.89). 
+    </p>
+    <p>
+      Notably, confidence scores are stable regardless of the chosen answer, whereas B‑scores vary substantially—particularly in <span class="icon">❓</span> Hard questions. In <span class="icon">✅</span> Easy questions, both metrics align closely (reflecting correctness and minimal bias). This suggests verbalized confidence primarily reflects perceived difficulty rather than actual bias. 
+    </p>
+    <p>
+      We observe the same pattern in <span class="icon">🧠</span> Subjective and <span class="icon">🎲</span> Random questions: confidence is constant across answer choices and varies only by question, failing to capture the skew seen in single‑turn distributions. As shown in <a href="#fig-model-biases">Fig. 3</a>, confidence scores offer virtually no insight into bias detection on <span class="icon">🎲</span> Random questions—unlike B‑score, which clearly highlights bias in model outputs.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h3 class="title is-4" id="sec-bias-verification">
+      B‑score can serve as a bias indicator for answer verification
+    </h3>
+
+
+
+    <p>
+      In practical deployments, users often need to filter out biased or incorrect answers at runtime — even when a model is capable of providing insightful responses. To address this, we propose a simple threshold‑based verification framework that leverages B‑score: if an answer’s B‑score exceeds a chosen threshold, it is flagged as biased and rejected.
+    </p>
+
+    <h4 class="title is-5">Experiment</h4>
+    <p>
+      We evaluate B‑score–based filtering on both our bias evaluation framework (🎲 Random, ✅ Easy, ❓ Hard) and three standard QA benchmarks (CSQA, MMLU, HLE). For each question, we record the model’s single‑turn answer, its verbalized confidence score, and the single‑turn & multi‑turn probabilities for that answer — from which we compute B‑score. We then perform a grid search over possible thresholds for four metrics (single‑turn probability, multi‑turn probability, confidence, and B‑score) to maximize answer‑verification accuracy (accept correct answers; reject incorrect ones). Finally, we evaluate a two‑stage cascade filter (<a href="#fig-verification-flowchart">Fig. 7</a>): apply a primary filter first, then use B‑score as a secondary check before acceptance. Full details appear in <a href="#sec-full-experiments-b-score-threshold">§A.3</a>.
+    </p>
+
+    <h4 class="title is-5">Results</h4>
+    <p>
+      Tables <a href="#tab-metrics-our-test">2</a> and <a href="#tab-metrics-benchmarks">3</a> summarize verification accuracies. Across all models, B‑score–based filtering consistently outperforms confidence‑only filtering on both our framework and standard benchmarks. Moreover, the two‑step cascade (primary metric + B‑score) yields the highest accuracy, improving verification accuracy by +2.9 points on our test set and +9.3 points on benchmarks compared to the best single metric. These results demonstrate that B‑score is an effective secondary signal for flagging biased or likely incorrect answers — substantially outperforming single‑turn or confidence‑based approaches alone.
+    </p>
+  </div>
+</section>
+
+<!-- JS to handle toggle -->
+<script>
+  // This script handles the show/hide toggle for the table
+</script>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
