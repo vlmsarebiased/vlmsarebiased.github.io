@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,8 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.2/css/academicons.min.css">
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   <style>
     body {
@@ -92,6 +95,9 @@
       border-radius: 5px;
       margin: 2rem 0;
     }
+    .video-container {
+      margin-bottom: 2rem;
+    }
   </style>
 </head>
 <body>
@@ -159,11 +165,10 @@
         </div>
       </div>
       
-      <!-- Two fully independent sections -->
-      <div class="columns is-centered is-variable is-4">
-        <!-- Single turn section -->
-        <div class="column is-6">
-          <div class="box" style="border-radius: 12px; border: 1px solid #ddd; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; padding: 0;">
+      <!-- Single turn section -->
+      <div class="columns is-centered">
+        <div class="column is-10">
+          <div class="box video-container" style="border-radius: 12px; border: 1px solid #ddd; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; padding: 0;">
             <!-- Header with color accent -->
             <div style="background-color: #0B61A4; height: 8px;"></div>
             <div style="padding: 1.5rem; background-color: #f5f5f5; border-bottom: 1px solid #ddd;">
@@ -172,7 +177,6 @@
                 Independent conversations reset each time<br>
                 <br> 
                 <strong>Showing 100% bias toward <span style="color: #0B61A4; font-weight: bold;">Biden</span></strong>
-                
               </p>
             </div>
             
@@ -193,10 +197,12 @@
             </div>
           </div>
         </div>
-        
-        <!-- Multi turn section -->
-        <div class="column is-6">
-          <div class="box" style="border-radius: 12px; border: 1px solid #ddd; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; padding: 0;">
+      </div>
+      
+      <!-- Multi turn section -->
+      <div class="columns is-centered">
+        <div class="column is-10">
+          <div class="box video-container" style="border-radius: 12px; border: 1px solid #ddd; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; padding: 0;">
             <!-- Header with color accents for both candidates -->
             <div style="background: linear-gradient(to right, #E91D0E 50%, #0B61A4 50%); height: 8px;"></div>
             <div style="padding: 1.5rem; background-color: #f5f5f5; border-bottom: 1px solid #ddd;">
@@ -246,6 +252,8 @@
     </div>
   </div>
 </section>
+
+
 
 
 <section class="section">
@@ -570,21 +578,13 @@
             <h3>4. B-score Improves Answer Verification</h3>
             
             <div class="columns is-vcentered">
-              <div class="column is-8">
+              <div class="column is-12">
                 <p>
                   Perhaps most practically useful, we found that B-score can be used to decide when to trust or reject LLM answers. By using B-score as a secondary verification check after initial filtering, we improved verification accuracy by <strong style="color: #00c853;">+9.3 percentage points</strong> on our evaluation framework and <strong style="color: #00c853;">+4.8 points</strong> on standard benchmarks like MMLU, HLE, and CSQA.
                 </p>
                 <p>
                   This suggests a practical application: using B-score as an additional signal to detect potentially biased or incorrect answers in real-world deployments.
                 </p>
-              </div>
-              <div class="column is-4">
-                <figure>
-                  <img src="./static/images/verification-flowchart.png" alt="Two-step verification process using B-score" style="width: 100%; height: auto;">
-                  <figcaption>
-                    Two-step verification process using B-score as a secondary check.
-                  </figcaption>
-                </figure>
               </div>
             </div>
             
@@ -594,27 +594,13 @@
               
               <!-- First table image -->
               <div class="mb-5">
-                <div class="box p-0" style="overflow: hidden; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer;" onclick="alert('This would open the full table in a modal window')">
-                  <div style="background-color: #e8eaf6; padding: 10px 15px; border-bottom: 1px solid #c5cae9; display: flex; justify-content: space-between; align-items: center;">
-                    <h5 class="mb-0" style="font-weight: bold; color: #3f51b5;">
+                <div class="box p-0" style="overflow: hidden; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                  <div style="background-color: #e8eaf6; padding: 10px 15px; border-bottom: 1px solid #c5cae9;">
+                    <h5 class="mb-0 has-text-centered" style="font-weight: bold; color: #3f51b5;">
                       Results on Our Evaluation Framework
                     </h5>
-                    <span class="tag is-info is-light">
-                      <span class="icon is-small">
-                        <i class="fas fa-search-plus"></i>
-                      </span>
-                      <span>Click to enlarge</span>
-                    </span>
                   </div>
-                  <div class="table-image-container has-text-centered" style="overflow-x: auto; padding: 15px; background-color: #fff; position: relative;">
-                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255,255,255,0.1)); display: flex; justify-content: center; align-items: center; opacity: 0.8; transition: opacity 0.3s;" class="zoom-overlay">
-                      <div class="has-background-white has-text-centered p-2" style="border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                        <span class="icon">
-                          <i class="fas fa-search-plus"></i>
-                        </span>
-                        <span>Click to see full table</span>
-                      </div>
-                    </div>
+                  <div class="table-image-container has-text-centered" style="overflow-x: auto; padding: 15px; background-color: #fff;">
                     <img src="./static/images/table3.png" alt="Table 3: Two-step threshold-based verification results on our evaluation framework" style="max-width: 90%; margin: 0 auto;">
                   </div>
                   <div style="background-color: #f5f7ff; padding: 10px 15px; border-top: 1px solid #e0e0e0;">
@@ -627,27 +613,13 @@
               
               <!-- Second table image -->
               <div>
-                <div class="box p-0" style="overflow: hidden; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer;" onclick="alert('This would open the full table in a modal window')">
-                  <div style="background-color: #e8eaf6; padding: 10px 15px; border-bottom: 1px solid #c5cae9; display: flex; justify-content: space-between; align-items: center;">
-                    <h5 class="mb-0" style="font-weight: bold; color: #3f51b5;">
+                <div class="box p-0" style="overflow: hidden; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                  <div style="background-color: #e8eaf6; padding: 10px 15px; border-bottom: 1px solid #c5cae9;">
+                    <h5 class="mb-0 has-text-centered" style="font-weight: bold; color: #3f51b5;">
                       Results on Standard Benchmarks
                     </h5>
-                    <span class="tag is-info is-light">
-                      <span class="icon is-small">
-                        <i class="fas fa-search-plus"></i>
-                      </span>
-                      <span>Click to enlarge</span>
-                    </span>
                   </div>
-                  <div class="table-image-container has-text-centered" style="overflow-x: auto; padding: 15px; background-color: #fff; position: relative;">
-                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255,255,255,0.1)); display: flex; justify-content: center; align-items: center; opacity: 0.8; transition: opacity 0.3s;" class="zoom-overlay">
-                      <div class="has-background-white has-text-centered p-2" style="border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                        <span class="icon">
-                          <i class="fas fa-search-plus"></i>
-                        </span>
-                        <span>Click to see full table</span>
-                      </div>
-                    </div>
+                  <div class="table-image-container has-text-centered" style="overflow-x: auto; padding: 15px; background-color: #fff;">
                     <img src="./static/images/table4.png" alt="Table 4: Two-step threshold-based verification results on benchmarks" style="max-width: 90%; margin: 0 auto;">
                   </div>
                   <div style="background-color: #f5f7ff; padding: 10px 15px; border-top: 1px solid #e0e0e0;">
