@@ -102,40 +102,7 @@
       margin: 2rem 0;
     }
     .video-container {
-      border-radius: 12px;
-      border: 1px solid #ddd;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      overflow: hidden;
-      padding: 0;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
       margin-bottom: 2rem;
-    }
-    .video-header {
-      padding: 1.5rem;
-      background-color: #f5f5f5;
-      border-bottom: 1px solid #ddd;
-    }
-    .video-footer {
-      padding: 1rem;
-      background-color: #f9f9f9;
-      border-top: 1px solid #eee;
-    }
-    .video-wrapper {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      background-color: #000;
-    }
-    .video-wrapper video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
     }
   </style>
 </head>
@@ -330,104 +297,109 @@
           </div>
         </div>
 
-        <!-- Trump vs Biden video section - MODIFIED FOR 50:50 SIDE-BY-SIDE COMPARISON -->
-        <div class="content-section">
-          <h2 class="title is-2 has-text-centered">See the Bias in Action: Trump vs Biden</h2>
-          
-          <div class="columns is-centered">
-            <div class="column is-10">
-              <p class="has-text-centered is-size-5 mb-5">
-                Watch how GPT-4o exhibits extreme bias when repeatedly asked to make a "random" choice between 
-                <span style="color: #E91D0E; font-weight: bold;">Trump</span> and 
-                <span style="color: #0B61A4; font-weight: bold;">Biden</span>.
-                <strong>In single-turn, it selects <span style="color: #0B61A4;">Biden</span> 10/10 times (100%)</strong>, while <strong>in multi-turn, it alternates between both candidates to achieve a uniform 50/50 distribution</strong>.
-              </p>
-            </div>
-          </div>
-          
-          <!-- Side-by-side video comparison -->
-          <div class="columns is-variable is-3">
-            <!-- Single turn video column -->
-            <div class="column is-6">
-              <div class="video-container">
-                <!-- Header with color accent -->
-                <div style="background-color: #0B61A4; height: 8px;"></div>
-                <div class="video-header">
-                  <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.5rem; color: #333;">Single-Turn Setting</h3>
-                  <p class="has-text-centered" style="font-size: 1rem;">
-                    Independent conversations reset each time<br>
-                    <strong>Showing 100% bias toward <span style="color: #0B61A4; font-weight: bold;">Biden</span></strong>
-                  </p>
-                </div>
-                
-                <!-- Video -->
-                <div class="video-wrapper">
-                  <video controls preload="auto">
-                    <source src="./static/videos/biden_trump_single.mp4" type="video/mp4">
-                    <source src="./static/videos/biden_trump_single.webm" type="video/webm">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-                
-                <!-- Footer caption -->
-                <div class="video-footer">
-                  <p class="has-text-centered mb-0" style="font-size: 0.95rem; color: #555;">
-                    In 10 separate conversations, GPT-4o chooses <span style="color: #0B61A4; font-weight: bold;">Biden</span> 10/10 times (100%)
+        <!-- Trump vs Biden video section moved here -->
+        <section class="section" style="padding-top: 0; padding-bottom: 3rem;">
+          <div class="container">
+            <div class="content-section">
+              <h2 class="title is-2 has-text-centered">See the Bias in Action: Trump vs. Biden</h2>
+              
+              <div class="columns is-centered">
+                <div class="column is-10">
+                  <p class="has-text-centered is-size-5 mb-5">
+                    Watch how GPT-4o exhibits extreme bias when repeatedly asked to make a "random" choice between 
+                    <span style="color: #E91D0E; font-weight: bold;">Trump</span> and 
+                    <span style="color: #0B61A4; font-weight: bold;">Biden</span>.
+                    <strong>In single-turn, it selects <span style="color: #0B61A4;">Biden</span> 10/10 times (100%)</strong>, while <strong>in multi-turn, it alternates between both candidates to achieve a uniform 50/50 distribution</strong>.
                   </p>
                 </div>
               </div>
-            </div>
-            
-            <!-- Multi turn video column -->
-            <div class="column is-6">
-              <div class="video-container">
-                <!-- Header with color accents for both candidates -->
-                <div style="background: linear-gradient(to right, #E91D0E 50%, #0B61A4 50%); height: 8px;"></div>
-                <div class="video-header">
-                  <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.5rem; color: #333;">Multi-Turn Setting</h3>
-                  <p class="has-text-centered" style="font-size: 1rem;">
-                    Continuous conversation where GPT-4o can see previous answers<br>
-                    <strong>Alternates between <span style="color: #E91D0E;">Trump</span> and <span style="color: #0B61A4;">Biden</span> (50/50 split)</strong>
-                  </p>
+              
+              <!-- Single turn section -->
+              <div class="columns is-centered">
+                <div class="column is-10">
+                  <div class="box video-container" style="border-radius: 12px; border: 1px solid #ddd; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; padding: 0;">
+                    <!-- Header with color accent -->
+                    <div style="background-color: #0B61A4; height: 8px;"></div>
+                    <div style="padding: 1.5rem; background-color: #f5f5f5; border-bottom: 1px solid #ddd;">
+                      <h3 class="title is-3 has-text-centered" style="margin-bottom: 1rem; color: #333;">Single-Turn Setting</h3>
+                      <p class="has-text-centered" style="font-size: 1.1rem;">
+                        Independent conversations reset each time<br>
+                        <strong>Showing 100% bias toward <span style="color: #0B61A4; font-weight: bold;">Biden</span></strong>
+                      </p>
+                    </div>
+                    
+                    <!-- Video - Larger for better visibility -->
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                      <video controls preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; background-color: #000;">
+                        <source src="./static/videos/biden_trump_single.mp4" type="video/mp4">
+                        <source src="./static/videos/biden_trump_single.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                    
+                    <!-- Footer caption -->
+                    <div style="padding: 1rem; background-color: #f9f9f9; border-top: 1px solid #eee;">
+                      <p class="has-text-centered mb-0" style="font-size: 0.95rem; color: #555;">
+                        In 10 separate conversations, GPT-4o chooses <span style="color: #0B61A4; font-weight: bold;">Biden</span> 10/10 times (100%)
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                
-                <!-- Video -->
-                <div class="video-wrapper">
-                  <video controls preload="auto">
-                    <source src="./static/videos/biden_trump_multi.mp4" type="video/mp4">
-                    <source src="./static/videos/biden_trump_multi.webm" type="video/webm">
-                    Your browser does not support the video tag.
-                  </video>
+              </div>
+              
+              <!-- Multi turn section -->
+              <div class="columns is-centered">
+                <div class="column is-10">
+                  <div class="box video-container" style="border-radius: 12px; border: 1px solid #ddd; box-shadow: 0 4px 12px rgba(0,0,0,0.1); overflow: hidden; padding: 0;">
+                    <!-- Header with color accents for both candidates -->
+                    <div style="background: linear-gradient(to right, #E91D0E 50%, #0B61A4 50%); height: 8px;"></div>
+                    <div style="padding: 1.5rem; background-color: #f5f5f5; border-bottom: 1px solid #ddd;">
+                      <h3 class="title is-3 has-text-centered" style="margin-bottom: 1rem; color: #333;">Multi-Turn Setting</h3>
+                      <p class="has-text-centered" style="font-size: 1.1rem;">
+                        Continuous conversation where GPT-4o can see previous answers<br>
+                        <strong>Alternates between <span style="color: #E91D0E;">Trump</span> and <span style="color: #0B61A4;">Biden</span> (50/50 split)</strong>
+                      </p>
+                    </div>
+                    
+                    <!-- Video - Same dimensions as other video -->
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                      <video controls preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; background-color: #000;">
+                        <source src="./static/videos/biden_trump_multi.mp4" type="video/mp4">
+                        <source src="./static/videos/biden_trump_multi.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                    
+                    <!-- Footer caption -->
+                    <div style="padding: 1rem; background-color: #f9f9f9; border-top: 1px solid #eee;">
+                      <p class="has-text-centered mb-0" style="font-size: 0.95rem; color: #555;">
+                        GPT-4o deliberately alternates its answers to maintain balance between <span style="color: #E91D0E; font-weight: bold;">Trump</span> and 
+                        <span style="color: #0B61A4; font-weight: bold;">Biden</span>
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                
-                <!-- Footer caption -->
-                <div class="video-footer">
-                  <p class="has-text-centered mb-0" style="font-size: 0.95rem; color: #555;">
-                    GPT-4o deliberately alternates its answers to maintain balance between <span style="color: #E91D0E; font-weight: bold;">Trump</span> and 
-                    <span style="color: #0B61A4; font-weight: bold;">Biden</span>
-                  </p>
+              </div>
+              
+              <div class="key-insight mt-5" style="background: linear-gradient(to right, rgba(233, 29, 14, 0.1), rgba(11, 97, 164, 0.1)); border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); padding: 1.5rem;">
+                <p class="has-text-centered is-size-5">
+                  <strong>Key Insight:</strong> When GPT-4o can see its previous answers (multi-turn), it completely corrects its extreme <span style="color: #0B61A4; font-weight: bold;">Biden</span> bias, deliberately alternating to achieve a perfect 50/50 distribution - demonstrating its awareness of its own statistical bias.
+                </p>
+              </div>
+              
+              <div class="has-text-centered mt-4">
+                <div class="columns is-centered">
+                  <div class="column is-8">
+                    <div class="box" style="background: linear-gradient(to right, rgba(233, 29, 14, 0.05), rgba(11, 97, 164, 0.15)); border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); padding: 1.5rem;">
+                      <p class="is-size-4 has-text-weight-bold">B-score for <span style="color: #0B61A4;">Biden</span>: +0.50</p>
+                      <p class="is-size-6">This high positive B-score clearly identifies the strong bias in the single-turn setting</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          
-          <div class="key-insight mt-5" style="background: linear-gradient(to right, rgba(233, 29, 14, 0.1), rgba(11, 97, 164, 0.1)); border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); padding: 1.5rem;">
-            <p class="has-text-centered is-size-5">
-              <strong>Key Insight:</strong> When GPT-4o can see its previous answers (multi-turn), it completely corrects its extreme <span style="color: #0B61A4; font-weight: bold;">Biden</span> bias, deliberately alternating to achieve a perfect 50/50 distribution - demonstrating its awareness of its own statistical bias.
-            </p>
-          </div>
-          
-          <div class="has-text-centered mt-4">
-            <div class="columns is-centered">
-              <div class="column is-8">
-                <div class="box" style="background: linear-gradient(to right, rgba(233, 29, 14, 0.05), rgba(11, 97, 164, 0.15)); border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); padding: 1.5rem;">
-                  <p class="is-size-4 has-text-weight-bold">B-score for <span style="color: #0B61A4;">Biden</span>: +0.50</p>
-                  <p class="is-size-6">This high positive B-score clearly identifies the strong bias in the single-turn setting</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </section>
 
         <!-- Four Categories of Questions -->
         <div class="content-section">
