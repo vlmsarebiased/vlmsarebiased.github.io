@@ -1,6 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Google tag (gtag.js) - Add this first! -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R57GVTJBR9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-R57GVTJBR9');
+  </script>
+
+  <!-- Enhanced tracking for research project -->
+  <script>
+    // Track paper downloads
+    function trackPaperDownload() {
+      gtag('event', 'download', {
+        'event_category': 'Paper',
+        'event_label': 'ArXiv PDF',
+        'value': 1
+      });
+    }
+
+    // Track code repository visits
+    function trackCodeVisit() {
+      gtag('event', 'click', {
+        'event_category': 'Code',
+        'event_label': 'GitHub Repository',
+        'value': 1
+      });
+    }
+
+    // Track dataset visits
+    function trackDatasetVisit() {
+      gtag('event', 'click', {
+        'event_category': 'Dataset',
+        'event_label': 'Hugging Face Dataset',
+        'value': 1
+      });
+    }
+  </script>
+
   <meta charset="utf-8">
   <meta name="description" content="Vision Language Models are Biased: VLMs fail on simple counting tasks when familiar objects are subtly modified">
   <meta name="keywords" content="VLM, Vision Language Models, Bias, AI, Computer Vision, Counting">
@@ -916,15 +956,15 @@
         
         <div class="mt-4 has-text-centered">
           <div class="buttons is-centered">
-            <a href="https://arxiv.org/abs/stay-tuned" class="button is-rounded is-dark">
+            <a href="https://arxiv.org/abs/stay-tuned" class="button is-rounded is-dark" onclick="trackPaperDownload()">
               <span class="icon"><i class="fas fa-file-pdf"></i></span>
               <span>Read Paper on ArXiv</span>
             </a>
-            <a href="https://github.com/anvo25/vlms-are-biased" class="button is-rounded is-dark">
+            <a href="https://github.com/anvo25/vlms-are-biased" class="button is-rounded is-dark" onclick="trackCodeVisit()">
               <span class="icon"><i class="fab fa-github"></i></span>
               <span>Code on GitHub</span>
             </a>
-            <a href="https://huggingface.co/datasets/anvo25/vlms-are-biased" class="button is-rounded is-dark">
+            <a href="https://huggingface.co/datasets/anvo25/vlms-are-biased" class="button is-rounded is-dark" onclick="trackDatasetVisit()">
               <span class="icon"><i class="fas fa-database"></i></span>
               <span>Dataset on HuggingFace</span>
             </a>
