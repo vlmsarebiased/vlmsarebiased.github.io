@@ -38,11 +38,11 @@
       padding: 0 20px;
     }
 
-    /* Hero section - exactly from B-score */
+    /* Hero section - MODIFIED margin-bottom */
     .hero {
       background-color: #f5f7fa;
       padding: 2rem 0;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem; /* MODIFIED from 2rem */
     }
 
     .hero .title {
@@ -420,7 +420,7 @@
 
     .slideshow-content {
       position: relative;
-      min-height: 900px; /* MODIFIED */
+      min-height: 900px; 
       overflow: hidden;
       background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     }
@@ -434,7 +434,7 @@
       padding: 1.5rem;
       gap: 1rem;
       align-items: flex-start;
-      min-height: 850px; /* MODIFIED */
+      min-height: 850px; 
       opacity: 0;
       visibility: hidden;
       transform: translateX(50px) scale(0.95);
@@ -457,7 +457,7 @@
     
     .slide-image {
       width: 100%;
-      height: 600px; /* MODIFIED */
+      height: 600px; 
       position: relative;
       border-radius: 8px;
       overflow: hidden;
@@ -650,8 +650,8 @@
     
     /* Style for the specific adversarial text figure */
     #adversarial-text-figure img {
-        max-width: 80%; /* MODIFIED */
-        max-height: 450px; /* MODIFIED */
+        max-width: 80%; 
+        max-height: 450px; 
         object-fit: contain; /* Ensure aspect ratio is maintained */
     }
     #adversarial-text-figure .image-placeholder {
@@ -797,11 +797,11 @@
         padding: 1rem;
         text-align: center;
         align-items: center;
-        min-height: 750px; /* MODIFIED */
+        min-height: 750px; 
       }
       .slide-image {
         width: 100%;
-        height: 450px; /* MODIFIED */
+        height: 450px; 
         margin-bottom: 0.8rem;
       }
       .slide-content {
@@ -814,7 +814,7 @@
         text-align: center;
       }
       .slideshow-content {
-        min-height: 800px; /* MODIFIED */
+        min-height: 800px; 
       }
       .domain-grid {
         grid-template-columns: 1fr;
@@ -864,17 +864,17 @@
       }
       .slide {
         padding: 0.8rem;
-        min-height: 680px; /* MODIFIED */
+        min-height: 680px; 
       }
       .slide-image {
-        height: 375px; /* MODIFIED */
+        height: 375px; 
       }
       .domain-indicator {
         font-size: 0.75rem;
         padding: 0.3rem 0.6rem;
       }
       .slideshow-content {
-        min-height: 720px; /* MODIFIED */
+        min-height: 720px; 
       }
       .research-figure-medium img {
         max-width: 100%; 
@@ -900,7 +900,7 @@
         <div class="is-size-5 publication-authors">
           <span class="author-block"><a href="https://anvo25.github.io/">An Vo</a><sup>1*</sup>,</span>
           <span class="author-block"><a href="https://nkn002.github.io/">Khai-Nguyen Nguyen</a><sup>2*</sup>,</span>
-          <span class="author-block"><a href="https://taesiri.ai/">Mohammad Reza Taesiri</a><sup>3</sup>,</span>
+          <span class="author-block"><a href="https://taesiri.ai/">Mohammad Reza Taesiri</a><sup>3</sup>,</span><br class="is-hidden-tablet"> <!-- Optional: only break on smaller screens -->
           <span class="author-block"><a href="https://www.linkedin.com/in/dang-thi-tuong-vy-00a357278/">Vy Tuong Dang</a><sup>1</sup>,</span>
           <span class="author-block"><a href="https://anhnguyen.me/research/">Anh Totti Nguyen</a><sup>4†</sup>,</span>
           <span class="author-block"><a href="https://www.resl.kaist.ac.kr/members/director">Daeyoung Kim</a><sup>1†</sup></span>
@@ -941,7 +941,8 @@
       <div class="column is-full-width">
         
         <div class="content-section">
-          <div class="stat-highlight">
+          <!-- MODIFIED: Inline style to reduce top margin -->
+          <div class="stat-highlight" style="margin-top: 0.5rem; margin-bottom: 2rem;">
             <p class="is-size-4">
               <strong><i class="fas fa-exclamation-triangle"></i> Shocking Discovery:</strong> State-of-the-art Vision Language Models achieve <span class="is-size-3">100%</span> accuracy on original images but only <span class="is-size-3 accuracy-bad">17.05%</span> when objects are subtly modified.
             </p>
@@ -950,7 +951,8 @@
             </p>
           </div>
 
-          <div class="research-figure">
+          <!-- MODIFIED: Added research-figure-medium class -->
+          <div class="research-figure research-figure-medium">
             <img src="static/images/fig1_overview.png" alt="VLM failures across 7 domains" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="image-placeholder" style="display: none; height: 400px;">
               <i class="fas fa-chart-bar"></i>
@@ -982,7 +984,8 @@
             </p>
           </div>
 
-          <div class="research-figure">
+          <!-- MODIFIED: Added research-figure-medium class -->
+          <div class="research-figure research-figure-medium">
             <img src="static/images/fig3_fail_subtle.png" alt="VLMs fail to detect subtle changes" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="image-placeholder" style="display: none; height: 350px;">
               <i class="fas fa-times-circle"></i>
@@ -1006,7 +1009,8 @@
             Our testing methodology follows a simple but powerful three-step process that exposes the fundamental difference between memorization and actual visual analysis in VLMs.
           </p>
 
-          <div class="research-figure">
+          <!-- MODIFIED: Added research-figure-medium class -->
+          <div class="research-figure research-figure-medium">
             <img src="static/images/teaser-1.png" alt="VLMBias testing framework" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="image-placeholder" style="display: none; height: 450px;">
               <i class="fas fa-microscope"></i>
@@ -1474,7 +1478,6 @@
           
           <p>Adding subject names directly to images (like "Ebbinghaus illusion") made models even more biased, dropping accuracy by an additional 4.49%.</p>
 
-          <!-- MODIFIED: Added ID for specific styling -->
           <div class="research-figure research-figure-medium" id="adversarial-text-figure">
             <img src="static/images/add_title.png" alt="In-image text example showing Ebbinghaus illusion"  onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('afterbegin', '<div class=\'image-placeholder\'><i class=\'fas fa-image\'></i><div class=\'image-title\'>Ebbinghaus Illusion with Text</div><div class=\'image-description\'>Image showing Ebbinghaus illusion variants with added text labels.</div></div>');">
             <div class="figure-caption">
