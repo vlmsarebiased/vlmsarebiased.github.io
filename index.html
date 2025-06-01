@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Vision Language Models are Biased</title>
+  <link rel="icon" href="static/icons/assumption.png" type="image/png">
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -50,6 +51,16 @@
       margin-bottom: 1rem;
       font-weight: 700;
       line-height: 1.2;
+      display: flex; /* For aligning icon with text */
+      align-items: center; /* For aligning icon with text */
+      justify-content: center; /* For centering title content */
+      flex-wrap: wrap; /* Allow wrapping if title is too long */
+    }
+
+    .hero .title .title-icon {
+      height: 0.9em; /* Relative to title font size */
+      margin-left: 0.3em;
+      vertical-align: middle; /* Better alignment for inline-block/flex item */
     }
     
     .publication-authors {
@@ -110,8 +121,7 @@
       background-color: #ffffff;
       color: #4a5568;
     }
-    /* Adjusting hero buttons specifically if needed, or rely on removing is-small */
-    .hero .buttons .button.is-rounded { /* Ensure rounded buttons have enough space */
+    .hero .buttons .button.is-rounded { 
         padding-left: 1.2em;
         padding-right: 1.2em;
     }
@@ -139,19 +149,17 @@
       padding: 1rem;
     }
     
-    /* Styling for bulleted lists in specific sections */
     .content-section .column ul {
-      list-style: disc; /* Ensure standard bullet points */
-      margin-left: 1.5em; /* Indentation for the list */
-      padding-left: 0.5em; /* Padding for bullet spacing */
+      list-style: disc; 
+      margin-left: 1.5em; 
+      padding-left: 0.5em; 
     }
 
     .content-section .column ul li {
-      margin-bottom: 0.5em; /* Space between list items */
+      margin-bottom: 0.5em; 
     }
 
 
-    /* Highlight boxes - exactly from B-score style (no borders) */
     .highlight-box {
       background-color: #e3f2fd;
       padding: 1.5rem;
@@ -195,7 +203,6 @@
       font-style: italic;
     }
 
-    /* Domain cards */
     .domain-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -224,7 +231,6 @@
       margin-bottom: 1rem;
     }
 
-    /* Results grid */
     .results-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -249,7 +255,6 @@
       margin-bottom: 0.5rem;
     }
 
-    /* Table styles - simplified */
     .research-table {
       background: #ffffff;
       border-radius: 5px;
@@ -302,7 +307,6 @@
       background-color: #f8fafc;
     }
 
-    /* Value highlights - simplified */
     .highlight-value {
       background-color: #fef3c7;
       padding: 0.2rem 0.5rem;
@@ -319,7 +323,6 @@
       color: #065f46;
     }
 
-    /* Slideshow styles - improved design */
     .slideshow-container {
       background: #ffffff;
       border-radius: 8px;
@@ -337,7 +340,6 @@
       overflow: hidden;
     }
 
-    /* Subtle pattern overlay */
     .slideshow-header::before {
       content: '';
       position: absolute;
@@ -418,7 +420,7 @@
 
     .slideshow-content {
       position: relative;
-      min-height: 700px;
+      min-height: 900px; /* MODIFIED */
       overflow: hidden;
       background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     }
@@ -432,7 +434,7 @@
       padding: 1.5rem;
       gap: 1rem;
       align-items: flex-start;
-      min-height: 650px;
+      min-height: 850px; /* MODIFIED */
       opacity: 0;
       visibility: hidden;
       transform: translateX(50px) scale(0.95);
@@ -452,10 +454,10 @@
       width: 100%;
       margin-bottom: 1rem;
     }
-
+    
     .slide-image {
       width: 100%;
-      height: 400px;
+      height: 600px; /* MODIFIED */
       position: relative;
       border-radius: 8px;
       overflow: hidden;
@@ -508,14 +510,13 @@
       line-height: 1.4;
     }
 
-    /* Updated image caption styles - now matches slideshow header */
     .image-caption {
       background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
       color: #ffffff;
       padding: 1rem;
       border-radius: 0 0 8px 8px;
       text-align: center;
-      margin-top: -1px; /* Slight overlap with image border */
+      margin-top: -1px; 
     }
 
     .image-title {
@@ -622,7 +623,6 @@
       line-height: 1.4;
     }
 
-    /* Figure styles */
     .research-figure {
       background: #ffffff;
       border-radius: 5px;
@@ -637,7 +637,6 @@
       display: block;
     }
 
-    /* New style for medium-sized, centered figures */
     .research-figure-medium img {
       max-width: 80%; 
       margin-left: auto;
@@ -647,6 +646,17 @@
     .research-figure-medium .image-placeholder {
         margin-left: auto;
         margin-right: auto;
+    }
+    
+    /* Style for the specific adversarial text figure */
+    #adversarial-text-figure img {
+        max-width: 80%; /* MODIFIED */
+        max-height: 450px; /* MODIFIED */
+        object-fit: contain; /* Ensure aspect ratio is maintained */
+    }
+    #adversarial-text-figure .image-placeholder {
+        max-width: 60%;
+        height: 250px; /* Match image max-height */
     }
 
 
@@ -668,7 +678,6 @@
       color: #1a237e;
     }
 
-    /* Utility classes */
     .accuracy-bad { 
       color: #dc2626; 
       font-weight: 700; 
@@ -740,7 +749,6 @@
       flex: 0 0 100%;
     }
 
-    /* Footer - exactly from B-score */
     .footer {
       background-color: #f5f7fa;
       padding: 3rem 1.5rem;
@@ -761,16 +769,13 @@
       text-decoration: underline;
     }
 
-    /* Responsive design */
     @media (max-width: 1024px) {
       .container {
         padding: 0 15px;
       }
-      
       .domain-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       }
-      
       .results-grid {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       }
@@ -780,7 +785,9 @@
       .hero .title {
         font-size: 2.2rem;
       }
-      
+      .hero .title .title-icon {
+        height: 0.85em;
+      }
       .publication-authors { font-size: 1rem; }
       .affiliations { font-size: 0.9rem; }
       .contributions { font-size: 0.8rem; }
@@ -790,50 +797,45 @@
         padding: 1rem;
         text-align: center;
         align-items: center;
-        min-height: 600px;
+        min-height: 750px; /* MODIFIED */
       }
-      
       .slide-image {
         width: 100%;
-        height: 300px;
+        height: 450px; /* MODIFIED */
         margin-bottom: 0.8rem;
       }
-      
       .slide-content {
         padding-left: 0;
         text-align: left;
         width: 100%;
       }
-      
       .slideshow-header-content {
         flex-direction: column;
         text-align: center;
       }
-      
       .slideshow-content {
-        min-height: 650px;
+        min-height: 800px; /* MODIFIED */
       }
-      
       .domain-grid {
         grid-template-columns: 1fr;
       }
-      
       .results-grid {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       }
-      
       .columns {
         flex-direction: column;
         gap: 1rem;
       }
-      
       .column.is-6,
       .column.is-8 {
         flex: 1;
       }
-
       .research-figure-medium img {
         max-width: 95%; 
+      }
+      #adversarial-text-figure img {
+        max-width: 80%;
+        max-height: 200px;
       }
     }
 
@@ -841,7 +843,9 @@
       .hero .title {
         font-size: 1.8rem;
       }
-      
+      .hero .title .title-icon {
+        height: 0.8em;
+      }
       .publication-authors { font-size: 0.9rem; }
       .affiliations { font-size: 0.8rem; }
       .contributions { font-size: 0.7rem; }
@@ -850,36 +854,34 @@
         flex-direction: column;
         align-items: center;
       }
-      
-      .hero .buttons .button { /* Target hero buttons specifically on small screens */
-        width: 80%; /* Make them wider */
-        max-width: 280px; /* But not excessively wide */
+      .hero .buttons .button { 
+        width: 80%; 
+        max-width: 280px; 
         justify-content: center;
-        font-size: 1rem; /* Slightly larger font */
-        padding-top: 0.6em; /* Adjust padding for better touch target */
+        font-size: 1rem; 
+        padding-top: 0.6em; 
         padding-bottom: 0.6em;
       }
-      
       .slide {
         padding: 0.8rem;
-        min-height: 580px;
+        min-height: 680px; /* MODIFIED */
       }
-      
       .slide-image {
-        height: 250px;
+        height: 375px; /* MODIFIED */
       }
-      
       .domain-indicator {
         font-size: 0.75rem;
         padding: 0.3rem 0.6rem;
       }
-      
       .slideshow-content {
-        min-height: 620px;
+        min-height: 720px; /* MODIFIED */
       }
-
       .research-figure-medium img {
         max-width: 100%; 
+      }
+      #adversarial-text-figure img {
+        max-width: 90%;
+        max-height: 180px;
       }
     }
   </style>
@@ -892,6 +894,7 @@
       <div class="has-text-centered">
         <h1 class="title" style="color: #000000;">
           Vision Language Models are Biased
+          <img src="static/icons/assumption.png" alt="Bias Icon" class="title-icon">
         </h1>
         
         <div class="is-size-5 publication-authors">
@@ -913,7 +916,6 @@
         
         <div class="mt-4 has-text-centered">
           <div class="buttons is-centered">
-            <!-- MODIFIED: Removed is-small class for larger buttons -->
             <a href="https://arxiv.org/abs/stay-tuned" class="button is-rounded is-dark">
               <span class="icon"><i class="fas fa-file-pdf"></i></span>
               <span>Read Paper on ArXiv</span>
@@ -933,23 +935,11 @@
   </div>
 </section>
 
-<section class="section" style="padding-top: 0; padding-bottom: 2rem;">
-  <div class="container">
-    <div class="abstract-section">
-      <h2 class="title is-3 has-text-centered">TL;DR</h2>
-      <p class="has-text-centered is-size-5" style="font-weight: 500;">
-        State-of-the-art Vision Language Models achieve 100% accuracy on original images but only 17.05% when objects are subtly modified. VLMs don't actually "see" - they rely on memorized knowledge instead of visual analysis due to bias.
-      </p>
-    </div>
-  </div>
-</section>
-
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-full-width">
         
-        <!-- TL;DR Section -->
         <div class="content-section">
           <div class="stat-highlight">
             <p class="is-size-4">
@@ -960,7 +950,6 @@
             </p>
           </div>
 
-          <!-- Main Overview Figure -->
           <div class="research-figure">
             <img src="static/images/fig1_overview.png" alt="VLM failures across 7 domains" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="image-placeholder" style="display: none; height: 400px;">
@@ -974,7 +963,6 @@
           </div>
         </div>
 
-        <!-- The Problem Section -->
         <div class="content-section">
           <h2><i class="fas fa-exclamation-triangle icon-large"></i>The Problem: VLMs Can't Count When It Matters</h2>
           
@@ -994,7 +982,6 @@
             </p>
           </div>
 
-          <!-- Comparison Figure -->
           <div class="research-figure">
             <img src="static/images/fig3_fail_subtle.png" alt="VLMs fail to detect subtle changes" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="image-placeholder" style="display: none; height: 350px;">
@@ -1012,7 +999,6 @@
           </div>
         </div>
 
-        <!-- How We Test VLM Bias Section -->
         <div class="content-section">
           <h2><i class="fas fa-flask icon-large"></i>How We Test VLM Bias: The VLMBias Framework</h2>
           
@@ -1020,7 +1006,6 @@
             Our testing methodology follows a simple but powerful three-step process that exposes the fundamental difference between memorization and actual visual analysis in VLMs.
           </p>
 
-          <!-- Methodology Figure 2 -->
           <div class="research-figure">
             <img src="static/images/teaser-1.png" alt="VLMBias testing framework" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="image-placeholder" style="display: none; height: 450px;">
@@ -1064,7 +1049,6 @@
           </div>
         </div>
 
-        <!-- Interactive Failure Showcase -->
         <div class="content-section">
           <h2><i class="fas fa-images icon-large"></i>Interactive Failure Gallery</h2>
           <p>Explore examples from all 7 domains where state-of-the-art VLMs fail spectacularly.</p>
@@ -1089,7 +1073,6 @@
             
             <div class="slideshow-content">
   
-              <!-- Task 1: Animal Leg Counting -->
               <div class="slide active" data-domain="Animals">
                 <div class="slide-image-container">
                   <div class="slide-image">
@@ -1113,7 +1096,6 @@
                 </div>
               </div>
 
-              <!-- Task 2: Brand Logos - Shoes -->
               <div class="slide" data-domain="Logos">
                 <div class="slide-image-container">
                   <div class="slide-image">
@@ -1137,7 +1119,6 @@
                 </div>
               </div>
 
-              <!-- Task 2: Brand Logos - Cars -->
               <div class="slide" data-domain="Logos">
                 <div class="slide-image-container">
                   <div class="slide-image">
@@ -1161,7 +1142,6 @@
                 </div>
               </div>
 
-              <!-- Task 3: National Flags -->
               <div class="slide" data-domain="Flags">
                 <div class="slide-image-container">
                   <div class="slide-image">
@@ -1185,7 +1165,6 @@
                 </div>
               </div>
 
-              <!-- Task 4: Chess Pieces -->
               <div class="slide" data-domain="Chess">
                 <div class="slide-image-container">
                   <div class="slide-image">
@@ -1209,7 +1188,6 @@
                 </div>
               </div>
 
-              <!-- Task 5: Board Games -->
               <div class="slide" data-domain="BoardGames">
                 <div class="slide-image-container">
                   <div class="slide-image">
@@ -1233,7 +1211,6 @@
                 </div>
               </div>
 
-              <!-- Task 6: Optical Illusions -->
               <div class="slide" data-domain="Illusions">
                 <div class="slide-image-container">
                   <div class="slide-image">
@@ -1256,7 +1233,6 @@
                 </div>
               </div>
 
-              <!-- Task 7: Patterned Grids -->
               <div class="slide" data-domain="Grids">
                 <div class="slide-image-container">
                   <div class="slide-image">
@@ -1300,7 +1276,6 @@
           </div>
         </div>
 
-        <!-- Bias Analysis Section -->
         <div class="content-section">
           <h2><i class="fas fa-chart-bar icon-large"></i>The Bias is Systematic, Not Random</h2>
           <p>When VLMs make errors, they don't make random mistakes. Instead, 75.70% of all errors are "bias-aligned" - meaning they give the expected answer based on prior knowledge rather than what they actually see in the image.</p>
@@ -1322,7 +1297,6 @@
           </div>
         </div>
 
-        <!-- Model Comparison -->
         <div class="content-section">
           <h2><i class="fas fa-chart-bar icon-large"></i>All Models Fail Equally</h2>
           <p>We tested five state-of-the-art models. The results are consistently terrible across the board:</p>
@@ -1331,7 +1305,7 @@
             <div class="table-content">
               <div class="comparison-table">
                 <table>
-                  <caption style="font-size: 1.1rem; font-weight: 600; color: #333; padding: 1rem; text-align: left; line-height: 1.6;">
+                  <caption style="font-size: 1.1rem; color: #333; padding: 1rem; text-align: left; line-height: 1.6;">
                     All VLMs achieve <span class="truth-value">100%</span> on identification and counting tasks with unmodified images, showing that they fully recognize the original version but fail on the counting questions on the modified images (i.e., counterfactuals) in VLMBias. The mean accuracy of five state-of-the-art VLMs on our seven tasks is <span class="error-value">17.05%</span>. o4-mini achieves the highest accuracy (20.25%) which however is still low. VLMs with "thinking" capabilities (o4-mini, o3) only slightly outperform non-thinking models (Gemini-2.5 Pro, Sonnet-3.7, GPT-4.1).
                   </caption>
                   <thead>
@@ -1435,7 +1409,6 @@
           </div>
         </div>
 
-        <!-- Implications Section -->
         <div class="content-section">
           <h2><i class="fas fa-lightbulb icon-large"></i>Why This Matters</h2>
           
@@ -1473,7 +1446,6 @@
           </div>
         </div>
 
-        <!-- What Didn't Work Section -->
         <div class="content-section">
           <h2><i class="fas fa-tools icon-large"></i>What We Tried (That Didn't Work)</h2>
           
@@ -1497,14 +1469,14 @@
           </div>
         </div>
 
-        <!-- Adversarial In-Image Text Section -->
         <div class="content-section">
           <h2><i class="fas fa-font icon-large"></i>Adversarial In-Image Text Makes It Even Worse</h2>
           
           <p>Adding subject names directly to images (like "Ebbinghaus illusion") made models even more biased, dropping accuracy by an additional 4.49%.</p>
 
-          <div class="research-figure research-figure-medium">
-            <img src="static/images/add_title.png" alt="In-image text example showing Ebbinghaus illusion"  onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('afterbegin', '<div class=\'image-placeholder\' style=\'height: 300px;\'><i class=\'fas fa-image\'></i><div class=\'image-title\'>Ebbinghaus Illusion with Text</div><div class=\'image-description\'>Image showing Ebbinghaus illusion variants with added text labels.</div></div>');">
+          <!-- MODIFIED: Added ID for specific styling -->
+          <div class="research-figure research-figure-medium" id="adversarial-text-figure">
+            <img src="static/images/add_title.png" alt="In-image text example showing Ebbinghaus illusion"  onerror="this.style.display='none'; this.parentElement.insertAdjacentHTML('afterbegin', '<div class=\'image-placeholder\'><i class=\'fas fa-image\'></i><div class=\'image-title\'>Ebbinghaus Illusion with Text</div><div class=\'image-description\'>Image showing Ebbinghaus illusion variants with added text labels.</div></div>');">
             <div class="figure-caption">
               Original vs. modified versions without (top) and with (bottom) the in-image text ("Ebbinghaus illusion"). Adding text labels makes models more likely to rely on memorized knowledge rather than visual analysis.
             </div>
@@ -1518,7 +1490,6 @@
           </div>
         </div>
 
-        <!-- Future Work Section -->
         <div class="content-section">
           <h2><i class="fas fa-road icon-large"></i>What Comes Next?</h2>
           
@@ -1534,7 +1505,6 @@
             <div class="column is-6">
               <h3><i class="fas fa-flask"></i> Research Directions</h3>
               <ul>
-                <!-- MODIFIED: Added periods -->
                 <li>Develop training methods that emphasize visual analysis over memorization.</li>
                 <li>Create evaluation benchmarks that test robustness to modifications.</li>
                 <li>Build models that can explicitly separate prior knowledge from visual evidence.</li>
@@ -1544,7 +1514,6 @@
             <div class="column is-6">
               <h3><i class="fas fa-cogs"></i> Practical Solutions</h3>
               <ul>
-                <!-- MODIFIED: Added periods -->
                 <li>Implement uncertainty quantification for visual tasks.</li>
                 <li>Develop hybrid systems combining vision models with explicit counting modules.</li>
                 <li>Create domain-specific fine-tuning approaches.</li>
@@ -1554,7 +1523,6 @@
           </div>
         </div>
 
-        <!-- Conclusion Section -->
         <div class="content-section">
           <h2><i class="fas fa-flag-checkered icon-large"></i>The Takeaway</h2>
           
@@ -1634,18 +1602,26 @@ function initializeSlideshow() {
 }
 
 function showSlide(index) {
+  const slideshowContent = document.querySelector('.slideshow-content');
+  // Clear "no slides" message if it exists and we have slides to show
+  if (filteredSlides.length > 0) {
+      const noSlidesMsg = slideshowContent.querySelector('.no-slides-message');
+      if (noSlidesMsg) {
+          noSlidesMsg.remove();
+      }
+  }
+
+
   if (filteredSlides.length === 0) {
     console.log('No filtered slides available');
-    // Optionally display a "no slides" message in the slideshow content area
-    const slideshowContent = document.querySelector('.slideshow-content');
-    if (slideshowContent) {
-        slideshowContent.innerHTML = '<p style="text-align:center; padding:2rem;">No examples match this filter.</p>';
+    if (slideshowContent && !slideshowContent.querySelector('.no-slides-message')) { // Prevent adding multiple messages
+        const noSlidesDiv = document.createElement('div');
+        noSlidesDiv.className = 'no-slides-message';
+        noSlidesDiv.innerHTML = '<p style="text-align:center; padding:2rem;">No examples match this filter.</p>';
+        slideshowContent.appendChild(noSlidesDiv);
     }
-    updateSlideCounter(); // Update counter to show 0 / 0 or similar
+    updateSlideCounter(); 
     return;
-  } else {
-    // If there were no slides and now there are, ensure the placeholder message is cleared
-    // This might need a more robust way to manage content if slides can be added/removed dynamically beyond filtering
   }
   
   if (index >= filteredSlides.length) {
@@ -1667,20 +1643,20 @@ function showSlide(index) {
   }
   
   if (currentActiveSlide && currentActiveSlide !== nextSlide) {
-    currentActiveSlide.classList.remove('active'); // Remove active first
-    currentActiveSlide.classList.add('exiting'); // Add exiting for animation
+    currentActiveSlide.classList.remove('active'); 
+    currentActiveSlide.classList.add('exiting'); 
     
-    setTimeout(() => { // Cleanup exiting after animation
+    setTimeout(() => { 
       if (currentActiveSlide) currentActiveSlide.classList.remove('exiting');
-    }, 800); // Match CSS transition duration
+    }, 800); 
   }
   
-  nextSlide.classList.add('active'); // Add active to make it visible via CSS
-  nextSlide.classList.add('entering'); // Add entering for animation
+  nextSlide.classList.add('active'); 
+  nextSlide.classList.add('entering'); 
   
-  setTimeout(() => { // Cleanup entering after animation
+  setTimeout(() => { 
     nextSlide.classList.remove('entering');
-  }, 800); // Match CSS transition duration
+  }, 800); 
   
   updateSlideCounter();
 }
@@ -1688,15 +1664,15 @@ function showSlide(index) {
 function changeSlide(direction) {
   console.log('Changing slide by:', direction);
   showSlide(currentSlideIndex + direction);
-  startAutoSlide(); // Restart auto-advance
+  startAutoSlide(); 
 }
 
 function startAutoSlide() {
   clearInterval(slideInterval);
-  if (!isPaused && filteredSlides.length > 0) { // Only start if not paused and there are slides
+  if (!isPaused && filteredSlides.length > 0) { 
     slideInterval = setInterval(() => {
       showSlide(currentSlideIndex + 1);
-    }, 3000); // MODIFIED: 3 seconds interval
+    }, 3000); 
     console.log('Auto-slide started');
   }
 }
@@ -1729,7 +1705,6 @@ function filterByDomain(domain) {
     clickedIndicator.classList.add('active');
   }
   
-  // Deactivate all slides before filtering. CSS will handle hiding them.
   allSlides.forEach(slide => {
     slide.classList.remove('active', 'entering', 'exiting');
   });
@@ -1744,22 +1719,17 @@ function filterByDomain(domain) {
   
   console.log('Filtered slides count:', filteredSlides.length);
   
-  currentSlideIndex = 0; // Reset to the first slide of the new filtered set
+  currentSlideIndex = 0; 
   
-  // Clear any "no slides" message if it exists (simple way for now)
+  // Clear existing "no slides" message before calling showSlide
   const slideshowContent = document.querySelector('.slideshow-content');
-  if (slideshowContent.firstChild && slideshowContent.firstChild.tagName === 'P' && filteredSlides.length > 0) {
-      // This is a basic check; might need to be more robust if other P tags can be first child.
-      // A better way would be to have a dedicated placeholder element.
-      // For now, we assume if a P is there and we have slides, it was the "no slides" message.
-      // slideshowContent.innerHTML = ''; // This would remove all slides too, bad.
-      // Instead, re-append all slides if they were removed.
-      // For now, showSlide will handle making the correct one active.
+  const noSlidesMsg = slideshowContent.querySelector('.no-slides-message');
+  if (noSlidesMsg) {
+      noSlidesMsg.remove();
   }
 
-
-  showSlide(currentSlideIndex); // Show the first slide of the new set (or handle empty set)
-  startAutoSlide(); // Restart auto-advance with the new set
+  showSlide(currentSlideIndex); 
+  startAutoSlide(); 
 }
 
 function setupEventListeners() {
