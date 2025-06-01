@@ -150,11 +150,11 @@
     .button {
       display: inline-flex;
       align-items: center;
-      padding: 0.5rem 1rem; /* Default padding */
+      padding: 0.75rem 1.5rem; /* Increased padding for bigger buttons */
       border-radius: 4px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.9rem; /* Default font size */
+      font-size: 1.1rem; /* Increased font size */
       transition: all 0.2s ease;
       border: 1px solid #e2e8f0;
       margin: 0.25rem;
@@ -162,8 +162,17 @@
       color: #4a5568;
     }
     .hero .buttons .button.is-rounded { 
-        padding-left: 1.2em;
-        padding-right: 1.2em;
+        padding-left: 1.8em; /* Increased padding */
+        padding-right: 1.8em;
+        padding-top: 0.8em;
+        padding-bottom: 0.8em;
+    }
+
+    /* Logo styles for buttons */
+    .button .logo-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 0.75rem;
     }
 
 
@@ -895,12 +904,12 @@
         align-items: center;
       }
       .hero .buttons .button { 
-        width: 80%; 
-        max-width: 280px; 
+        width: 85%; 
+        max-width: 320px; 
         justify-content: center;
-        font-size: 1rem; 
-        padding-top: 0.6em; 
-        padding-bottom: 0.6em;
+        font-size: 1.1rem; 
+        padding-top: 0.8em; 
+        padding-bottom: 0.8em;
       }
       .slide {
         padding: 0.8rem;
@@ -957,15 +966,21 @@
         <div class="mt-4 has-text-centered">
           <div class="buttons is-centered">
             <a href="https://arxiv.org/abs/stay-tuned" class="button is-rounded is-dark" onclick="trackPaperDownload()">
-              <span class="icon"><i class="fas fa-file-pdf"></i></span>
+              <span class="icon">
+                <i class="fas fa-file-pdf"></i>
+              </span>
               <span>Read Paper on ArXiv</span>
             </a>
             <a href="https://github.com/anvo25/vlms-are-biased" class="button is-rounded is-dark" onclick="trackCodeVisit()">
-              <span class="icon"><i class="fab fa-github"></i></span>
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
               <span>Code on GitHub</span>
             </a>
             <a href="https://huggingface.co/datasets/anvo25/vlms-are-biased" class="button is-rounded is-dark" onclick="trackDatasetVisit()">
-              <span class="icon"><i class="fas fa-database"></i></span>
+              <span class="icon">
+                <i class="fas fa-database"></i>
+              </span>
               <span>Dataset on HuggingFace</span>
             </a>
           </div>
