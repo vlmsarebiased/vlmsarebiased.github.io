@@ -39,6 +39,15 @@
         'value': 1
       });
     }
+
+    // Track examples visits
+    function trackExamplesVisit() {
+      gtag('event', 'click', {
+        'event_category': 'Examples',
+        'event_label': 'GitHub Examples',
+        'value': 1
+      });
+    }
   </script>
 
   <meta charset="utf-8">
@@ -175,7 +184,6 @@
       margin-right: 0.75rem;
     }
 
-
     .button:hover {
       background-color: #f7fafc;
       border-color: #cbd5e0;
@@ -183,6 +191,23 @@
 
     .button .icon {
       margin-right: 0.5rem;
+    }
+
+    /* Special styling for the examples button */
+    .button.is-examples {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      transform: translateY(0);
+      transition: all 0.3s ease;
+    }
+
+    .button.is-examples:hover {
+      background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      color: #ffffff;
     }
 
     .buttons {
@@ -207,7 +232,6 @@
     .content-section .column ul li {
       margin-bottom: 0.5em; 
     }
-
 
     .highlight-box {
       background-color: #e3f2fd;
@@ -708,7 +732,6 @@
         height: 250px; /* Match image max-height */
     }
 
-
     .figure-caption {
       padding: 1rem;
       background: #f8fafc;
@@ -721,7 +744,6 @@
     .research-figure-medium .figure-caption {
         text-align: center; 
     }
-
 
     .figure-caption strong {
       color: #1a237e;
@@ -982,6 +1004,12 @@
                 <i class="fas fa-database"></i>
               </span>
               <span>Dataset on HuggingFace</span>
+            </a>
+            <a href="https://github.com/anvo25/vlms-are-biased/tree/main/examples" class="button is-rounded is-examples" onclick="trackExamplesVisit()">
+              <span class="icon">
+                <i class="fas fa-play-circle"></i>
+              </span>
+              <span>Test It Yourself</span>
             </a>
           </div>
         </div>
