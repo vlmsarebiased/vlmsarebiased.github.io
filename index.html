@@ -898,66 +898,224 @@ background: #ffffff;
     .footer-text a { color: #3b82f6; text-decoration: none; }
     .footer-text a:hover { text-decoration: underline; }
 
-    @media (max-width: 768px) {
-  /* Fix #1: Reduce excessive padding in the Example Gallery for mobile */
-  .gallery-container {
-    padding-left: 15px;
-    padding-right: 15px;
+@media (max-width: 768px) {
+  /* PREVENT HORIZONTAL SCROLL */
+  body {
+    overflow-x: hidden !important;
   }
 
-  /* Make general two-column layouts stack vertically */
-  .columns {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  /* Make the slideshow and its images responsive */
-  .slideshow-content {
-    min-height: auto; /* Remove the large fixed height */
-  }
-  .slide-image {
-    height: 45vh; /* Use a percentage of the viewport height */
-    max-height: 400px; /* But don't let it get excessively tall */
+  /* Scale down all fonts but keep desktop layout */
+  html {
+    font-size: 12px;
   }
 
-  /* --- Original styles you already had (kept for completeness) --- */
-
-  /* Handles the copy buttons inside the gallery */
-  .copy-buttons {
-      flex-direction: column;
-      width: 100%;
+  /* Hero section */
+  .hero .title {
+    font-size: 2rem;
   }
   
-  .copy-prompt-btn, .copy-image-btn {
-      width: 100%;
-      justify-content: center;
-  }
-  
-  .example-footer {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 1rem;
-  }
-  
-  .example-type {
-      text-align: center;
+  .publication-authors {
+    font-size: 1rem;
   }
 
-  /* Handles the hero buttons with horizontal scrolling */
-  .hero .buttons.is-centered {
-    flex-wrap: nowrap;
+  /* Buttons */
+  .button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  /* HORIZONTAL SCROLL FOR TABLES */
+  .research-table {
     overflow-x: auto;
-    justify-content: flex-start;
     -webkit-overflow-scrolling: touch;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 15px;
-    scrollbar-width: none; /* For Firefox */
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .comparison-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .comparison-table table {
+    min-width: 800px;
+    font-size: 0.7rem;
   }
 
-  /* Hide scrollbar for Chrome, Safari, and Opera */
-  .hero .buttons.is-centered::-webkit-scrollbar {
+  /* HERO BUTTONS - FIXED */
+  .hero .buttons.is-centered {
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    justify-content: center;
+    padding-bottom: 10px;
+  }
+
+  /* EXAMPLE GALLERY FIXES - CONTAINED WITHIN VIEWPORT */
+  #example-gallery-section {
+    margin-left: -0.8rem !important;
+    margin-right: -0.8rem !important;
+    width: calc(100% + 1.6rem) !important;
+    max-width: calc(100% + 1.6rem) !important;
+    overflow-x: hidden;
+  }
+
+  #example-gallery-section .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    overflow-x: hidden;
+  }
+
+  /* GALLERY SECTION - FIXED WIDTH CALCULATION */
+  .gallery-section {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow-x: hidden;
+  }
+
+  .gallery-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow-x: hidden;
+  }
+
+  /* Make gallery track stack vertically on mobile */
+  .gallery-track {
+    flex-direction: column !important;
+  }
+
+  .gallery-slide {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    padding: 0 1rem !important;
+  }
+
+  .gallery-item {
+    width: 100% !important;
+    flex: none !important;
+    margin: 0 !important;
+  }
+
+  .example-card {
+    font-size: 0.8rem;
+    margin: 0 0 0.5rem 0 !important;
+    border-radius: 4px;
+    width: 100%;
+  }
+
+  .example-image {
+    height: 120px;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .example-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .example-content {
+    padding: 0.6rem;
+  }
+
+  .example-question {
+    font-size: 0.75rem;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+
+  .example-info {
+    font-size: 0.7rem;
+    padding: 0.3rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .example-footer {
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0 0.6rem 0.6rem 0.6rem;
+  }
+
+  .copy-prompt-btn, .copy-image-btn {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.65rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .copy-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.3rem;
+  }
+
+  .example-type {
+    text-align: center;
+  }
+
+  /* Hide gallery navigation on mobile */
+  .gallery-nav {
     display: none;
+  }
+
+  /* Content sections */
+  .content-section {
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Stat highlights and boxes */
+  .stat-highlight,
+  .key-insight,
+  .failure-showcase,
+  .methodology-section {
+    padding: 1rem;
+  }
+
+  .stat-highlight .is-size-4 {
+    font-size: 1rem !important;
+  }
+
+  .stat-highlight .is-size-3 {
+    font-size: 1.2rem !important;
+  }
+
+  .stat-highlight .is-size-5 {
+    font-size: 0.9rem !important;
+  }
+
+  /* Slideshow */
+  .slideshow-content {
+    min-height: 500px;
+  }
+
+  .slide-image {
+    height: 250px;
+  }
+
+  .slideshow-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 0.3rem 0.2rem;
+  }
+
+  .columns {
+    gap: 1rem;
   }
 }
 </style>
@@ -1010,8 +1168,8 @@ background: #ffffff;
               </span>
               <span>Dataset</span>
             </a>
-
             
+            <br>
             <a href="#example-gallery-section" class="button is-rounded is-examples" onclick="trackExamplesVisit()">
                 <span class="icon">
                     <i class="fas fa-play-circle"></i>
@@ -1849,11 +2007,19 @@ function initializeGallery() {
         slide.className = 'gallery-slide';
 
         for (let i = 0; i < Math.min(itemsPerView, activeData.length); i++) {
-            const item = activeData[i];
-            const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item';
-            const gapValue = '1.5rem';
-            galleryItem.style.width = `calc((100% - (${itemsPerView - 1} * ${gapValue})) / ${itemsPerView})`;
+    const item = activeData[i];
+    const galleryItem = document.createElement('div');
+    galleryItem.className = 'gallery-item';
+    
+    // Mobile: full width for vertical stacking
+    if (window.innerWidth <= 768) {
+      galleryItem.style.width = '100%';
+      galleryItem.style.margin = '0 0 0.5rem 0';
+    } else {
+      // Desktop: horizontal layout
+      const gapValue = '1.5rem';
+      galleryItem.style.width = `calc((100% - (${itemsPerView - 1} * ${gapValue})) / ${itemsPerView})`;
+    }
 
             galleryItem.innerHTML = `
               <div class="example-card">
@@ -1916,10 +2082,10 @@ function initializeGallery() {
   }
   
   function getItemsPerView() {
-    if (window.innerWidth <= 768) return 1;
-    if (window.innerWidth <= 1024) return 2;
-    return 4;
-  }
+  if (window.innerWidth <= 768) return 4; // Show 4 items stacked on mobile
+  if (window.innerWidth <= 1024) return 2;
+  return 4;
+}
 
   galleryContainer.addEventListener('click', async function(e) {
     const promptButton = e.target.closest('.copy-prompt-btn');
