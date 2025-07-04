@@ -899,55 +899,55 @@ background: #ffffff;
     .footer-text a:hover { text-decoration: underline; }
 
     @media (max-width: 768px) {
-      /* Handles the copy buttons inside the gallery */
-      .copy-buttons {
-          flex-direction: column;
-          width: 100%;
-      }
-      
-      .copy-prompt-btn, .copy-image-btn {
-          width: 100%;
-          justify-content: center;
-      }
-      
-      .example-footer {
-          flex-direction: column;
-          align-items: stretch;
-          gap: 1rem;
-      }
-      
-      .example-type {
-          text-align: center;
-      }
+  /* Handles the copy buttons inside the gallery */
+  .copy-buttons {
+      flex-direction: column;
+      width: 100%;
+  }
+  
+  .copy-prompt-btn, .copy-image-btn {
+      width: 100%;
+      justify-content: center;
+  }
+  
+  .example-footer {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+  }
+  
+  .example-type {
+      text-align: center;
+  }
 
-      /* Handles the hero buttons with horizontal scrolling */
-      .hero .buttons.is-centered {
-        /* Force all buttons onto a single line */
-        flex-wrap: nowrap;
-        
-        /* Enable horizontal scrolling if the content overflows */
-        overflow-x: auto;
-        
-        /* Align buttons to the start for a natural scrolling feel */
-        justify-content: flex-start;
-        
-        /* Improve scrolling experience on iOS */
-        -webkit-overflow-scrolling: touch;
-        
-        /* Add a little padding so buttons don't touch the screen edges */
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-bottom: 15px; /* Add space below for a cleaner look */
-        
-        /* Hide the scrollbar for a cleaner UI */
-        scrollbar-width: none; /* For Firefox */
-      }
+  /* Handles the hero buttons with horizontal scrolling */
+  .hero .buttons.is-centered {
+    /* Force all buttons onto a single line */
+    flex-wrap: nowrap;
+    
+    /* Enable horizontal scrolling if the content overflows */
+    overflow-x: auto;
+    
+    /* Align buttons to the start for a natural scrolling feel */
+    justify-content: flex-start;
+    
+    /* Improve scrolling experience on iOS */
+    -webkit-overflow-scrolling: touch;
+    
+    /* Add a little padding so buttons don't touch the screen edges */
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 15px; /* Add space below for a cleaner look */
+    
+    /* Hide the scrollbar for a cleaner UI */
+    scrollbar-width: none; /* For Firefox */
+  }
 
-      /* Hide scrollbar for Chrome, Safari, and Opera */
-      .hero .buttons.is-centered::-webkit-scrollbar {
-        display: none;
-      }
-    }
+  /* Hide scrollbar for Chrome, Safari, and Opera */
+  .hero .buttons.is-centered::-webkit-scrollbar {
+    display: none;
+  }
+}
 </style>
 </head>
 <body>
