@@ -63,7 +63,7 @@
   <meta name="description" content="Vision Language Models are Biased: VLMs fail on simple counting tasks when familiar objects are subtly modified">
   <meta name="keywords" content="VLM, Vision Language Models, Bias, AI, Computer Vision, Counting">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base target="_blank">
+  <base href="./" target="_blank">
   <title>VLMs are Biased</title>
   <link rel="icon" href="static/icons/assumption.png" type="image/png">
 
@@ -72,542 +72,715 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.2/css/academicons.min.css">
 
-  <style>
-    /* Base styles - exactly from B-score */
-    body {
-      font-family: 'Noto Sans', sans-serif;
-      line-height: 1.6;
-      color: #333;
-      margin: 0 auto;
-      padding: 20px;
-    }
+ <style>
+/* Base styles - exactly from B-score */
+body {
+  font-family: 'Noto Sans', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  margin: 0 auto;
+  padding: 20px;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
 
-    h1, h2, h3, h4, h5 {
-      font-family: 'Google Sans', sans-serif;
-      font-weight: 700;
-      margin-top: 1.5em;
-      margin-bottom: 0.5em;
-      color: #1a237e;
-    }
+h1, h2, h3, h4, h5 {
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: #1a237e;
+}
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
-    /* Hero section - MODIFIED margin-bottom */
-    .hero {
-      background-color: #f5f7fa;
-      padding: 2rem 0;
-      margin-bottom: 1rem; /* MODIFIED from 2rem */
-    }
+/* Hero section - MODIFIED margin-bottom */
+.hero {
+  background-color: #f5f7fa;
+  padding: 2rem 0;
+  margin-bottom: 1rem; /* MODIFIED from 2rem */
+}
 
-    .hero .title {
-      color: #000000;
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-      line-height: 1.2;
-      display: flex; /* For aligning icon with text */
-      align-items: center; /* For aligning icon with text */
-      justify-content: center; /* For centering title content */
-      flex-wrap: wrap; /* Allow wrapping if title is too long */
-    }
+.hero .title {
+  color: #000000;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  display: flex; /* For aligning icon with text */
+  align-items: center; /* For aligning icon with text */
+  justify-content: center; /* For centering title content */
+  flex-wrap: wrap; /* Allow wrapping if title is too long */
+}
 
-    .hero .title .title-icon {
-      height: 0.9em; /* Relative to title font size */
-      margin-left: 0.3em;
-      vertical-align: middle; /* Better alignment for inline-block/flex item */
-    }
-    
-    .publication-authors {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      color: #4a5568;
-      margin-bottom: 1rem;
-    }
-    
-    .publication-authors .author-block {
-      display: inline-block;
-      margin: 0 0.4em 0.3em 0;
-      margin-right: 10px;
-    }
-    
-    .publication-authors .author-block:last-child {
-      margin-right: 0;
-    }
-    
-    .publication-authors a {
-      color: #3182ce;
-      text-decoration: none;
-    }
-    
-    .publication-authors a:hover {
-      text-decoration: underline;
-    }
-    
-    .publication-authors sup {
-      color: #718096;
-      font-weight: normal;
-    }
+.hero .title .title-icon {
+  height: 0.9em; /* Relative to title font size */
+  margin-left: 0.3em;
+  vertical-align: middle; /* Better alignment for inline-block/flex item */
+}
 
-    .affiliations {
-      font-size: 1rem;
-      color: #718096;
-      margin-bottom: 0.5rem;
-    }
-    
-    .contributions {
-      font-size: 0.9rem;
-      color: #718096;
-      margin-bottom: 2rem;
-    }
+.publication-authors {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #4a5568;
+  margin-bottom: 1rem;
+}
 
-    /* Buttons - simplified like B-score */
-    .button {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.75rem 1.5rem; /* Increased padding for bigger buttons */
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem; /* Increased font size */
-      transition: all 0.2s ease;
-      border: 1px solid #e2e8f0;
-      margin: 0.25rem;
-      background-color: #ffffff;
-      color: #4a5568;
-    }
-    .hero .buttons .button.is-rounded { 
-        padding-left: 1.8em; /* Increased padding */
-        padding-right: 1.8em;
-        padding-top: 0.8em;
-        padding-bottom: 0.8em;
-    }
+.publication-authors .author-block {
+  display: inline-block;
+  margin: 0 0.4em 0.3em 0;
+  margin-right: 10px;
+}
 
-    /* Logo styles for buttons */
-    .button .logo-icon {
-      width: 24px;
-      height: 24px;
-      margin-right: 0.75rem;
-    }
+.publication-authors .author-block:last-child {
+  margin-right: 0;
+}
 
-    .button:hover {
-      background-color: #f7fafc;
-      border-color: #cbd5e0;
-    }
+.publication-authors a {
+  color: #3182ce;
+  text-decoration: none;
+}
 
-    .button .icon {
-      margin-right: 0.5rem;
-    }
+.publication-authors a:hover {
+  text-decoration: underline;
+}
 
-    /* Special styling for the examples button */
-    .button.is-examples {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #ffffff;
-      border: none;
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-      transform: translateY(0);
-      transition: all 0.3s ease;
-    }
+.publication-authors sup {
+  color: #718096;
+  font-weight: normal;
+}
 
-    .button.is-examples:hover {
-      background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-      color: #ffffff;
-    }
-  /* Special styling for the discussion button - Slate Gray */
-  .button.is-discussion {
-    background: linear-gradient(135deg, #0987A0 0%, #00C4B3 100%);
+.affiliations {
+  font-size: 1rem;
+  color: #718096;
+  margin-bottom: 0.5rem;
+}
+
+.contributions {
+  font-size: 0.9rem;
+  color: #718096;
+  margin-bottom: 2rem;
+}
+
+/* Buttons - simplified like B-score */
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem; /* Increased padding for bigger buttons */
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem; /* Increased font size */
+  transition: all 0.2s ease;
+  border: 1px solid #e2e8f0;
+  margin: 0.25rem;
+  background-color: #ffffff;
+  color: #4a5568;
+}
+.hero .buttons .button.is-rounded { 
+    padding-left: 1.8em; /* Increased padding */
+    padding-right: 1.8em;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+}
+
+/* Logo styles for buttons */
+.button .logo-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.75rem;
+}
+
+.button:hover {
+  background-color: #f7fafc;
+  border-color: #cbd5e0;
+}
+
+.button .icon {
+  margin-right: 0.5rem;
+}
+
+/* Special styling for the examples button */
+.button.is-examples {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.button.is-examples:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  color: #ffffff;
+}
+/* Special styling for the discussion button - Slate Gray */
+.button.is-discussion {
+  background: linear-gradient(135deg, #0987A0 0%, #00C4B3 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 15px rgba(9, 135, 160, 0.3);
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.button.is-discussion:hover {
+  background: linear-gradient(135deg, #087387 0%, #00a99a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(9, 135, 160, 0.4);
+  color: #ffffff;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Content sections */
+.content-section {
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+.content-section .column ul {
+  list-style: disc; 
+  margin-left: 1.5em; 
+  padding-left: 0.5em; 
+}
+
+.content-section .column ul li {
+  margin-bottom: 0.5em; 
+}
+
+/* UPDATED: Example Gallery Styles */
+#example-gallery-section {
+  scroll-margin-top: 20px;
+}
+.gallery-section {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    margin: 2rem 0;
+}
+.gallery-header {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
     color: #ffffff;
-    border: none;
-    box-shadow: 0 4px 15px rgba(9, 135, 160, 0.3);
-    transform: translateY(0);
+    padding: 1.5rem;
+    text-align: center;
+}
+.gallery-header h2 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 1.8rem;
+}
+.gallery-filters {
+    padding: 1rem 1.5rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.gallery-filter-btn {
+    padding: 0.5rem 1rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    cursor: pointer;
     transition: all 0.3s ease;
-  }
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #4a5568;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.gallery-filter-btn:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e0;
+  transform: translateY(-1px);
+}
+.gallery-filter-btn.active {
+  background: #1a237e;
+  color: #ffffff;
+  border-color: #1a237e;
+}
 
-  .button.is-discussion:hover {
-    background: linear-gradient(135deg, #087387 0%, #00a99a 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(9, 135, 160, 0.4);
+.gallery-container {
+    position: relative;
+    padding: 1.5rem 50px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.gallery-viewport {
+    overflow: hidden;
+    position: relative;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.gallery-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother transition */
+}
+
+.gallery-slide {
+    flex: 0 0 100%;
+    display: flex;
+    gap: 1.5rem;
+    box-sizing: border-box;
+}
+
+.gallery-item {
+    flex: 0 0 auto; /* Let JS set the width, don't shrink or grow */
+    box-sizing: border-box;
+}
+
+.example-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.example-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+.example-image {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+}
+.example-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+.image-fallback {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f1f5f9;
+    color: #94a3b8;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+.example-image.has-error .image-fallback {
+    display: flex;
+}
+.example-image.has-error img {
+    display: none;
+}
+.example-content {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.example-question {
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
+    flex-grow: 1;
+}
+.example-info {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    padding: 0.6rem;
+    border-radius: 6px;
+}
+.info-label {
+    font-weight: 600;
+    margin-right: 0.4em;
+}
+.truth-label { color: #166534; }
+.bias-label { color: #991b1b; }
+.info-value {
+    font-family: 'Courier New', Courier, monospace;
+}
+.truth-value { color: #15803d; }
+.bias-value { color: #b91c1c; }
+
+.example-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.example-type {
+    display: inline-block;
+    background: #4a5568;
     color: #ffffff;
-  }
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.copy-prompt-btn, .copy-image-btn {
+    background: #e2e8f0;
+    border: 1px solid #cbd5e0;
+    color: #4a5568;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+.copy-image-btn {
+  background: #dbeafe;
+  border-color: #93c5fd;
+  color: #1e40af;
+}
+.copy-prompt-btn:hover {
+    background: #cbd5e0;
+}
+.copy-prompt-btn.copied {
+    background: #d1fae5;
+    color: #065f46;
+    border-color: #6ee7b7;
+}
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+.copy-image-btn:hover {
+    background: #bfdbfe;
+    border-color: #60a5fa;
+}
 
-    /* Content sections */
-    .content-section {
-      margin-bottom: 2rem;
-      padding: 1rem;
-    }
-    
-    .content-section .column ul {
-      list-style: disc; 
-      margin-left: 1.5em; 
-      padding-left: 0.5em; 
-    }
+.copy-image-btn.copied {
+    background: #d1fae5;
+    color: #065f46;
+    border-color: #6ee7b7;
+}
 
-    .content-section .column ul li {
-      margin-bottom: 0.5em; 
-    }
+.copy-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(0,0,0,0.1);
+    color: #333;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+}
+.gallery-nav:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.gallery-nav.prev { left: 5px; } 
+.gallery-nav.next { right: 5px; } 
 
-    .highlight-box {
-      background-color: #e3f2fd;
-      padding: 1.5rem;
-      border-radius: 5px;
-      margin: 2rem 0;
-    }
+.gallery-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+}
+.gallery-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #cbd5e0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.gallery-indicator:hover { background: #a0aec0; }
+.gallery-indicator.active {
+    background: #1a237e;
+    transform: scale(1.2);
+}
+.gallery-paused {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: #ffffff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.gallery-container:hover .gallery-paused {
+    opacity: 1;
+    visibility: visible;
+}
+.highlight-box {
+  background-color: #e3f2fd;
+  padding: 1.5rem;
+  border-radius: 5px;
+  margin: 2rem 0;
+}
+.key-insight {
+  background-color: #e8f5e9;
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 1.5rem 0;
+}
+.stat-highlight {
+  background-color: #e3f2fd;
+  padding: 1.5rem;
+  border-radius: 5px;
+  margin: 2rem 0;
+  text-align: center;
+}
+.failure-showcase {
+  background-color: #ffebee;
+  padding: 1.5rem;
+  border-radius: 5px;
+  margin: 2rem 0;
+}
+.methodology-section {
+  background-color: #f3e5f5;
+  padding: 1.5rem;
+  border-radius: 5px;
+  margin: 2rem 0;
+}
+.quote-block {
+  border-left: 4px solid #7986cb;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+}
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+.model-result {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.model-result h4 {
+  color: #1a237e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.research-table {
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+.comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+.comparison-table th {
+  background: #4a5568;
+  color: #ffffff;
+  padding: 0.75rem;
+  text-align: center;
+  white-space: nowrap;
+}
+.comparison-table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: center;
+}
+.comparison-table td:first-child {
+  text-align: left;
+  font-weight: 600;
+  background: #f8fafc;
+}
+.highlight-value {
+  background-color: #fef3c7;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-weight: 700;
+  color: #92400e;
+}
+.best-value {
+  background-color: #d1fae5;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-weight: 700;
+  color: #065f46;
+}
+.slideshow-container {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin: 2rem 0;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+.slideshow-header {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: #ffffff;
+  padding: 1.5rem;
+  position: relative;
+}
+.slideshow-header-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.slideshow-header h3 {
+  color: #ffffff;
+  margin: 0;
+  font-size: 1.4rem;
+}
+.slideshow-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.slide-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #ffffff;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.slide-btn:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-1px);
+}
+.slide-counter {
+  color: #ffffff;
+  font-weight: 600;
+  min-width: 70px;
+  text-align: center;
+  background: rgba(255,255,255,0.15);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+}
+.slideshow-content {
+position: relative;
+min-height: 900px; 
+overflow: hidden;
+/* Add background to prevent content bleeding */
+background: #ffffff;
+}
 
-    .key-insight {
-      background-color: #e8f5e9;
-      padding: 1rem;
-      border-radius: 5px;
-      margin: 1.5rem 0;
-    }
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    background: #ffffff; /* Ensure solid background */
+}
 
-    .stat-highlight {
-      background-color: #e3f2fd;
-      padding: 1.5rem;
-      border-radius: 5px;
-      margin: 2rem 0;
-      text-align: center;
-    }
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 10;
+}
 
-    .failure-showcase {
-      background-color: #ffebee;
-      padding: 1.5rem;
-      border-radius: 5px;
-      margin: 2rem 0;
-    }
-
-    .methodology-section {
-      background-color: #f3e5f5;
-      padding: 1.5rem;
-      border-radius: 5px;
-      margin: 2rem 0;
-    }
-
-    .quote-block {
-      border-left: 4px solid #7986cb;
-      padding-left: 1rem;
-      margin: 1.5rem 0;
-      font-style: italic;
-    }
-
-    .domain-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0;
-    }
-
-    .domain-card {
+  .no-slides-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
       background: #ffffff;
-      border-radius: 5px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .domain-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-    }
-
-    .domain-card h3 {
-      color: #1a237e;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .results-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    .model-result {
-      background: #ffffff;
-      padding: 1.5rem;
-      border-radius: 5px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .model-result h4 {
-      color: #1a237e;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .research-table {
-      background: #ffffff;
-      border-radius: 5px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      margin: 2rem 0;
-      overflow: hidden; 
-      overflow-x: auto;
-    }
-
-    .table-header {
-      background: #1a237e;
-      color: #ffffff;
-      padding: 1rem;
-      font-weight: 600;
-      font-size: 1rem;
-    }
-
-    .comparison-table table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 800px;
-    }
-
-    .comparison-table th {
-      background: #4a5568;
-      color: #ffffff;
-      padding: 0.75rem;
-      text-align: center;
-      white-space: nowrap;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .comparison-table td {
-      padding: 0.5rem;
-      border-bottom: 1px solid #e2e8f0;
-      text-align: center;
-      font-weight: 500;
-      font-size: 0.9rem;
-    }
-
-    .comparison-table td:first-child {
-      text-align: left;
-      white-space: nowrap;
-      font-weight: 600;
-      background: #f8fafc;
-    }
-
-    .comparison-table tr:hover {
-      background-color: #f8fafc;
-    }
-
-    .highlight-value {
-      background-color: #fef3c7;
-      padding: 0.2rem 0.5rem;
-      border-radius: 3px;
-      font-weight: 700;
-      color: #92400e;
-    }
-
-    .best-value {
-      background-color: #d1fae5;
-      padding: 0.2rem 0.5rem;
-      border-radius: 3px;
-      font-weight: 700;
-      color: #065f46;
-    }
-
-    .slideshow-container {
-      background: #ffffff;
+      padding: 2rem;
       border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      margin: 2rem 0;
-      overflow: hidden;
-      border: 1px solid #e2e8f0;
-    }
-
-    .slideshow-header {
-      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-      color: #ffffff;
-      padding: 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .slideshow-header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .slideshow-header-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .slideshow-header h3 {
-      color: #ffffff;
-      margin: 0;
-      font-size: 1.4rem;
-      font-weight: 600;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    }
-
-    .slideshow-controls {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .slide-btn {
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: #ffffff;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-      backdrop-filter: blur(10px);
-    }
-
-    .slide-btn:hover {
-      background: rgba(255,255,255,0.25);
-      border-color: rgba(255,255,255,0.3);
-      transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-
-    .slide-btn:active {
-      transform: translateY(0);
-    }
-
-    .slide-counter {
-      color: #ffffff;
-      font-weight: 600;
-      min-width: 70px;
-      text-align: center;
-      background: rgba(255,255,255,0.15);
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      border: 1px solid rgba(255,255,255,0.2);
-      backdrop-filter: blur(10px);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    }
-
-    .slideshow-content {
-      position: relative;
-      min-height: 900px; 
-      overflow: hidden;
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    }
-
-    .slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      padding: 1.5rem;
-      gap: 1rem;
-      align-items: flex-start;
-      min-height: 850px; 
-      opacity: 0;
-      visibility: hidden;
-      transform: translateX(50px) scale(0.95);
-      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .slide.active {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(0) scale(1);
-    }
-
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
     .slide-image-container {
-      flex: 0 0 auto;
       width: 100%;
       margin-bottom: 1rem;
     }
-    
     .slide-image {
       width: 100%;
       height: 600px; 
       position: relative;
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      margin-bottom: 1rem;
     }
-
     .slide-image img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      object-position: center;
-      display: block;
     }
-
-    .image-placeholder {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #64748b;
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-align: center;
-      padding: 1rem;
-      gap: 0.5rem;
-    }
-
-    .image-placeholder i {
-      font-size: 3rem;
-      color: #cbd5e0;
-      margin-bottom: 1rem;
-    }
-
-    .image-placeholder .image-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #475569;
-      margin-bottom: 0.5rem;
-    }
-
-    .image-placeholder .image-description {
-      font-size: 0.85rem;
-      color: #64748b;
-      line-height: 1.4;
-    }
-
     .image-caption {
       background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
       color: #ffffff;
@@ -616,31 +789,17 @@
       text-align: center;
       margin-top: -1px; 
     }
-
     .image-title {
       font-size: 1rem;
       font-weight: 600;
-      margin: 0 0 0.4rem 0;
-      color: #ffffff;
     }
-
     .image-takeaway {
       font-size: 0.85rem;
-      margin: 0;
-      opacity: 0.95;
       font-style: italic;
-      line-height: 1.4;
-      color: #ecf0f1;
     }
-
     .slide-content {
-      flex: 1;
-      text-align: left;
       width: 100%;
-      color: #333;
-      padding: 0.5rem;
     }
-
     .domain-tag {
       display: inline-block;
       background: #1a237e;
@@ -648,10 +807,8 @@
       padding: 0.3rem 0.8rem;
       border-radius: 12px;
       font-size: 0.8rem;
-      font-weight: 600;
       margin-bottom: 0.8rem;
     }
-
     .accuracy-indicator {
       display: inline-block;
       background: #dc2626;
@@ -661,27 +818,12 @@
       font-size: 0.85rem;
       font-weight: 700;
       margin-left: 0.5rem;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
-
-    .slide-content h4 {
-      color: #1a237e;
-      margin: 0 0 0.8rem 0;
-      font-size: 1.1rem;
-      line-height: 1.4;
-    }
-
-    .slide-content p {
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-    }
-
     .slideshow-footer {
       background: #f8fafc;
       padding: 1.5rem;
       border-top: 1px solid #e2e8f0;
     }
-
     .domain-indicators {
       display: flex;
       gap: 0.5rem;
@@ -689,101 +831,44 @@
       flex-wrap: wrap;
       justify-content: center;
     }
-
     .domain-indicator {
       padding: 0.5rem 1rem;
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 20px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #4a5568;
     }
-
     .domain-indicator:hover {
       background: #f1f5f9;
-      border-color: #cbd5e0;
-      transform: translateY(-1px);
     }
-
     .domain-indicator.active {
       background: #1a237e;
       color: #ffffff;
-      border-color: #1a237e;
     }
-
     .slideshow-info {
       text-align: center;
       color: #64748b;
       font-size: 0.85rem;
-      line-height: 1.4;
     }
-
-    .research-figure {
-      background: #ffffff;
-      border-radius: 5px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      margin: 2rem 0;
-      overflow: hidden;
-    }
-
     .research-figure img {
       width: 100%;
       height: auto;
-      display: block;
     }
-
     .research-figure-medium img {
       max-width: 80%; 
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
       display: block; 
     }
-    .research-figure-medium .image-placeholder {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    /* Style for the specific adversarial text figure */
-    #adversarial-text-figure img {
-        max-width: 80%; 
-        max-height: 450px; 
-        object-fit: contain; /* Ensure aspect ratio is maintained */
-    }
-    #adversarial-text-figure .image-placeholder {
-        max-width: 60%;
-        height: 250px; /* Match image max-height */
-    }
-
     .figure-caption {
       padding: 1rem;
       background: #f8fafc;
       font-size: 0.9rem;
-      color: #555;
       font-style: italic;
       text-align: center; 
     }
-    
-    .research-figure-medium .figure-caption {
-        text-align: center; 
-    }
-
-    .figure-caption strong {
-      color: #1a237e;
-    }
-
-    .accuracy-bad { 
-      color: #dc2626; 
-      font-weight: 700; 
-    }
-    
-    .accuracy-good { 
-      color: #16a34a; 
-      font-weight: 700; 
-    }
-
+    .figure-caption strong { color: #1a237e; }
+    .accuracy-bad { color: #dc2626; font-weight: 700; }
+    .accuracy-good { color: #16a34a; font-weight: 700; }
     .truth-value {
       color: #16a34a;
       font-weight: 700;
@@ -791,7 +876,6 @@
       padding: 0.2rem 0.5rem;
       border-radius: 3px;
     }
-
     .error-value {
       color: #dc2626;
       font-weight: 700;
@@ -799,7 +883,6 @@
       padding: 0.2rem 0.5rem;
       border-radius: 3px;
     }
-
     .yellow-highlight {
       background: #fef3c7;
       padding: 0.1em 0.4em;
@@ -807,180 +890,36 @@
       color: #92400e;
       font-weight: 600;
     }
-
-    .icon-large {
-      font-size: 1.8rem;
-      margin-right: 0.8rem;
-      color: #7986cb;
-    }
-
-    .has-text-centered { text-align: center; }
-    .has-text-weight-bold { font-weight: 700; }
-    .is-size-3 { font-size: 1.8rem; }
-    .is-size-4 { font-size: 1.4rem; }
-    .is-size-5 { font-size: 1.1rem; }
-    .mt-3 { margin-top: 1rem; }
-    .mt-4 { margin-top: 1.5rem; }
-    .mb-3 { margin-bottom: 1rem; }
-
-    .columns {
-      display: flex;
-      gap: 2rem;
-      margin: 1rem 0;
-    }
-
-    .column {
-      flex: 1;
-    }
-
-    .column.is-6 {
-      flex: 0 0 50%;
-    }
-
-    .column.is-8 {
-      flex: 0 0 66.666%;
-    }
-
-    .column.is-full-width {
-      flex: 0 0 100%;
-    }
-
-    .footer {
-      background-color: #f5f7fa;
-      padding: 3rem 1.5rem;
-      margin-top: 4rem;
-    }
-
-    .footer-text {
-      color: #64748b;
-      font-size: 1rem;
-    }
-
-    .footer-text a {
-      color: #3b82f6;
-      text-decoration: none;
-    }
-
-    .footer-text a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 1024px) {
-      .container {
-        padding: 0 15px;
-      }
-      .domain-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      }
-      .results-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      }
-    }
+    .icon-large { font-size: 1.8rem; margin-right: 0.8rem; color: #7986cb; }
+    .columns { display: flex; gap: 2rem; margin: 1rem 0; }
+    .column { flex: 1; }
+    .footer { background-color: #f5f7fa; padding: 3rem 1.5rem; margin-top: 4rem; }
+    .footer-text { color: #64748b; font-size: 1rem; }
+    .footer-text a { color: #3b82f6; text-decoration: none; }
+    .footer-text a:hover { text-decoration: underline; }
 
     @media (max-width: 768px) {
-      .hero .title {
-        font-size: 2.2rem;
+      .copy-buttons {
+          flex-direction: column;
+          width: 100%;
       }
-      .hero .title .title-icon {
-        height: 0.85em;
-      }
-      .publication-authors { font-size: 1rem; }
-      .affiliations { font-size: 0.9rem; }
-      .contributions { font-size: 0.8rem; }
       
-      .slide {
-        flex-direction: column;
-        padding: 1rem;
-        text-align: center;
-        align-items: center;
-        min-height: 750px; 
+      .copy-prompt-btn, .copy-image-btn {
+          width: 100%;
+          justify-content: center;
       }
-      .slide-image {
-        width: 100%;
-        height: 450px; 
-        margin-bottom: 0.8rem;
-      }
-      .slide-content {
-        padding-left: 0;
-        text-align: left;
-        width: 100%;
-      }
-      .slideshow-header-content {
-        flex-direction: column;
-        text-align: center;
-      }
-      .slideshow-content {
-        min-height: 800px; 
-      }
-      .domain-grid {
-        grid-template-columns: 1fr;
-      }
-      .results-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      }
-      .columns {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .column.is-6,
-      .column.is-8 {
-        flex: 1;
-      }
-      .research-figure-medium img {
-        max-width: 95%; 
-      }
-      #adversarial-text-figure img {
-        max-width: 80%;
-        max-height: 200px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero .title {
-        font-size: 1.8rem;
-      }
-      .hero .title .title-icon {
-        height: 0.8em;
-      }
-      .publication-authors { font-size: 0.9rem; }
-      .affiliations { font-size: 0.8rem; }
-      .contributions { font-size: 0.7rem; }
       
-      .buttons {
-        flex-direction: column;
-        align-items: center;
+      .example-footer {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 1rem;
       }
-      .hero .buttons .button { 
-        width: 85%; 
-        max-width: 320px; 
-        justify-content: center;
-        font-size: 1.1rem; 
-        padding-top: 0.8em; 
-        padding-bottom: 0.8em;
+      
+      .example-type {
+          text-align: center;
       }
-      .slide {
-        padding: 0.8rem;
-        min-height: 680px; 
-      }
-      .slide-image {
-        height: 375px; 
-      }
-      .domain-indicator {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.6rem;
-      }
-      .slideshow-content {
-        min-height: 720px; 
-      }
-      .research-figure-medium img {
-        max-width: 100%; 
-      }
-      #adversarial-text-figure img {
-        max-width: 90%;
-        max-height: 180px;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 
@@ -1016,29 +955,29 @@
               <span class="icon">
                 <i class="fas fa-file-pdf"></i>
               </span>
-              <span>Read Paper on ArXiv</span>
+              <span>Paper</span>
             </a>
             <a href="https://github.com/anvo25/vlms-are-biased" class="button is-rounded is-dark" target="_blank" rel="noopener noreferrer" onclick="trackCodeVisit()">
               <span class="icon">
                 <i class="fab fa-github"></i>
               </span>
-              <span>Code on GitHub</span>
+              <span>Code</span>
             </a>
             <a href="https://huggingface.co/datasets/anvo25/vlms-are-biased" class="button is-rounded is-dark" target="_blank" rel="noopener noreferrer" onclick="trackDatasetVisit()">
               <span class="icon">
                 <i class="fas fa-database"></i>
               </span>
-              <span>Dataset on HuggingFace</span>
+              <span>Dataset</span>
             </a>
 
             <!-- This div forces the following buttons to a new line in a flex container -->
             <div style="flex-basis: 100%; height: 0;"></div>
             
-            <a href="https://github.com/anvo25/vlms-are-biased/tree/main/examples" class="button is-rounded is-examples" target="_blank" rel="noopener noreferrer" onclick="trackExamplesVisit()">
-              <span class="icon">
-                <i class="fas fa-play-circle"></i>
-              </span>
-              <span>Test It Yourself</span>
+            <a href="#example-gallery-section" class="button is-rounded is-examples" onclick="trackExamplesVisit()">
+                <span class="icon">
+                    <i class="fas fa-play-circle"></i>
+                </span>
+                <span>Test It Yourself</span>
             </a>
             <a href="https://x.com/anh_ng8/status/1929682381683712340" class="button is-rounded is-discussion" target="_blank" rel="noopener noreferrer" onclick="trackDiscussionVisit()">
               <span class="icon">
@@ -1399,6 +1338,45 @@
           </div>
         </div>
 
+      <div class="content-section" id="example-gallery-section">
+        <div class="gallery-section">
+          <div class="gallery-header">
+            <h2><i class="fas fa-vial" style="margin-right: 0.8rem;"></i>Example Gallery</h2>
+            <p style="font-size: 1rem; opacity: 0.9; margin-top: 0.5rem;">Please feel free to copy the prompts and test with your own VLMs.</p>
+          </div>
+          
+          <div class="gallery-container" id="gallery-container">
+            <div class="gallery-paused" id="gallery-paused">
+              <i class="fas fa-pause"></i> Paused
+            </div>
+            <div class="gallery-nav prev" id="gallery-prev">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="gallery-nav next" id="gallery-next">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="gallery-viewport" id="gallery-viewport">
+              <!-- Gallery items will be populated by JavaScript -->
+              <div class="gallery-loading" style="display: flex; justify-content: center; align-items: center; height: 400px; color: #666;">
+                <i class="fas fa-spinner fa-spin" style="margin-right: 0.5rem;"></i>
+                Loading gallery...
+              </div>
+            </div>
+          </div>
+          
+          <div class="gallery-filters" id="gallery-filters">
+            <!-- Filter buttons will be populated by JavaScript -->
+            <div class="filters-loading" style="text-align: center; padding: 1rem; color: #666;">
+              Loading filters...
+            </div>
+          </div>
+          
+          <div class="gallery-indicators" id="gallery-indicators">
+            <!-- Indicators will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
         <div class="content-section">
           <h2><i class="fas fa-chart-bar icon-large"></i>The Bias is Systematic, Not Random</h2>
           <p>When VLMs make errors, they don't make random mistakes. Instead, 75.70% of all errors are "bias-aligned" - meaning they give the expected answer based on prior knowledge rather than what they actually see in the image.</p>
@@ -1692,232 +1670,383 @@
 </footer>
 
 <script>
-// Slideshow functionality
-let currentSlideIndex = 0;
-let slideInterval;
-let allSlides = [];
-let filteredSlides = [];
-let isPaused = false;
-
-// Initialize when DOM is ready
+// Combined functionality - Run when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded, initializing slideshow...');
+  console.log('DOM loaded, initializing components...');
   initializeSlideshow();
+  initializeGallery();
+  setupSmoothScrolling();
 });
-
-function initializeSlideshow() {
-  allSlides = document.querySelectorAll('.slide');
-  console.log('Found slides:', allSlides.length);
+// ===== EXAMPLE GALLERY FUNCTIONALITY =====
+function initializeGallery() {
+  console.log('Initializing gallery...');
   
-  if (allSlides.length === 0) {
-    console.error('No slides found');
+  const galleryData = [
+    { task: "Animals", image: "static/images/examples/task1_animals/2_legs/chicken_0_3_1152.png", question: "How many legs does this animal have? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "3", expectedBias: "2", icon: "fas fa-paw" },
+    { task: "Animals", image: "static/images/examples/task1_animals/2_legs/duck_0_3_1152.png", question: "How many legs does this animal have? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "3", expectedBias: "2", icon: "fas fa-paw" },
+    { task: "Animals", image: "static/images/examples/task1_animals/4_legs/zebra_5_3_1152.png", question: "How many legs does this animal have? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "5", expectedBias: "4", icon: "fas fa-paw" },
+    { task: "Animals", image: "static/images/examples/task1_animals/4_legs/african elephant_2_0_1152.png", question: "How many legs does this animal have? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "5", expectedBias: "4", icon: "fas fa-paw" },
+    { task: "Logos", image: "static/images/examples/task2_logos/car_logos/audi-black-convertible_1152.png", question: "How many overlapping circles are there in the logo of this car? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "5", expectedBias: "4", icon: "fas fa-tag" },
+    { task: "Logos", image: "static/images/examples/task2_logos/car_logos/mercedes_benz-black-coupe_1152.png", question: "How many points are there on the star in the logo of this car? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "4", expectedBias: "3", icon: "fas fa-tag" },
+    { task: "Logos", image: "static/images/examples/task2_logos/shoe_logos/adidas-black-basketball-5_1152.png", question: "How many visible stripes are there in the logo of the left shoe? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "4", expectedBias: "3", icon: "fas fa-tag" },
+    { task: "Logos", image: "static/images/examples/task2_logos/shoe_logos/adidas-red-running-5_1152.png", question: " How many visible stripes are there in the logo of the left shoe? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "4", expectedBias: "3", icon: "fas fa-tag" },
+    { task: "Flags", image: "static/images/examples/task3_flags/stripes/Flag of the United States-stripes=12_1152.png", question: "How many stripes are there on this flag? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "12", expectedBias: "13", icon: "fas fa-flag" },
+    { task: "Flags", image: "static/images/examples/task3_flags/stripes/Flag of the United States-stripes=14_1152.png", question: "How many stripes are there on this flag? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "14", expectedBias: "13", icon: "fas fa-flag" },
+    { task: "Flags", image: "static/images/examples/task3_flags/stars/Flag of Europe-stars=11_1152.png", question: "How many stars are there on this flag? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "11", expectedBias: "12", icon: "fas fa-flag" },
+    { task: "Flags", image: "static/images/examples/task3_flags/stars/Flag of Europe-stars=13_1152.png", question: "How many stars are there on this flag? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "13", expectedBias: "12", icon: "fas fa-flag" },
+    { task: "Chess Pieces", image: "static/images/examples/task4_chess_pieces/chess/chess_pieces_005_remove_whiteking_at_e1_notitle_px1152.png", question: "How many chess pieces are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "31", expectedBias: "32", icon: "fas fa-chess" },
+    { task: "Chess Pieces", image: "static/images/examples/task4_chess_pieces/chess/chess_pieces_008_remove_blackbishop_at_f8_notitle_px1152.png", question: "How many chess pieces are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "31", expectedBias: "32", icon: "fas fa-chess" },
+    { task: "Chess Pieces", image: "static/images/examples/task4_chess_pieces/xiangqi/xiangqi_pieces_002_remove_black_soldier_at_e4_notitle_px1152.png", question: "How many xiangqi pieces are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "31", expectedBias: "32", icon: "fas fa-chess" },
+    { task: "Chess Pieces", image: "static/images/examples/task4_chess_pieces/xiangqi/xiangqi_pieces_006_remove_red_chariot_at_i10_notitle_px1152.png", question: "How many xiangqi pieces are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "31", expectedBias: "32", icon: "fas fa-chess" },
+    { task: "Game Boards", image: "static/images/examples/task5_game_boards/chess/chess_grid_02_row_remove_last_row_notitle_px1152.png", question: "How many rows are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "7", expectedBias: "8", icon: "fas fa-dice" },
+    { task: "Game Boards", image: "static/images/examples/task5_game_boards/go/go_grid_03_add_row_px1152.png", question: "How many horizontal lines are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "20", expectedBias: "19", icon: "fas fa-dice" },
+    { task: "Game Boards", image: "static/images/examples/task5_game_boards/sudoku/sudoku_grid_08_col_remove_last_col_notitle_px1152.png", question: "How many columns are there on this puzzle? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "8", expectedBias: "9", icon: "fas fa-dice" },
+    { task: "Game Boards", image: "static/images/examples/task5_game_boards/xiangqi/xiangqi_grid_02_row_remove_row_after_river_notitle_px1152.png", question: "How many horizontal lines are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "9", expectedBias: "10", icon: "fas fa-dice" },
+    { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/ebbinghaus/Ebbinghaus_017_str3_diff0p7_notitle_px1152.png", question: "Are the two inner circles equal in size? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fas fa-eye" },
+    { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/muller_lyer/MullerLyer_023_str50_diff0p5_notitle_px1152.png", question: "Are the two horizontal lines equal in length? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fas fa-eye" },
+    { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/zollner/Zollner_022_strneg75_diffneg2p5_notitle_px1152.png", question: "Are the two horizontal lines parallel? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fas fa-eye" },
+    { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/ponzo/Ponzo_023_str18_diff0p25_notitle_px1152.png", question: "Are the two horizontal lines equal in length? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fas fa-eye" },
+    { task: "Patterned Grids", image: "static/images/examples/task7_patterned_grid/dice/dice_001_remove_C3_notitle_px1152.png", question: "How many circles are there in cell C3? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "2", expectedBias: "3", icon: "fas fa-th" },
+    { task: "Patterned Grids", image: "static/images/examples/task7_patterned_grid/dice/dice_001_replace_C3_notitle_px1152.png", question: "How many circles are there in cell C3? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "2", expectedBias: "3", icon: "fas fa-th" },
+    { task: "Patterned Grids", image: "static/images/examples/task7_patterned_grid/tally/tally_003_add_D4_notitle_px1152.png", question: "How many lines are there in cell D4? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "5", expectedBias: "4", icon: "fas fa-th" },
+    { task: "Patterned Grids", image: "static/images/examples/task7_patterned_grid/tally/tally_003_remove_D4_notitle_px1152.png", question: "How many lines are there in cell D4? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "3", expectedBias: "4", icon: "fas fa-th" }
+  ];
+
+  const galleryContainer = document.getElementById('gallery-container');
+  const filtersContainer = document.getElementById('gallery-filters');
+  const viewport = document.getElementById('gallery-viewport');
+  const indicatorsContainer = document.getElementById('gallery-indicators');
+  const prevBtn = document.getElementById('gallery-prev');
+  const nextBtn = document.getElementById('gallery-next');
+
+  if (!galleryContainer || !filtersContainer || !viewport || !indicatorsContainer) {
+    console.error('Gallery elements not found');
     return;
   }
-  
-  filteredSlides = Array.from(allSlides);
-  console.log('Filtered slides:', filteredSlides.length);
-  
-  updateSlideCounter();
-  startAutoSlide();
-  setupEventListeners();
-  
-  console.log('Slideshow initialized successfully');
-}
 
-function showSlide(index) {
-  const slideshowContent = document.querySelector('.slideshow-content');
-  // Clear "no slides" message if it exists and we have slides to show
-  if (filteredSlides.length > 0) {
-      const noSlidesMsg = slideshowContent.querySelector('.no-slides-message');
-      if (noSlidesMsg) {
-          noSlidesMsg.remove();
-      }
+  // Add the transition style for smooth fading
+  viewport.style.transition = 'opacity 0.3s ease-in-out';
+
+  let categories = [];
+  let currentCategoryIndex = 0;
+  let autoSlideInterval;
+  let isPaused = false;
+
+  function setup() {
+    categories = [...new Set(galleryData.map(item => item.task))];
+    createFilterButtons();
+    createIndicators();
+    
+    // Setup event listeners
+    prevBtn.addEventListener('click', () => changeCategory(-1));
+    nextBtn.addEventListener('click', () => changeCategory(1));
+    
+    // *** CHANGE HERE: Manage the isPaused state in the event listeners ***
+    galleryContainer.addEventListener('mouseenter', pauseAutoPlay);
+    galleryContainer.addEventListener('mouseleave', () => {
+        isPaused = false; // User has left, so we are no longer paused
+        startAutoPlay();  // Now attempt to resume autoplay
+    });
+    
+    window.addEventListener('resize', () => displayCategory(currentCategoryIndex));
+    
+    displayCategory(0); // Display the first category by default
   }
 
+  function createFilterButtons() {
+    const taskIcons = { 'Animals': 'fas fa-paw', 'Logos': 'fas fa-tag', 'Flags': 'fas fa-flag', 'Chess Pieces': 'fas fa-chess', 'Game Boards': 'fas fa-dice', 'Optical Illusions': 'fas fa-eye', 'Patterned Grids': 'fas fa-th' };
+    filtersContainer.innerHTML = '';
+    categories.forEach((task, index) => {
+      const button = document.createElement('button');
+      button.className = 'gallery-filter-btn';
+      button.innerHTML = `<i class="${taskIcons[task] || 'fas fa-circle'}"></i> ${task}`;
+      button.dataset.index = index;
+      button.addEventListener('click', () => displayCategory(index));
+      filtersContainer.appendChild(button);
+    });
+  }
 
-  if (filteredSlides.length === 0) {
-    console.log('No filtered slides available');
-    if (slideshowContent && !slideshowContent.querySelector('.no-slides-message')) { // Prevent adding multiple messages
+  function createIndicators() {
+    indicatorsContainer.innerHTML = '';
+    categories.forEach((_, index) => {
+      const indicator = document.createElement('div');
+      indicator.className = 'gallery-indicator';
+      indicator.addEventListener('click', () => displayCategory(index));
+      indicatorsContainer.appendChild(indicator);
+    });
+  }
+
+  function displayCategory(index) {
+    // We call pauseAutoPlay which will stop the timer but also importantly set isPaused = true
+    // This prevents the timer from restarting while content is loading if the mouse is over it.
+    pauseAutoPlay(); 
+    currentCategoryIndex = index;
+
+    // Fade out the viewport
+    viewport.style.opacity = '0';
+
+    // Wait for the fade-out transition to finish (300ms)
+    setTimeout(() => {
+        const categoryName = categories[index];
+        const activeData = galleryData.filter(item => item.task === categoryName);
+        const itemsPerView = getItemsPerView();
+        
+        viewport.innerHTML = ''; // Clear old content
+        const track = document.createElement('div');
+        track.className = 'gallery-track';
+        
+        const slide = document.createElement('div');
+        slide.className = 'gallery-slide';
+
+        for (let i = 0; i < Math.min(itemsPerView, activeData.length); i++) {
+            const item = activeData[i];
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            
+            const gapValue = '1.5rem';
+            galleryItem.style.width = `calc((100% - (${itemsPerView - 1} * ${gapValue})) / ${itemsPerView})`;
+
+            galleryItem.innerHTML = `
+              <div class="example-card">
+                <div class="example-image">
+                  <img src="${item.image}" alt="${item.task} example" loading="lazy">
+                  <div class="image-fallback"><i class="fas fa-exclamation-triangle"></i><span>Image not found</span></div>
+                </div>
+                <div class="example-content">
+                  <p class="example-question">${item.question}</p>
+                  <div class="example-info">
+                    <span><span class="info-label truth-label">Ground Truth:</span><span class="info-value truth-value">${item.groundTruth}</span></span>
+                    <span><span class="info-label bias-label">Bias:</span><span class="info-value bias-value">${item.expectedBias}</span></span>
+                  </div>
+                  <div class="example-footer">
+                    <span class="example-type"><i class="${item.icon}"></i> ${item.task}</span>
+                    <div class="copy-buttons">
+                      <button class="copy-prompt-btn" data-prompt="${item.question.replace(/"/g, '"')}"><i class="fas fa-copy"></i> Copy Prompt</button>
+                      <button class="copy-image-btn" data-image="${item.image}"><i class="fas fa-image"></i> Copy Image</button>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+            const img = galleryItem.querySelector('img');
+            img.addEventListener('error', () => galleryItem.querySelector('.example-image').classList.add('has-error'));
+            slide.appendChild(galleryItem);
+        }
+        
+        track.appendChild(slide);
+        viewport.appendChild(track);
+        
+        // Fade the new content back in
+        viewport.style.opacity = '1';
+        updateActiveUI();
+        
+        // After content is loaded, try to start the autoplay again.
+        // It will only start if isPaused is false (i.e., user is not hovering).
+        startAutoPlay(); 
+    }, 300); 
+  }
+  
+  function updateActiveUI() {
+      document.querySelectorAll('.gallery-filter-btn').forEach((btn, index) => {
+          btn.classList.toggle('active', index === currentCategoryIndex);
+      });
+      document.querySelectorAll('.gallery-indicator').forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentCategoryIndex);
+      });
+  }
+
+  function changeCategory(direction) {
+    const newIndex = (currentCategoryIndex + direction + categories.length) % categories.length;
+    displayCategory(newIndex);
+  }
+
+  // *** CHANGE HERE: This function now respects the isPaused flag ***
+  function startAutoPlay() {
+    // Only start the timer if the gallery is not in a paused state
+    if (isPaused) {
+        return;
+    }
+    clearInterval(autoSlideInterval); // Clear any existing timer
+    autoSlideInterval = setInterval(() => changeCategory(1), 3000);
+  }
+
+  // *** CHANGE HERE: This function now sets the isPaused state ***
+  function pauseAutoPlay() {
+    isPaused = true;
+    clearInterval(autoSlideInterval);
+  }
+  
+  function getItemsPerView() {
+    if (window.innerWidth <= 768) return 1;
+    if (window.innerWidth <= 1024) return 2;
+    return 4;
+  }
+
+  galleryContainer.addEventListener('click', async function(e) {
+    const promptButton = e.target.closest('.copy-prompt-btn');
+    if (promptButton) {
+      const promptText = promptButton.dataset.prompt;
+      navigator.clipboard.writeText(promptText).then(() => {
+        const originalText = promptButton.innerHTML;
+        promptButton.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        promptButton.classList.add('copied');
+        setTimeout(() => {
+          promptButton.innerHTML = originalText;
+          promptButton.classList.remove('copied');
+        }, 2000);
+      });
+    }
+    
+    const imageButton = e.target.closest('.copy-image-btn');
+    if (imageButton) {
+      const imageUrl = imageButton.dataset.image;
+      imageButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; 
+      try {
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        await navigator.clipboard.write([ new ClipboardItem({ [blob.type]: blob }) ]);
+        
+        const originalText = '<i class="fas fa-image"></i> Copy Image';
+        imageButton.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        imageButton.classList.add('copied');
+        setTimeout(() => {
+          imageButton.innerHTML = originalText;
+          imageButton.classList.remove('copied');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy image: ', err);
+        alert('Could not copy image data. Your browser may not support this feature or there was a network error.');
+        imageButton.innerHTML = '<i class="fas fa-times"></i> Failed';
+      }
+    }
+  });
+
+  // Start everything
+  setup();
+}
+
+
+// ===== SLIDESHOW FUNCTIONALITY =====
+function initializeSlideshow() {
+  console.log('Initializing slideshow...');
+  
+  const allSlides = document.querySelectorAll('.slide');
+  if (allSlides.length === 0) {
+    console.log('No slides found, skipping slideshow initialization');
+    return;
+  }
+
+  let currentSlideIndex = 0;
+  let slideInterval;
+  let filteredSlides = Array.from(allSlides);
+  let isPaused = false;
+
+  function showSlide(index) {
+    const slideshowContent = document.querySelector('.slideshow-content');
+    if (!slideshowContent) return;
+
+    if (filteredSlides.length === 0) {
+      if (!slideshowContent.querySelector('.no-slides-message')) {
         const noSlidesDiv = document.createElement('div');
         noSlidesDiv.className = 'no-slides-message';
         noSlidesDiv.innerHTML = '<p style="text-align:center; padding:2rem;">No examples match this filter.</p>';
         slideshowContent.appendChild(noSlidesDiv);
+      }
+      updateSlideCounter(0, 0);
+      return;
     }
-    updateSlideCounter(); 
-    return;
-  }
-  
-  if (index >= filteredSlides.length) {
-    currentSlideIndex = 0;
-  } else if (index < 0) {
-    currentSlideIndex = filteredSlides.length - 1;
-  } else {
-    currentSlideIndex = index;
-  }
-  
-  console.log('Showing slide:', currentSlideIndex);
-  
-  const currentActiveSlide = document.querySelector('.slide.active');
-  const nextSlide = filteredSlides[currentSlideIndex];
-  
-  if (!nextSlide) {
-    console.error('Next slide not found for index:', currentSlideIndex, 'in filtered set of length:', filteredSlides.length);
-    return;
-  }
-  
-  if (currentActiveSlide && currentActiveSlide !== nextSlide) {
-    currentActiveSlide.classList.remove('active'); 
-    currentActiveSlide.classList.add('exiting'); 
     
-    setTimeout(() => { 
-      if (currentActiveSlide) currentActiveSlide.classList.remove('exiting');
-    }, 800); 
-  }
-  
-  nextSlide.classList.add('active'); 
-  nextSlide.classList.add('entering'); 
-  
-  setTimeout(() => { 
-    nextSlide.classList.remove('entering');
-  }, 800); 
-  
-  updateSlideCounter();
-}
+    const existingMessage = slideshowContent.querySelector('.no-slides-message');
+    if (existingMessage) existingMessage.remove();
 
-function changeSlide(direction) {
-  console.log('Changing slide by:', direction);
-  showSlide(currentSlideIndex + direction);
-  startAutoSlide(); 
-}
-
-function startAutoSlide() {
-  clearInterval(slideInterval);
-  if (!isPaused && filteredSlides.length > 0) { 
-    slideInterval = setInterval(() => {
-      showSlide(currentSlideIndex + 1);
-    }, 3000); 
-    console.log('Auto-slide started');
-  }
-}
-
-function stopAutoSlide() {
-  clearInterval(slideInterval);
-  console.log('Auto-slide stopped');
-}
-
-function updateSlideCounter() {
-  const currentElement = document.getElementById('current-slide');
-  const totalElement = document.getElementById('total-slides');
-  
-  if (currentElement && totalElement) {
-    currentElement.textContent = filteredSlides.length > 0 ? currentSlideIndex + 1 : 0;
-    totalElement.textContent = filteredSlides.length;
-    console.log('Counter updated:', currentElement.textContent, '/', totalElement.textContent);
-  }
-}
-
-function filterByDomain(domain) {
-  console.log('Filtering by domain:', domain);
-  
-  document.querySelectorAll('.domain-indicator').forEach(indicator => {
-    indicator.classList.remove('active');
-  });
-  
-  const clickedIndicator = document.querySelector(`.domain-indicator[data-domain="${domain}"]`);
-  if (clickedIndicator) {
-    clickedIndicator.classList.add('active');
-  }
-  
-  allSlides.forEach(slide => {
-    slide.classList.remove('active', 'entering', 'exiting');
-  });
-
-  if (domain === 'all') {
-    filteredSlides = Array.from(allSlides);
-  } else {
-    filteredSlides = Array.from(allSlides).filter(slide => 
-      slide.getAttribute('data-domain') === domain
-    );
-  }
-  
-  console.log('Filtered slides count:', filteredSlides.length);
-  
-  currentSlideIndex = 0; 
-  
-  // Clear existing "no slides" message before calling showSlide
-  const slideshowContent = document.querySelector('.slideshow-content');
-  const noSlidesMsg = slideshowContent.querySelector('.no-slides-message');
-  if (noSlidesMsg) {
-      noSlidesMsg.remove();
+    currentSlideIndex = (index + filteredSlides.length) % filteredSlides.length;
+    filteredSlides.forEach((slide, i) => slide.classList.toggle('active', i === currentSlideIndex));
+    updateSlideCounter(currentSlideIndex + 1, filteredSlides.length);
   }
 
-  showSlide(currentSlideIndex); 
-  startAutoSlide(); 
-}
+  function changeSlide(direction) {
+    showSlide(currentSlideIndex + direction);
+    startAutoSlide();
+  }
 
-function setupEventListeners() {
-  console.log('Setting up event listeners...');
-  
+  function startAutoSlide() {
+    clearInterval(slideInterval);
+    if (!isPaused && filteredSlides.length > 1) { 
+      slideInterval = setInterval(() => changeSlide(1), 3000);
+    }
+  }
+
+  function stopAutoSlide() { 
+    clearInterval(slideInterval); 
+  }
+
+  function updateSlideCounter(current, total) {
+    const currentElement = document.getElementById('current-slide');
+    const totalElement = document.getElementById('total-slides');
+    if (currentElement && totalElement) {
+      currentElement.textContent = current;
+      totalElement.textContent = total;
+    }
+  }
+
+  function filterByDomain(domain) {
+    allSlides.forEach(slide => slide.classList.remove('active'));
+    
+    document.querySelectorAll('.domain-indicator').forEach(indicator => {
+      indicator.classList.remove('active');
+    });
+    const activeIndicator = document.querySelector(`.domain-indicator[data-domain="${domain}"]`);
+    if (activeIndicator) activeIndicator.classList.add('active');
+
+    filteredSlides = (domain === 'all') 
+      ? Array.from(allSlides) 
+      : Array.from(allSlides).filter(slide => slide.getAttribute('data-domain') === domain);
+    
+    showSlide(0);
+    startAutoSlide();
+  }
+
   const slideshow = document.querySelector('.slideshow-container');
   if (slideshow) {
-    slideshow.addEventListener('mouseenter', () => {
-      isPaused = true;
-      stopAutoSlide();
-      console.log('Slideshow paused on hover');
-    });
-    
-    slideshow.addEventListener('mouseleave', () => {
-      isPaused = false;
-      startAutoSlide();
-      console.log('Slideshow resumed');
-    });
+    slideshow.addEventListener('mouseenter', () => { isPaused = true; stopAutoSlide(); });
+    slideshow.addEventListener('mouseleave', () => { isPaused = false; startAutoSlide(); });
   }
   
   const prevBtn = document.getElementById('prev-btn');
   const nextBtn = document.getElementById('next-btn');
   
-  if (prevBtn) {
-    prevBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      changeSlide(-1);
-    });
-  }
+  if (prevBtn) prevBtn.addEventListener('click', e => { e.preventDefault(); changeSlide(-1); });
+  if (nextBtn) nextBtn.addEventListener('click', e => { e.preventDefault(); changeSlide(1); });
   
-  if (nextBtn) {
-    nextBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      changeSlide(1);
-    });
-  }
-  
-  document.querySelectorAll('.domain-indicator').forEach((indicator) => {
-    indicator.addEventListener('click', (e) => {
-      const domain = e.currentTarget.getAttribute('data-domain');
-      filterByDomain(domain);
-    });
+  document.querySelectorAll('.domain-indicator').forEach(indicator => {
+    indicator.addEventListener('click', e => filterByDomain(e.currentTarget.getAttribute('data-domain')));
   });
   
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      changeSlide(-1);
-    } else if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      changeSlide(1);
+  document.addEventListener('keydown', e => {
+    const isSlideshowFocused = document.activeElement && document.activeElement.closest('.slideshow-container');
+    if (isSlideshowFocused) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); changeSlide(1); }
     }
   });
+
+  showSlide(0);
+  startAutoSlide();
   
-  console.log('Event listeners set up successfully');
+  console.log('Slideshow initialization complete');
 }
 
-window.debugSlideshow = function() {
-  console.log('=== Slideshow Debug Info ===');
-  console.log('Current slide index:', currentSlideIndex);
-  console.log('Total slides:', allSlides.length);
-  console.log('Filtered slides:', filteredSlides.length);
-  console.log('Is paused:', isPaused);
-  console.log('Active slide:', document.querySelector('.slide.active'));
-};
+// ===== SMOOTH SCROLLING =====
+function setupSmoothScrolling() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetElement = document.querySelector(this.getAttribute('href'));
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+}
 </script>
 
 </body>
