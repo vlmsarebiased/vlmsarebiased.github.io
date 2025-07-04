@@ -1677,6 +1677,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeGallery();
   setupSmoothScrolling();
 });
+
 // ===== EXAMPLE GALLERY FUNCTIONALITY =====
 function initializeGallery() {
   console.log('Initializing gallery...');
@@ -1704,7 +1705,7 @@ function initializeGallery() {
     { task: "Game Boards", image: "static/images/examples/task5_game_boards/xiangqi/xiangqi_grid_02_row_remove_row_after_river_notitle_px1152.png", question: "How many horizontal lines are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "9", expectedBias: "10", icon: "fas fa-dice" },
     { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/ebbinghaus/Ebbinghaus_017_str3_diff0p7_notitle_px1152.png", question: "Are the two inner circles equal in size? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fas fa-eye" },
     { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/muller_lyer/MullerLyer_023_str50_diff0p5_notitle_px1152.png", question: "Are the two horizontal lines equal in length? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fas fa-eye" },
-    { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/zollner/Zollner_022_strneg75_diffneg2p5_notitle_px1152.png", question: "Are the two horizontal lines parallel? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fas fa-eye" },
+    { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/zollner/Zollner_022_strneg75_diffneg2p5_notitle_px1152.png", question: "Are the two horizontal lines parallel? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "Yes", expectedBias: "No", icon: "fas fa-eye" },
     { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/ponzo/Ponzo_023_str18_diff0p25_notitle_px1152.png", question: "Are the two horizontal lines equal in length? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fas fa-eye" },
     { task: "Patterned Grids", image: "static/images/examples/task7_patterned_grid/dice/dice_001_remove_C3_notitle_px1152.png", question: "How many circles are there in cell C3? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "2", expectedBias: "3", icon: "fas fa-th" },
     { task: "Patterned Grids", image: "static/images/examples/task7_patterned_grid/dice/dice_001_replace_C3_notitle_px1152.png", question: "How many circles are there in cell C3? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "2", expectedBias: "3", icon: "fas fa-th" },
@@ -1723,9 +1724,9 @@ function initializeGallery() {
     console.error('Gallery elements not found');
     return;
   }
-
-  // Add the transition style for smooth fading
-  viewport.style.transition = 'opacity 0.3s ease-in-out';
+  
+  // *** FIX #1: Detect if the user is on a touch device ***
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
 
   let categories = [];
   let currentCategoryIndex = 0;
@@ -1737,20 +1738,35 @@ function initializeGallery() {
     createFilterButtons();
     createIndicators();
     
-    // Setup event listeners
     prevBtn.addEventListener('click', () => changeCategory(-1));
     nextBtn.addEventListener('click', () => changeCategory(1));
     
-    // *** CHANGE HERE: Manage the isPaused state in the event listeners ***
-    galleryContainer.addEventListener('mouseenter', pauseAutoPlay);
-    galleryContainer.addEventListener('mouseleave', () => {
-        isPaused = false; // User has left, so we are no longer paused
-        startAutoPlay();  // Now attempt to resume autoplay
-    });
+    // *** FIX #1: Conditional event listeners for pause/play ***
+    if (isTouchDevice) {
+        // On mobile, use tap to toggle pause/play
+        galleryContainer.addEventListener('click', (e) => {
+            // Make sure the click is not on a button
+            if (!e.target.closest('button')) {
+                if (isPaused) {
+                    isPaused = false;
+                    startAutoPlay();
+                } else {
+                    pauseAutoPlay();
+                }
+            }
+        });
+    } else {
+        // On desktop, use hover to pause/play
+        galleryContainer.addEventListener('mouseenter', pauseAutoPlay);
+        galleryContainer.addEventListener('mouseleave', () => {
+            isPaused = false;
+            startAutoPlay();
+        });
+    }
     
     window.addEventListener('resize', () => displayCategory(currentCategoryIndex));
     
-    displayCategory(0); // Display the first category by default
+    displayCategory(0);
   }
 
   function createFilterButtons() {
@@ -1777,24 +1793,19 @@ function initializeGallery() {
   }
 
   function displayCategory(index) {
-    // We call pauseAutoPlay which will stop the timer but also importantly set isPaused = true
-    // This prevents the timer from restarting while content is loading if the mouse is over it.
-    pauseAutoPlay(); 
+    clearInterval(autoSlideInterval); // Stop timer during transition
     currentCategoryIndex = index;
 
-    // Fade out the viewport
     viewport.style.opacity = '0';
 
-    // Wait for the fade-out transition to finish (300ms)
     setTimeout(() => {
         const categoryName = categories[index];
         const activeData = galleryData.filter(item => item.task === categoryName);
         const itemsPerView = getItemsPerView();
         
-        viewport.innerHTML = ''; // Clear old content
+        viewport.innerHTML = '';
         const track = document.createElement('div');
         track.className = 'gallery-track';
-        
         const slide = document.createElement('div');
         slide.className = 'gallery-slide';
 
@@ -1802,7 +1813,6 @@ function initializeGallery() {
             const item = activeData[i];
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
-            
             const gapValue = '1.5rem';
             galleryItem.style.width = `calc((100% - (${itemsPerView - 1} * ${gapValue})) / ${itemsPerView})`;
 
@@ -1815,7 +1825,7 @@ function initializeGallery() {
                 <div class="example-content">
                   <p class="example-question">${item.question}</p>
                   <div class="example-info">
-                    <span><span class="info-label truth-label">Ground Truth:</span><span class="info-value truth-value">${item.groundTruth}</span></span>
+                    <span><span class="info-label truth-label">Truth:</span><span class="info-value truth-value">${item.groundTruth}</span></span>
                     <span><span class="info-label bias-label">Bias:</span><span class="info-value bias-value">${item.expectedBias}</span></span>
                   </div>
                   <div class="example-footer">
@@ -1835,12 +1845,8 @@ function initializeGallery() {
         track.appendChild(slide);
         viewport.appendChild(track);
         
-        // Fade the new content back in
         viewport.style.opacity = '1';
         updateActiveUI();
-        
-        // After content is loaded, try to start the autoplay again.
-        // It will only start if isPaused is false (i.e., user is not hovering).
         startAutoPlay(); 
     }, 300); 
   }
@@ -1859,17 +1865,12 @@ function initializeGallery() {
     displayCategory(newIndex);
   }
 
-  // *** CHANGE HERE: This function now respects the isPaused flag ***
   function startAutoPlay() {
-    // Only start the timer if the gallery is not in a paused state
-    if (isPaused) {
-        return;
-    }
-    clearInterval(autoSlideInterval); // Clear any existing timer
-    autoSlideInterval = setInterval(() => changeCategory(1), 3000);
+    if (isPaused) return;
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(() => changeCategory(1), 5000);
   }
 
-  // *** CHANGE HERE: This function now sets the isPaused state ***
   function pauseAutoPlay() {
     isPaused = true;
     clearInterval(autoSlideInterval);
@@ -1899,23 +1900,31 @@ function initializeGallery() {
     const imageButton = e.target.closest('.copy-image-btn');
     if (imageButton) {
       const imageUrl = imageButton.dataset.image;
-      imageButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; 
-      try {
-        const response = await fetch(imageUrl);
-        const blob = await response.blob();
-        await navigator.clipboard.write([ new ClipboardItem({ [blob.type]: blob }) ]);
-        
-        const originalText = '<i class="fas fa-image"></i> Copy Image';
-        imageButton.innerHTML = '<i class="fas fa-check"></i> Copied!';
-        imageButton.classList.add('copied');
-        setTimeout(() => {
-          imageButton.innerHTML = originalText;
-          imageButton.classList.remove('copied');
-        }, 2000);
-      } catch (err) {
-        console.error('Failed to copy image: ', err);
-        alert('Could not copy image data. Your browser may not support this feature or there was a network error.');
-        imageButton.innerHTML = '<i class="fas fa-times"></i> Failed';
+      
+      // *** FIX #2: Conditional logic for "Copy Image" button ***
+      if (isTouchDevice) {
+        // On mobile, open image in a new tab for easy saving
+        window.open(imageUrl, '_blank');
+      } else {
+        // On desktop, use the Clipboard API
+        imageButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; 
+        try {
+          const response = await fetch(imageUrl);
+          const blob = await response.blob();
+          await navigator.clipboard.write([ new ClipboardItem({ [blob.type]: blob }) ]);
+          
+          const originalText = '<i class="fas fa-image"></i> Copy Image';
+          imageButton.innerHTML = '<i class="fas fa-check"></i> Copied!';
+          imageButton.classList.add('copied');
+          setTimeout(() => {
+            imageButton.innerHTML = originalText;
+            imageButton.classList.remove('copied');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy image: ', err);
+          alert('Could not copy image. Your browser may not support this feature or there was a network error.');
+          imageButton.innerHTML = '<i class="fas fa-times"></i> Failed';
+        }
       }
     }
   });
@@ -1939,6 +1948,7 @@ function initializeSlideshow() {
   let slideInterval;
   let filteredSlides = Array.from(allSlides);
   let isPaused = false;
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
   function showSlide(index) {
     const slideshowContent = document.querySelector('.slideshow-content');
@@ -1965,7 +1975,6 @@ function initializeSlideshow() {
 
   function changeSlide(direction) {
     showSlide(currentSlideIndex + direction);
-    startAutoSlide();
   }
 
   function startAutoSlide() {
@@ -2007,15 +2016,24 @@ function initializeSlideshow() {
 
   const slideshow = document.querySelector('.slideshow-container');
   if (slideshow) {
-    slideshow.addEventListener('mouseenter', () => { isPaused = true; stopAutoSlide(); });
-    slideshow.addEventListener('mouseleave', () => { isPaused = false; startAutoSlide(); });
+      if(isTouchDevice) {
+          slideshow.addEventListener('click', (e) => {
+              if(!e.target.closest('button, a')) {
+                  isPaused ? startAutoSlide() : stopAutoSlide();
+                  isPaused = !isPaused;
+              }
+          });
+      } else {
+        slideshow.addEventListener('mouseenter', stopAutoSlide);
+        slideshow.addEventListener('mouseleave', startAutoSlide);
+      }
   }
   
   const prevBtn = document.getElementById('prev-btn');
   const nextBtn = document.getElementById('next-btn');
   
-  if (prevBtn) prevBtn.addEventListener('click', e => { e.preventDefault(); changeSlide(-1); });
-  if (nextBtn) nextBtn.addEventListener('click', e => { e.preventDefault(); changeSlide(1); });
+  if (prevBtn) prevBtn.addEventListener('click', e => { e.preventDefault(); changeSlide(-1); startAutoSlide(); });
+  if (nextBtn) nextBtn.addEventListener('click', e => { e.preventDefault(); changeSlide(1); startAutoSlide(); });
   
   document.querySelectorAll('.domain-indicator').forEach(indicator => {
     indicator.addEventListener('click', e => filterByDomain(e.currentTarget.getAttribute('data-domain')));
@@ -2024,8 +2042,8 @@ function initializeSlideshow() {
   document.addEventListener('keydown', e => {
     const isSlideshowFocused = document.activeElement && document.activeElement.closest('.slideshow-container');
     if (isSlideshowFocused) {
-      if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
-      else if (e.key === 'ArrowRight') { e.preventDefault(); changeSlide(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); startAutoSlide();}
+      else if (e.key === 'ArrowRight') { e.preventDefault(); changeSlide(1); startAutoSlide();}
     }
   });
 
