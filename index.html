@@ -899,6 +899,29 @@ background: #ffffff;
     .footer-text a:hover { text-decoration: underline; }
 
     @media (max-width: 768px) {
+  /* Fix #1: Reduce excessive padding in the Example Gallery for mobile */
+  .gallery-container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* Make general two-column layouts stack vertically */
+  .columns {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Make the slideshow and its images responsive */
+  .slideshow-content {
+    min-height: auto; /* Remove the large fixed height */
+  }
+  .slide-image {
+    height: 45vh; /* Use a percentage of the viewport height */
+    max-height: 400px; /* But don't let it get excessively tall */
+  }
+
+  /* --- Original styles you already had (kept for completeness) --- */
+
   /* Handles the copy buttons inside the gallery */
   .copy-buttons {
       flex-direction: column;
@@ -922,24 +945,13 @@ background: #ffffff;
 
   /* Handles the hero buttons with horizontal scrolling */
   .hero .buttons.is-centered {
-    /* Force all buttons onto a single line */
     flex-wrap: nowrap;
-    
-    /* Enable horizontal scrolling if the content overflows */
     overflow-x: auto;
-    
-    /* Align buttons to the start for a natural scrolling feel */
     justify-content: flex-start;
-    
-    /* Improve scrolling experience on iOS */
     -webkit-overflow-scrolling: touch;
-    
-    /* Add a little padding so buttons don't touch the screen edges */
     padding-left: 20px;
     padding-right: 20px;
-    padding-bottom: 15px; /* Add space below for a cleaner look */
-    
-    /* Hide the scrollbar for a cleaner UI */
+    padding-bottom: 15px;
     scrollbar-width: none; /* For Firefox */
   }
 
