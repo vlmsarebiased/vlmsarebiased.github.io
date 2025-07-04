@@ -1705,7 +1705,7 @@ function initializeGallery() {
     { task: "Game Boards", image: "static/images/examples/task5_game_boards/xiangqi/xiangqi_grid_02_row_remove_row_after_river_notitle_px1152.png", question: "How many horizontal lines are there on this board? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "9", expectedBias: "10", icon: "fas fa-dice" },
     { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/ebbinghaus/Ebbinghaus_017_str3_diff0p7_notitle_px1152.png", question: "Are the two inner circles equal in size? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fas fa-eye" },
     { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/muller_lyer/MullerLyer_023_str50_diff0p5_notitle_px1152.png", question: "Are the two horizontal lines equal in length? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fas fa-eye" },
-    { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/zollner/Zollner_022_strneg75_diffneg2p5_notitle_px1152.png", question: "Are the two horizontal lines parallel? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "Yes", expectedBias: "No", icon: "fas fa-eye" },
+    { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/zollner/Zollner_022_strneg75_diffneg2p5_notitle_px1152.png", question: "Are the two horizontal lines parallel? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fas fa-eye" },
     { task: "Optical Illusions", image: "static/images/examples/task6_optical_illusion/ponzo/Ponzo_023_str18_diff0p25_notitle_px1152.png", question: "Are the two horizontal lines equal in length? Answer in curly brackets, e.g., {Yes} or {No}.", groundTruth: "No", expectedBias: "Yes", icon: "fas fa-eye" },
     { task: "Patterned Grids", image: "static/images/examples/task7_patterned_grid/dice/dice_001_remove_C3_notitle_px1152.png", question: "How many circles are there in cell C3? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "2", expectedBias: "3", icon: "fas fa-th" },
     { task: "Patterned Grids", image: "static/images/examples/task7_patterned_grid/dice/dice_001_replace_C3_notitle_px1152.png", question: "How many circles are there in cell C3? Answer with a number in curly brackets, e.g., {9}.", groundTruth: "2", expectedBias: "3", icon: "fas fa-th" },
@@ -1825,7 +1825,7 @@ function initializeGallery() {
                 <div class="example-content">
                   <p class="example-question">${item.question}</p>
                   <div class="example-info">
-                    <span><span class="info-label truth-label">Truth:</span><span class="info-value truth-value">${item.groundTruth}</span></span>
+                    <span><span class="info-label truth-label">Ground Truth:</span><span class="info-value truth-value">${item.groundTruth}</span></span>
                     <span><span class="info-label bias-label">Bias:</span><span class="info-value bias-value">${item.expectedBias}</span></span>
                   </div>
                   <div class="example-footer">
