@@ -323,6 +323,8 @@ h1, h2, h3, h4, h5 {
     position: relative;
     padding: 1.5rem 50px;
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .gallery-viewport {
@@ -330,11 +332,13 @@ h1, h2, h3, h4, h5 {
     position: relative;
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
+    max-width: 100%;
 }
 
 .gallery-track {
     display: flex;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother transition */
+    max-width: 100%;
 }
 
 .gallery-slide {
@@ -342,11 +346,13 @@ h1, h2, h3, h4, h5 {
     display: flex;
     gap: 1.5rem;
     box-sizing: border-box;
+    max-width: 100%;
 }
 
 .gallery-item {
     flex: 0 0 auto; /* Let JS set the width, don't shrink or grow */
     box-sizing: border-box;
+    max-width: 100%;
 }
 
 .example-card {
@@ -359,6 +365,8 @@ h1, h2, h3, h4, h5 {
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 .example-card:hover {
     transform: translateY(-4px);
@@ -377,6 +385,7 @@ h1, h2, h3, h4, h5 {
     height: 100%;
     object-fit: contain;
     display: block;
+    max-width: 100%;
 }
 .image-fallback {
     display: none;
@@ -985,6 +994,14 @@ background: #ffffff;
     text-align: center;
     word-break: break-word;
   }
+
+  .hero .title .title-icon {
+    height: 0.8em !important;
+    width: auto !important;
+    max-width: 0.8em !important;
+    margin-left: 0.2em !important;
+    vertical-align: middle;
+  }
   
   .publication-authors {
     font-size: 1rem;
@@ -1041,6 +1058,12 @@ background: #ffffff;
     overflow-x: hidden;
   }
 
+  /* Additional gallery responsive fixes */
+  .gallery-section * {
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
   /* GALLERY SECTION - FIXED WIDTH CALCULATION */
   .gallery-section {
     margin: 0 !important;
@@ -1056,45 +1079,66 @@ background: #ffffff;
   }
 
   .gallery-container {
-    padding: 0 !important;
+    padding: 1rem !important;
     margin: 0 !important;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .gallery-viewport {
+    width: 100%;
+    max-width: 100%;
     overflow-x: hidden;
   }
 
   /* Make gallery track stack vertically on mobile */
   .gallery-track {
     flex-direction: column !important;
+    width: 100%;
+    max-width: 100%;
   }
 
   .gallery-slide {
     flex-direction: column !important;
     gap: 0.5rem !important;
-    padding: 0 1rem !important;
+    padding: 0 !important;
+    width: 100%;
+    max-width: 100%;
   }
 
-  .gallery-item {
-    width: 100% !important;
-    flex: none !important;
-    margin: 0 !important;
-  }
-
+  /* Gallery cards responsive */
   .example-card {
     font-size: 0.8rem;
     margin: 0 0 0.5rem 0 !important;
     border-radius: 4px;
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
+  .gallery-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+  }
+
+  /* Gallery images responsive on mobile */
   .example-image {
-    height: 120px;
-    width: 100%;
+    height: auto !important;
+    min-height: 120px;
+    width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
   }
 
   .example-image img {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 150px;
     object-fit: contain;
     margin: 0 !important;
     padding: 0 !important;
