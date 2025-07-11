@@ -1250,7 +1250,21 @@ background: #ffffff;
   }
 
   .columns {
-    gap: 1rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  
+  .column {
+    width: 100% !important;
+    flex: none !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Remove the is-6 constraint on mobile */
+  .column.is-6 {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 </style>
@@ -2130,6 +2144,9 @@ function initializeGallery() {
 
     viewport.style.opacity = '0';
 
+    // Increased delay for mobile devices to allow for loading
+    const transitionDelay = window.innerWidth <= 768 ? 600 : 300;
+
     setTimeout(() => {
         const categoryName = categories[index];
         const activeData = galleryData.filter(item => item.task === categoryName);
@@ -2141,20 +2158,43 @@ function initializeGallery() {
         const slide = document.createElement('div');
         slide.className = 'gallery-slide';
 
-        for (let i = 0; i < Math.min(itemsPerView, activeData.length); i++) {
-    const item = activeData[i];
-    const galleryItem = document.createElement('div');
-    galleryItem.className = 'gallery-item';
-    
-    // Mobile: full width for vertical stacking
-    if (window.innerWidth <= 768) {
-      galleryItem.style.width = '100%';
-      galleryItem.style.margin = '0 0 0.5rem 0';
-    } else {
-      // Desktop: horizontal layout
-      const gapValue = '1.5rem';
-      galleryItem.style.width = `calc((100% - (${itemsPerView - 1} * ${gapValue})) / ${itemsPerView})`;
-    }
+        let imagesLoaded = 0;
+        const totalImages = Math.min(itemsPerView, activeData.length);
+
+        // Function to handle when all images are loaded
+        function onAllImagesLoaded() {
+            viewport.style.opacity = '1';
+            updateActiveUI();
+            
+            // Longer interval on mobile to account for slower loading
+            const autoPlayDelay = window.innerWidth <= 768 ? 7000 : 5000;
+            setTimeout(() => {
+                startAutoPlay();
+            }, 500); // Small delay before starting auto-play
+        }
+
+        // Function to check if image is loaded
+        function checkImageLoaded() {
+            imagesLoaded++;
+            if (imagesLoaded >= totalImages) {
+                onAllImagesLoaded();
+            }
+        }
+
+        for (let i = 0; i < totalImages; i++) {
+            const item = activeData[i];
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            
+            // Mobile: full width for vertical stacking
+            if (window.innerWidth <= 768) {
+                galleryItem.style.width = '100%';
+                galleryItem.style.margin = '0 0 0.5rem 0';
+            } else {
+                // Desktop: horizontal layout
+                const gapValue = '1.5rem';
+                galleryItem.style.width = `calc((100% - (${itemsPerView - 1} * ${gapValue})) / ${itemsPerView})`;
+            }
 
             galleryItem.innerHTML = `
               <div class="example-card">
@@ -2177,19 +2217,36 @@ function initializeGallery() {
                   </div>
                 </div>
               </div>`;
+            
             const img = galleryItem.querySelector('img');
-            img.addEventListener('error', () => galleryItem.querySelector('.example-image').classList.add('has-error'));
+            
+            // Enhanced image loading handling
+            img.addEventListener('load', checkImageLoaded);
+            img.addEventListener('error', () => {
+                galleryItem.querySelector('.example-image').classList.add('has-error');
+                checkImageLoaded(); // Still count as "loaded" to prevent hanging
+            });
+            
+            // Fallback: if image takes too long, proceed anyway
+            setTimeout(() => {
+                if (imagesLoaded < i + 1) {
+                    checkImageLoaded();
+                }
+            }, 3000); // 3 second timeout per image
+            
             slide.appendChild(galleryItem);
         }
         
         track.appendChild(slide);
         viewport.appendChild(track);
         
-        viewport.style.opacity = '1';
-        updateActiveUI();
-        startAutoPlay(); 
-    }, 300); 
-  }
+        // Fallback: if no images or all failed to trigger load events
+        if (totalImages === 0) {
+            onAllImagesLoaded();
+        }
+        
+    }, transitionDelay);
+}
   
   function updateActiveUI() {
       document.querySelectorAll('.gallery-filter-btn').forEach((btn, index) => {
@@ -2205,10 +2262,14 @@ function initializeGallery() {
     displayCategory(newIndex);
   }
 
+  // Also update the startAutoPlay function:
   function startAutoPlay() {
-    if (isPaused) return;
-    clearInterval(autoSlideInterval);
-    autoSlideInterval = setInterval(() => changeCategory(1), 5000);
+      if (isPaused) return;
+      clearInterval(autoSlideInterval);
+      
+      // Longer intervals on mobile
+      const interval = window.innerWidth <= 768 ? 7000 : 5000;
+      autoSlideInterval = setInterval(() => changeCategory(1), interval);
   }
 
   function pauseAutoPlay() {
@@ -2320,7 +2381,7 @@ function initializeSlideshow() {
   function startAutoSlide() {
     clearInterval(slideInterval);
     if (!isPaused && filteredSlides.length > 1) { 
-      slideInterval = setInterval(() => changeSlide(1), 3000);
+      slideInterval = setInterval(() => changeSlide(1), 6000);
     }
   }
 
