@@ -871,7 +871,79 @@ background: #ffffff;
       margin: 0 auto;
       display: block; 
     }
-    
+
+    .news-container {
+      background: #f8fafc;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      margin: 1rem 0;
+      padding: 1rem;
+    }
+
+    .news-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #e2e8f0;
+      gap: 1rem;
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .news-item:first-child {
+      padding-top: 0;
+    }
+
+    .news-date {
+      flex: 0 0 auto;
+      background: #1a237e;
+      color: #ffffff;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-align: center;
+      min-width: 50px;
+    }
+
+    .news-content {
+      flex: 1;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #4a5568;
+    }
+
+    .news-content strong {
+      color: #1a237e;
+    }
+
+    .news-content a {
+      color: #3182ce;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .news-content a:hover {
+      text-decoration: underline;
+    }
+
+    .news-content .gallery-link {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #ffffff !important;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .news-content .gallery-link:hover {
+      background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+      text-decoration: none !important;
+    }
+        
     /* Make ALL images responsive */
     img {
       max-width: 100%;
@@ -922,6 +994,27 @@ background: #ffffff;
     max-width: 100% !important;
     width: auto !important;
     height: auto !important;
+  }
+
+  .news-container {
+    margin: 0.5rem 0;
+    padding: 0.8rem;
+  }
+  
+  .news-item {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+  
+  .news-date {
+    align-self: flex-start;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  .news-content {
+    font-size: 0.9rem;
   }
 
   /* Research figures responsive */
@@ -1368,6 +1461,46 @@ background: #ffffff;
             </div>
           </div>
         </div>
+  </section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        
+        <div class="content-section">
+          <h2><i class="fas fa-newspaper icon-large"></i>Latest News</h2>
+          
+          <div class="news-container">
+            <div class="news-item">
+              <span class="news-date">Jul 11</span>
+              <div class="news-content">
+                <strong>New Example Gallery Available!</strong> We created an <a href="#example-gallery-section" class="gallery-link">Example Gallery</a> so you can easily copy prompts & images to test with your own VLMs.
+              </div>
+            </div>
+            
+            <div class="news-item">
+              <span class="news-date">Jul 11</span>
+              <div class="news-content">
+                <strong>AI4MATH@ICML 2025 Workshop! </strong> VLMs are Biased will be presented at <a href="https://sites.google.com/view/ai4mathworkshopicml2025/home" target="_blank">AI4MATH@ICML 2025 workshop</a>. Welcome to visit our poster on July 18 to discuss with the authors!
+              </div>
+            </div>
+            
+            <div class="news-item">
+              <span class="news-date">Jul 10</span>
+              <div class="news-content">
+                <strong>Thanks for Community Feedback!</strong> We're improving the paper & VLMBias benchmark based on your suggestions. Stay tuned for updates!
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section class="section">
 
         <div class="content-section">
           <h2><i class="fas fa-exclamation-triangle icon-large"></i>The Problem: VLMs Can't Count When It Matters</h2>
