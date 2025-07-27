@@ -326,7 +326,7 @@
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
-            max-width: 250px;
+            max-width: 800px;
             margin: 0 auto 2rem;
         }
         
@@ -336,7 +336,7 @@
             grid-template-columns: 1fr 1fr;
             grid-template-rows: auto auto;
             gap: 0.75rem;
-            max-width: 400px;
+            max-width: 800px;
         }
         
         /* Updated layout for Yes/No options (1:1 grid) */
@@ -344,7 +344,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.75rem;
-            max-width: 400px;
+            max-width: 800px;
         }
 
         .choice-btn {
@@ -564,6 +564,49 @@
                 padding: 0.75rem 0.5rem !important;
             }
             
+            /* Significantly reduce header size and spacing */
+            .card-header {
+                padding: 1rem 0.5rem 0.5rem !important;
+            }
+            
+            h1 {
+                font-size: 2rem !important; /* Reduced from 2.5rem */
+                margin-bottom: 0.2rem !important;
+                line-height: 1.1 !important;
+            }
+            
+            h2 {
+                font-size: 1.6rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem !important;
+                margin-bottom: 0.2rem !important;
+            }
+            
+            .instructions {
+                padding: 0.75rem 0.75rem !important;
+                margin: 0.75rem 0 !important;
+            }
+            
+            .instructions h3 {
+                font-size: 0.9rem !important;
+                margin-bottom: 0.4rem !important;
+            }
+            
+            .instructions li {
+                font-size: 0.8rem !important;
+                margin: 0.2rem 0 !important;
+                padding-left: 1rem !important;
+            }
+            
+            .instructions p.mt-4 {
+                font-size: 0.8rem !important;
+                margin-top: 0.5rem !important;
+                font-weight: 400 !important;
+            }
+            
             .progress-container {
                 padding: 0.5rem 0.5rem 0 !important;
             }
@@ -576,67 +619,31 @@
                 padding: 0 0.25rem !important;
             }
             
-            .reading-time {
-                padding: 1rem 0.5rem !important;
-                margin: 0.5rem 0 !important;
-            }
-            
             .choices {
-                grid-template-columns: 65px 65px !important;
-                width: 200px !important;
-                gap: 0.3rem !important;
+                grid-template-columns: 130px 130px !important; /* Doubled from 65px */
+                width: 270px !important; /* Increased from 200px */
+                gap: 0.4rem !important;
+                margin: 0 auto 1rem !important;
             }
             
             .choices.two-options {
-                grid-template-columns: 65px 65px !important;
-                width: 200px !important;
+                grid-template-columns: 130px 130px !important; /* Doubled from 65px */
+                width: 270px !important; /* Increased from 200px */
             }
             
             .choice-btn {
-                width: 65px !important;
-                min-width: 65px !important;
-                max-width: 65px !important;
-                font-size: 0.75rem !important;
-                height: 24px !important;
-                padding: 0.5rem !important;
+                width: 130px !important; /* Doubled from 65px */
+                min-width: 130px !important; /* Doubled from 65px */
+                max-width: 130px !important; /* Doubled from 65px */
+                font-size: 0.9rem !important; /* Slightly larger font */
+                height: 30px !important; /* A bit taller to accommodate larger text */
+                padding: 0.5rem 0.3rem !important;
             }
             
-            .timer {
-                font-size: 1.2rem !important;
-                margin-bottom: 0.5rem !important;
-            }
-            
-            .question-image {
-                max-height: 250px !important; /* Reduced from 300px */
-                margin-bottom: 0.5rem !important;
-                max-width: 98% !important;
-            }
-            
-            .instructions {
-                padding: 1rem 0.75rem !important;
-                margin: 1rem 0 !important;
-            }
-            
-            .instructions h3 {
-                font-size: 1rem !important;
-                margin-bottom: 0.5rem !important;
-            }
-            
-            .instructions li {
-                font-size: 0.9rem !important;
-                margin: 0.3rem 0 !important;
-            }
-            
-            h1 {
-                font-size: 2.5rem !important;
-            }
-            
-            h2 {
-                font-size: 1.8rem !important;
-            }
-            
-            .subtitle {
-                font-size: 1rem !important;
+            /* For four-options layout, ensure the grid works properly */
+            .choices.four-options {
+                grid-template-rows: auto auto !important;
+                gap: 0.4rem !important;
             }
         }
     </style>
