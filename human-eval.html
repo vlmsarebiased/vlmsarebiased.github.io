@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Evaluation Study</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #64748b;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --success: #059669;
+            --warning: #d97706;
+            --error: #dc2626;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            width: 100%;
+            max-width: 1000px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-footer {
+            padding: 1rem 2rem 1.5rem;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+        }
+
+        .instructions {
+            background: var(--border-light);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .instructions h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .instructions ul {
+            list-style: none;
+        }
+
+        .instructions li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .instructions li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .required {
+            color: var(--error);
+        }
+
+        input[type="text"], 
+        input[type="email"], 
+        input[type="number"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: var(--surface);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 120px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            padding: 1rem 1.5rem 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Question Display */
+        .question-container {
+            text-align: center;
+        }
+
+        .question-phase {
+            margin-bottom: 2rem;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+        }
+
+        .question-image {
+            max-width: 100%;
+            max-height: 500px; /* Increased from 250px */
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+        }
+
+        .reading-time {
+            background: var(--border-light);
+            border-radius: 8px;
+            padding: 2rem 2rem;
+            margin: 1rem 0;
+        }
+
+        .reading-progress {
+            width: 100%;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .reading-progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 2px;
+            transition: width linear;
+        }
+
+        /* Answer Timer Progress Bar */
+        .answer-progress {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .answer-progress-fill {
+            height: 100%;
+            background: var(--warning);
+            border-radius: 3px;
+            transition: width linear;
+        }
+
+        .answer-progress-fill.urgent {
+            background: var(--error);
+        }
+
+        /* Timer */
+        .timer-container {
+            margin: 1rem 0;
+        }
+
+        .timer {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        .timer.urgent {
+            color: var(--error);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Answer Options */
+        .choices {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-width: 250px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Updated layout for 2x2 grid with 4 options */
+        .choices.four-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 0.75rem;
+            max-width: 400px;
+        }
+        
+        /* Updated layout for Yes/No options (1:1 grid) */
+        .choices.two-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            max-width: 400px;
+        }
+
+        .choice-btn {
+            padding: 1.2rem 1rem;
+            border: 2px solid var(--border);
+            background: var(--surface);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+            min-height: 70px;
+        }
+
+        .choice-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--border-light);
+        }
+
+        .choice-btn.selected {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .number-input-container {
+            max-width: 300px;
+            margin: 0 auto 2rem;
+        }
+
+        .number-input {
+            text-align: center;
+            font-size: 1.125rem;
+            padding: 1rem;
+        }
+
+        /* Results */
+        .results {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        .score-details {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .status-success {
+            background: rgb(34 197 94 / 0.1);
+            color: var(--success);
+            border: 1px solid rgb(34 197 94 / 0.2);
+        }
+
+        .status-error {
+            background: rgb(239 68 68 / 0.1);
+            color: var(--error);
+            border: 1px solid rgb(239 68 68 / 0.2);
+        }
+
+        .status-loading {
+            background: var(--border-light);
+            color: var(--text-secondary);
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-2 { margin-top: 0.5rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mb-4 { margin-bottom: 1rem; }
+
+        /* Responsive Design - MAINTAIN HARDCODED SMALL BUTTONS */
+        @media (max-width: 1024px) {
+            .choices {
+                grid-template-columns: 75px 75px !important;
+                width: 160px !important;
+                gap: 0.4rem !important;
+            }
+            
+            .choices.two-options {
+                grid-template-columns: 75px 75px !important;
+                width: 160px !important;
+            }
+            
+            .choice-btn {
+                width: 75px !important;
+                min-width: 75px !important;
+                max-width: 75px !important;
+                font-size: 0.85rem !important;
+                height: 28px !important;
+            }
+            
+            .question-text {
+                font-size: 1.3rem !important;
+            }
+            
+            .timer {
+                font-size: 1.8rem !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0.5rem !important;
+            }
+            
+            .card {
+                max-width: 95% !important;
+            }
+            
+            .card-content, .card-header, .card-footer {
+                padding: 1rem !important;
+            }
+            
+            .progress-container {
+                padding: 0.5rem 1rem 0 !important;
+            }
+            
+            .question-text {
+                font-size: 1.2rem !important;
+                line-height: 1.1 !important;
+                margin-bottom: 0.75rem !important;
+            }
+            
+            .reading-time {
+                padding: 1.5rem 1rem !important;
+            }
+            
+            .choices {
+                grid-template-columns: 70px 70px !important;
+                width: 150px !important;
+                gap: 0.4rem !important;
+            }
+            
+            .choices.two-options {
+                grid-template-columns: 70px 70px !important;
+                width: 150px !important;
+            }
+            
+            .choice-btn {
+                width: 70px !important;
+                min-width: 70px !important;
+                max-width: 70px !important;
+                font-size: 0.8rem !important;
+                height: 26px !important;
+            }
+            
+            .timer {
+                font-size: 1.6rem !important;
+            }
+            
+            .question-image {
+                max-height: 350px !important; /* Increased from 200px */
+                margin-bottom: 0.75rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.25rem !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+            }
+            
+            .card {
+                border-radius: 8px !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+            }
+            
+            .card-content, .card-header, .card-footer {
+                padding: 0.75rem 0.5rem !important;
+            }
+            
+            .progress-container {
+                padding: 0.5rem 0.5rem 0 !important;
+            }
+            
+            .question-text {
+                font-size: 1rem !important;
+                line-height: 1.0 !important;
+                margin-bottom: 0.5rem !important;
+                max-width: 100% !important;
+                padding: 0 0.25rem !important;
+            }
+            
+            .reading-time {
+                padding: 1rem 0.5rem !important;
+                margin: 0.5rem 0 !important;
+            }
+            
+            .choices {
+                grid-template-columns: 65px 65px !important;
+                width: 140px !important;
+                gap: 0.3rem !important;
+            }
+            
+            .choices.two-options {
+                grid-template-columns: 65px 65px !important;
+                width: 140px !important;
+            }
+            
+            .choice-btn {
+                width: 65px !important;
+                min-width: 65px !important;
+                max-width: 65px !important;
+                font-size: 0.75rem !important;
+                height: 24px !important;
+                padding: 0.5rem !important;
+            }
+            
+            .timer {
+                font-size: 1.2rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            .question-image {
+                max-height: 250px !important; /* Reduced from 300px */
+                margin-bottom: 0.5rem !important;
+                max-width: 98% !important;
+            }
+            
+            .instructions {
+                padding: 1rem 0.75rem !important;
+                margin: 1rem 0 !important;
+            }
+            
+            .instructions h3 {
+                font-size: 1rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            .instructions li {
+                font-size: 0.9rem !important;
+                margin: 0.3rem 0 !important;
+            }
+            
+            h1 {
+                font-size: 2.5rem !important;
+            }
+            
+            h2 {
+                font-size: 1.8rem !important;
+            }
+            
+            .subtitle {
+                font-size: 1rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="card">
+            <div class="card-header">
+                <h1>Human Evaluation Study</h1>
+                <p class="subtitle">Research Evaluation Platform</p>
+            </div>
+            <div class="card-content">
+                <div class="instructions">
+                    <h3>Study Overview</h3>
+                    <ul>
+                        <li><strong>Duration:</strong> Approximately 3-5 minutes</li>
+                        <li><strong>Questions:</strong> 26 image-based evaluation tasks</li>
+                        <li><strong>Format:</strong> Multiple choice responses (2 or 4 options)</li>
+                        <li><strong>Timing:</strong> 3 seconds to read + 3 seconds to see image + answer</li>
+                        <li><strong>Control:</strong> You advance manually after each question</li>
+                        <li><strong>Privacy:</strong> Your responses are recorded anonymously</li>
+                    </ul>
+                    <p class="mt-4" style="font-weight: 500;">Your participation helps improve AI evaluation methods. Thank you for contributing to our research!</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" onclick="showRegistration()">Begin Study</button>
+            </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div id="registration-screen" class="card hidden">
+            <div class="card-header">
+                <h2>Participant Information</h2>
+                <p class="subtitle">Please provide some basic information (optional fields can be skipped)</p>
+            </div>
+            <div class="card-content">
+                <form id="registration-form">
+                    <div class="form-group">
+                        <label for="name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="affiliation">Affiliation</label>
+                        <input type="text" id="affiliation" placeholder="University, Organization, Company (optional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="your@email.com (optional)">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" form="registration-form" class="btn btn-primary">Start Evaluation</button>
+            </div>
+        </div>
+
+        <!-- Question Screen -->
+        <div id="question-screen" class="card hidden">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="question-counter">Question 1 of 20</span>
+                </div>
+            </div>
+            
+            <div class="card-content">
+                <!-- Question Reading Phase -->
+                <div id="reading-phase" class="question-phase">
+                    <div class="reading-time">
+                        <p id="question-text-reading" class="question-text"></p>
+                        <p class="text-center mt-2" style="color: var(--text-secondary);">Please read the question carefully</p>
+                        <div class="reading-progress">
+                            <div id="reading-progress-fill" class="reading-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question Answer Phase -->
+                <div id="answer-phase" class="question-phase hidden">
+                    <div class="question-container">
+                        <p id="question-text-answer" class="question-text"></p>
+                        <img id="question-image" class="question-image" src="" alt="Question Image" style="display: none;">
+                        
+                        <div class="timer-container">
+                            <div id="timer" class="timer">3s</div>
+                            <div class="answer-progress">
+                                <div id="answer-progress-fill" class="answer-progress-fill"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Multiple Choice -->
+                        <div id="choices-container" class="choices">
+                            <!-- Choices populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Complete Phase (after timer ends) -->
+                <div id="complete-phase" class="question-phase hidden">
+                    <div style="text-align: center; padding: 2rem 1.5rem;">
+                        <h3 style="color: var(--success); margin-bottom: 1rem; font-size: 1.3rem;">✓ Question Completed</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 1rem;">
+                            You are on question <span id="current-q-num"></span> of <span id="total-q-num"></span>
+                        </p>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 1rem;">
+                            <span id="remaining-q-num"></span> questions remaining
+                        </p>
+                        <div style="background: var(--border-light); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <p style="color: var(--warning); font-weight: 700; font-size: 1rem;">⚡ Next: 3s to read + 3s to answer!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                <button id="next-btn" class="btn btn-primary" onclick="nextQuestion()" style="display: none;">
+                    Next Question
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="card hidden">
+            <div class="card-header">
+                <h2>Evaluation Complete</h2>
+                <p class="subtitle">Thank you for your participation!</p>
+            </div>
+            <div class="card-content">
+                <div class="results">
+                    <div class="score" id="final-score">--/--</div>
+                    <div class="score-details">
+                        <p>You answered <span id="answered-count">--</span> out of <span id="total-count">--</span> questions.</p>
+                    </div>
+                    <div id="submission-status" class="status-message status-loading">
+                        <span>Submitting your results...</span>
+                        <span class="loading-spinner"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            READING_TIME: 3000, // 3 seconds to read question
+            ANSWER_TIME: 3000, // 3 seconds to answer
+            GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyog4AP9-Xzz9__3WnjbFzgKq2284ziEbbA_Sh8yhld-bipwRttqqD_FaFwqXyz2gom/exec'
+        };
+
+        // Application State
+        let currentQuestion = 0;
+        let answers = {};
+        let questionIds = {};
+        let userInfo = {};
+        let answerTimer = null;
+        let readingTimer = null;
+        let currentAnswer = null;
+        let questionsData = [];
+        let isTransitioning = false; // Prevent race conditions
+
+        // DOM Elements
+        const screens = {
+            welcome: document.getElementById('welcome-screen'),
+            registration: document.getElementById('registration-screen'),
+            question: document.getElementById('question-screen'),
+            results: document.getElementById('results-screen')
+        };
+
+        // Load questions from metadata.json
+        async function loadQuestions() {
+            try {
+                const response = await fetch('/static/images/human_evaluation/metadata.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load questions');
+                }
+                
+                const questions = await response.json();
+                
+                // Process questions into our format
+                questionsData = questions.map(q => {
+                    // Check if this is an illusion question (Yes/No answer)
+                    const isIllusionQuestion = q.ground_truth === "Yes" || q.ground_truth === "No";
+                    
+                    if (isIllusionQuestion) {
+                        // For illusion questions, use Yes/No options
+                        return {
+                            id: q.ID,
+                            image: q.image_path,
+                            text: q.prompt,
+                            type: 'yes-no',
+                            choices: shuffleArray(['Yes', 'No']),
+                            correctAnswer: q.ground_truth,
+                            expected_bias: q.expected_bias,
+                            topic: q.topic,
+                            sub_topic: q.sub_topic,
+                            modified: q.modified
+                        };
+                    } else {
+                        // For numerical questions, generate 4 options based on the rules
+                        const groundTruth = parseInt(q.ground_truth);
+                        const expectedBias = q.expected_bias ? parseInt(q.expected_bias) : null;
+                        let options = [];
+                        
+                        if (q.modified && expectedBias !== null) {
+                            // For modified questions
+                            if (groundTruth === expectedBias + 1) {
+                                // ground truth = expected bias + 1
+                                options = [groundTruth - 1, groundTruth, groundTruth + 1, groundTruth + 2];
+                            } else if (groundTruth === expectedBias - 1) {
+                                // ground truth = expected bias - 1  
+                                options = [groundTruth - 2, groundTruth - 1, groundTruth, groundTruth + 1];
+                            } else {
+                                // Default case for modified questions
+                                options = [groundTruth - 1, groundTruth, groundTruth + 1, groundTruth + 2];
+                            }
+                        } else {
+                            // For unmodified questions
+                            options = [groundTruth - 1, groundTruth, groundTruth + 1, groundTruth + 2];
+                        }
+                        
+                        // Filter out negative numbers and shuffle options
+                        options = options.filter(opt => opt > 0);
+                        
+                        // If we don't have 4 options after filtering, adjust
+                        while (options.length < 4) {
+                            const maxOption = Math.max(...options);
+                            options.push(maxOption + 1);
+                        }
+                        
+                        // Shuffle the options order
+                        options = shuffleArray(options);
+                        
+                        return {
+                            id: q.ID,
+                            image: q.image_path,
+                            text: q.prompt,
+                            type: 'multiple-choice',
+                            choices: options,
+                            correctAnswer: groundTruth,
+                            expected_bias: expectedBias,
+                            topic: q.topic,
+                            sub_topic: q.sub_topic,
+                            modified: q.modified
+                        };
+                    }
+                });
+                
+                // Shuffle questions order
+                questionsData = shuffleArray(questionsData);
+                
+                console.log('Questions loaded and shuffled successfully:', questionsData.length);
+            } catch (error) {
+                console.error('Error loading questions:', error);
+                // Use fallback questions
+                questionsData = getFallbackQuestions();
+            }
+        }
+
+        // Utility function to shuffle array
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Fallback questions if loading fails
+        function getFallbackQuestions() {
+            return [
+                {
+                    id: 'sample1',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y3ZmFmYyIgc3Ryb2tlPSIjZTJlOGYwIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSIyMDAiIHk9IjE1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2EwYWVjMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2Ij5TYW1wbGUgSW1hZ2U8L3RleHQ+PC9zdmc+',
+                    text: 'How many objects do you see in this image?',
+                    type: 'multiple-choice',
+                    choices: shuffleArray([2, 3, 4, 5]),
+                    correctAnswer: 3
+                },
+                {
+                    id: 'sample2',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y3ZmFmYyIgc3Ryb2tlPSIjZTJlOGYwIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSIyMDAiIHk9IjE1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2EwYWVjMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2Ij5TYW1wbGUgSW1hZ2U8L3RleHQ+PC9zdmc+',
+                    text: 'Are the two lines equal in length?',
+                    type: 'yes-no',
+                    choices: shuffleArray(['Yes', 'No']),
+                    correctAnswer: 'Yes'
+                }
+            ];
+        }
+
+        // Screen Navigation
+        function showScreen(screenName) {
+            Object.values(screens).forEach(screen => screen.classList.add('hidden'));
+            screens[screenName].classList.remove('hidden');
+        }
+
+        function showRegistration() {
+            showScreen('registration');
+        }
+
+        // Registration Form Handler
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            userInfo = {
+                name: document.getElementById('name').value.trim(),
+                affiliation: document.getElementById('affiliation').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                timestamp: new Date().toISOString()
+            };
+            
+            if (!userInfo.name) {
+                alert('Please enter your name');
+                document.getElementById('name').focus();
+                return;
+            }
+            
+            startEvaluation();
+        });
+
+        // Start Evaluation
+        function startEvaluation() {
+            currentQuestion = 0;
+            answers = {};
+            questionIds = {};
+            currentAnswer = null;
+            isTransitioning = false;
+            clearTimers();
+            showScreen('question');
+            loadCurrentQuestion();
+        }
+
+        // Load Current Question
+        function loadCurrentQuestion() {
+            if (isTransitioning) return; // Prevent race conditions
+            
+            if (currentQuestion >= questionsData.length) {
+                showResults();
+                return;
+            }
+
+            isTransitioning = true;
+            const question = questionsData[currentQuestion];
+            
+            // Clear any existing timers first
+            clearTimers();
+            
+            // Update progress
+            const progress = (currentQuestion / questionsData.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('question-counter').textContent = 
+                `Question ${currentQuestion + 1} of ${questionsData.length}`;
+            
+            // Reset state
+            currentAnswer = null;
+            
+            // Hide all phases, show reading phase
+            document.getElementById('reading-phase').classList.remove('hidden');
+            document.getElementById('answer-phase').classList.add('hidden');
+            document.getElementById('complete-phase').classList.add('hidden');
+            document.getElementById('next-btn').style.display = 'none';
+            
+            // Reset progress bars
+            document.getElementById('reading-progress-fill').style.width = '0%';
+            document.getElementById('answer-progress-fill').style.width = '100%';
+            document.getElementById('answer-progress-fill').classList.remove('urgent');
+            
+            // Hide image initially
+            document.getElementById('question-image').style.display = 'none';
+            
+            // Set question text
+            document.getElementById('question-text-reading').textContent = question.text;
+            document.getElementById('question-text-answer').textContent = question.text;
+            
+            // Preload image to prevent flashing
+            const img = new Image();
+            img.onload = function() {
+                document.getElementById('question-image').src = img.src;
+                // Small delay to ensure DOM is updated, then start reading phase
+                setTimeout(() => {
+                    isTransitioning = false;
+                    startReadingPhase();
+                }, 100);
+            };
+            img.onerror = function() {
+                // Use fallback image
+                const fallbackSrc = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y3ZmFmYyIgc3Ryb2tlPSIjZTJlOGYwIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSIyMDAiIHk9IjE1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2EwYWVjMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2Ij5JbWFnZSBjb3VsZCBub3QgYmUgbG9hZGVkPC90ZXh0Pjwvc3ZnPg==';
+                document.getElementById('question-image').src = fallbackSrc;
+                setTimeout(() => {
+                    isTransitioning = false;
+                    startReadingPhase();
+                }, 100);
+            };
+            img.src = question.image;
+        }
+
+        // Reading Phase
+        function startReadingPhase() {
+            const progressFill = document.getElementById('reading-progress-fill');
+            progressFill.style.width = '0%';
+            progressFill.style.transition = `width ${CONFIG.READING_TIME}ms linear`;
+            
+            setTimeout(() => {
+                progressFill.style.width = '100%';
+            }, 100);
+            
+            readingTimer = setTimeout(() => {
+                showAnswerPhase();
+            }, CONFIG.READING_TIME);
+        }
+
+        // Answer Phase
+        function showAnswerPhase() {
+            const question = questionsData[currentQuestion];
+            
+            // Hide reading phase, show answer phase
+            document.getElementById('reading-phase').classList.add('hidden');
+            document.getElementById('answer-phase').classList.remove('hidden');
+            
+            // Show the preloaded image
+            document.getElementById('question-image').style.display = 'block';
+            
+            // Setup multiple choice (all questions are now multiple choice)
+            setupMultipleChoice(question);
+            
+            // Start answer timer
+            startAnswerTimer();
+        }
+
+        // Setup Multiple Choice
+        function setupMultipleChoice(question) {
+            const container = document.getElementById('choices-container');
+            container.innerHTML = '';
+            
+            // Add appropriate CSS class based on number of options
+            container.className = 'choices';
+            if (question.choices.length === 2) {
+                container.classList.add('two-options');
+            } else {
+                container.classList.add('four-options');
+            }
+            
+            question.choices.forEach((choice, index) => {
+                const button = document.createElement('button');
+                button.className = 'choice-btn';
+                button.textContent = choice;
+                button.style.pointerEvents = 'auto'; // Reset pointer events
+                button.onclick = () => selectChoice(choice, button);
+                container.appendChild(button);
+            });
+        }
+
+        // Select Choice (Multiple Choice)
+        function selectChoice(choice, button) {
+            // Remove previous selection
+            document.querySelectorAll('.choice-btn').forEach(btn => 
+                btn.classList.remove('selected')
+            );
+            
+            // Mark current selection
+            button.classList.add('selected');
+            
+            // Record answer (but don't disable buttons)
+            selectAnswer(choice);
+        }
+
+        // Record Answer
+        function selectAnswer(answer) {
+            currentAnswer = answer;
+            // Don't disable buttons - allow changing mind until timer ends
+        }
+
+        // Timer Functions
+        function startAnswerTimer() {
+            const totalTime = CONFIG.ANSWER_TIME;
+            let timeElapsed = 0;
+            
+            // Set up smooth progress bar
+            const progressFill = document.getElementById('answer-progress-fill');
+            progressFill.style.width = '100%';
+            progressFill.style.transition = `width ${totalTime}ms linear`;
+            
+            // Start countdown immediately
+            setTimeout(() => {
+                progressFill.style.width = '0%';
+            }, 50);
+            
+            // Update timer display every 100ms for smoothness
+            answerTimer = setInterval(() => {
+                timeElapsed += 100;
+                const timeLeft = Math.ceil((totalTime - timeElapsed) / 1000);
+                
+                updateTimerDisplay(Math.max(0, timeLeft));
+                
+                if (timeLeft <= 1) {
+                    document.getElementById('timer').classList.add('urgent');
+                    document.getElementById('answer-progress-fill').classList.add('urgent');
+                }
+                
+                if (timeElapsed >= totalTime) {
+                    timeOut();
+                }
+            }, 100);
+        }
+
+        function updateTimerDisplay(timeLeft) {
+            document.getElementById('timer').textContent = `${timeLeft}s`;
+        }
+
+        function clearTimers() {
+            if (answerTimer) {
+                clearInterval(answerTimer);
+                answerTimer = null;
+            }
+            if (readingTimer) {
+                clearTimeout(readingTimer);
+                readingTimer = null;
+            }
+            // Clear urgent styling
+            document.getElementById('timer').classList.remove('urgent');
+            document.getElementById('answer-progress-fill').classList.remove('urgent');
+            // Reset progress bar transition
+            document.getElementById('answer-progress-fill').style.transition = 'none';
+        }
+
+        function timeOut() {
+            clearTimers();
+            
+            // Now that time is up, disable all buttons to prevent further changes
+            document.querySelectorAll('.choice-btn').forEach(btn => 
+                btn.style.pointerEvents = 'none'
+            );
+            
+            // Show complete phase
+            document.getElementById('answer-phase').classList.add('hidden');
+            document.getElementById('complete-phase').classList.remove('hidden');
+            
+            // Update complete phase info
+            document.getElementById('current-q-num').textContent = currentQuestion + 1;
+            document.getElementById('total-q-num').textContent = questionsData.length;
+            document.getElementById('remaining-q-num').textContent = questionsData.length - currentQuestion - 1;
+            
+            // Show next button
+            document.getElementById('next-btn').style.display = 'inline-flex';
+            document.getElementById('next-btn').textContent = 'Next Question';
+        }
+
+        // Question Navigation
+        function nextQuestion() {
+            if (isTransitioning) return; // Prevent double-clicks
+            
+            const question = questionsData[currentQuestion];
+            
+            // Record answer
+            answers[currentQuestion] = currentAnswer;
+            questionIds[question.id] = currentAnswer;
+            
+            // Clear timers and reset state
+            clearTimers();
+            document.getElementById('timer').classList.remove('urgent');
+            document.getElementById('answer-progress-fill').classList.remove('urgent');
+            
+            // Advance to next question
+            currentQuestion++;
+            
+            // Load next question
+            loadCurrentQuestion();
+        }
+
+        // Calculate Score
+        function calculateScore() {
+            let correct = 0;
+            let answered = 0;
+            let details = [];
+            
+            questionsData.forEach((question, index) => {
+                if (answers[index] !== null && answers[index] !== undefined) {
+                    answered++;
+                    const isCorrect = answers[index] === question.correctAnswer;
+                    if (isCorrect) {
+                        correct++;
+                    }
+                    details.push({
+                        questionIndex: index,
+                        questionId: question.id,
+                        userAnswer: answers[index],
+                        correctAnswer: question.correctAnswer,
+                        isCorrect: isCorrect
+                    });
+                }
+            });
+            
+            return { 
+                correct, 
+                answered, 
+                total: questionsData.length,
+                details
+            };
+        }
+
+        // Show Results
+        function showResults() {
+            const { correct, answered, total, details } = calculateScore();
+            
+            // Show score as correct/answered, not correct/total
+            document.getElementById('final-score').textContent = `${correct}/${answered}`;
+            
+            // Update the details text to be clear
+            document.getElementById('answered-count').textContent = answered;
+            document.getElementById('total-count').textContent = total;
+            
+            // Add more detailed breakdown
+            const scoreDetails = document.querySelector('.score-details');
+            scoreDetails.innerHTML = `
+                <p>You answered <strong>${answered}</strong> out of <strong>${total}</strong> questions.</p>
+                <p>Of those answered, <strong>${correct}</strong> were correct.</p>
+                <p><strong>Accuracy:</strong> ${answered > 0 ? Math.round((correct/answered)*100) : 0}%</p>
+            `;
+            
+            // Update progress to 100%
+            document.getElementById('progress-fill').style.width = '100%';
+            
+            showScreen('results');
+            
+            // Submit results
+            submitResults(correct, answered, total, details);
+        }
+
+        // Submit Results
+        async function submitResults(correct, answered, total) {
+            // Create detailed responses object with question IDs and answers
+            const detailedResponses = [];
+            
+            questionsData.forEach((question, index) => {
+                if (answers[index] !== null && answers[index] !== undefined) {
+                    detailedResponses.push({
+                        questionId: question.id,
+                        answer: answers[index],
+                        isCorrect: answers[index] === question.correctAnswer,
+                        expectedBias: question.expected_bias,
+                        correctAnswer: question.correctAnswer,
+                        modified: question.modified,
+                        topic: question.topic,
+                        subTopic: question.sub_topic
+                    });
+                }
+            });
+
+            const submissionData = {
+                timestamp: userInfo.timestamp,
+                name: userInfo.name,
+                affiliation: userInfo.affiliation || "Not provided",
+                email: userInfo.email || "Not provided",
+                score: correct,
+                answered: answered,
+                total: total,
+                answers: JSON.stringify(answers),
+                question_ids: JSON.stringify(questionIds),
+                detailed_responses: JSON.stringify(detailedResponses)
+            };
+
+            const statusEl = document.getElementById('submission-status');
+            let submissionSuccessful = false;
+            
+            try {
+                console.log('Preparing to submit data via fetch API');
+                statusEl.innerHTML = '<span>Submitting your results...</span><span class="loading-spinner"></span>';
+                
+                // Use fetch API as primary submission method
+                const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // This is important for cross-origin requests to Google Scripts
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams(submissionData).toString()
+                });
+                
+                console.log('Fetch submission completed successfully');
+                submissionSuccessful = true;
+                
+                // Show success message
+                statusEl.className = 'status-message status-success';
+                statusEl.innerHTML = 'Results submitted successfully! Thank you for your participation.';
+                
+            } catch (error) {
+                console.error('Fetch submission error:', error);
+                
+                // Only try the iframe method if fetch failed
+                if (!submissionSuccessful) {
+                    statusEl.className = 'status-message status-warning';
+                    statusEl.innerHTML = 'Primary submission method failed. Trying alternative method...';
+                    
+                    // Try the iframe method as a fallback
+                    submitViaIframe(submissionData, statusEl);
+                }
+            }
+        }
+        
+        // Backup submission method using iframe
+        function submitViaIframe(submissionData, statusEl) {
+            console.log('Attempting backup submission via iframe');
+            
+            try {
+                // Create hidden iframe for submission
+                const iframe = document.createElement('iframe');
+                iframe.name = 'hidden_iframe';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = CONFIG.GOOGLE_SCRIPT_URL;
+                form.target = 'hidden_iframe';
+                
+                for (const key in submissionData) {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = key;
+                    input.value = submissionData[key];
+                    form.appendChild(input);
+                }
+                
+                // Add an onload event to iframe to detect submission completion
+                iframe.onload = function() {
+                    console.log('Iframe loaded - submission likely completed');
+                    statusEl.className = 'status-message status-success';
+                    statusEl.innerHTML = 'Results submitted successfully! Thank you for your participation.';
+                    
+                    // Cleanup after a successful load
+                    setTimeout(() => {
+                        document.body.removeChild(form);
+                        document.body.removeChild(iframe);
+                        console.log('Cleanup completed');
+                    }, 2000);
+                };
+                
+                document.body.appendChild(form);
+                form.submit();
+                console.log('Backup form submitted');
+                
+            } catch (backupError) {
+                console.error('Backup submission failed:', backupError);
+                statusEl.className = 'status-message status-error';
+                statusEl.innerHTML = `All submission methods failed. Please contact the study administrator with this code: ${Date.now()}`;
+            }
+        }
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadQuestions();
+            showScreen('welcome');
+        });
+    </script>
+</body>
+</html>

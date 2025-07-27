@@ -1,0 +1,282 @@
+[
+  {
+    "ID": "xiangqi_grid_01_row_remove_row_before_river_notitle_px1152_Q1",
+    "image_path": "static/images/human_evaluation/modifed/game_boards/xiangqi_grid_01_row_remove_row_before_river_notitle_px1152.png",
+    "topic": "Game Boards",
+    "sub_topic": "Xiangqi Grid",
+    "prompt": "How many horizontal lines are there on this board?",
+    "ground_truth": "9",
+    "expected_bias": "10",
+    "modified": true
+  },
+  {
+    "ID": "dice_012_replace_notitle_px1152_prompt1",
+    "image_path": "static/images/human_evaluation/modifed/patterned_grid/dice_012_replace_D4_notitle_px1152.png",
+    "topic": "Patterned Grid",
+    "sub_topic": "Dice Pattern",
+    "prompt": "How many circles are there in cell D4?",
+    "ground_truth": "3",
+    "expected_bias": "4",
+    "modified": true
+  },
+  {
+    "ID": "MullerLyer_013_Q1_notitle_px1152",
+    "image_path": "static/images/human_evaluation/modifed/illusion/MullerLyer_013_str30_diff0p3_notitle_px1152.png",
+    "topic": "Optical Illusion",
+    "sub_topic": "M\u00fcller-Lyer illusion",
+    "prompt": "Are the two horizontal lines equal in length?",
+    "ground_truth": "No",
+    "expected_bias": "Yes",
+    "modified": true
+  },
+  {
+    "ID": "chess_grid_01_row_remove_first_row_notitle_px1152_Q1",
+    "image_path": "static/images/human_evaluation/modifed/game_boards/chess_grid_01_row_remove_first_row_notitle_px1152.png",
+    "topic": "Game Boards",
+    "sub_topic": "Chess Grid",
+    "prompt": "How many rows are there on this board?",
+    "ground_truth": "7",
+    "expected_bias": "8",
+    "modified": true
+  },
+  {
+    "ID": "chess_pieces_001_remove_notitle_px1152_prompt1",
+    "image_path": "static/images/human_evaluation/modifed/chess_pieces/chess_pieces_001_remove_whiteknight_at_g1_notitle_px1152.png",
+    "topic": "Chess Pieces",
+    "sub_topic": "Chess Pieces",
+    "prompt": "How many chess pieces are there on this board?",
+    "ground_truth": "31",
+    "expected_bias": "32",
+    "modified": true
+  },
+  {
+    "ID": "tally_014_remove_notitle_px1152_prompt1",
+    "image_path": "static/images/human_evaluation/modifed/patterned_grid/tally_014_remove_D8_notitle_px1152.png",
+    "topic": "Patterned Grid",
+    "sub_topic": "Tally Pattern",
+    "prompt": "How many lines are there in cell D8?",
+    "ground_truth": "3",
+    "expected_bias": "4",
+    "modified": true
+  },
+  {
+    "ID": "Ponzo_013_Q1_notitle_px1152",
+    "image_path": "static/images/human_evaluation/modifed/illusion/Ponzo_013_str15_diff0p15_notitle_px1152.png",
+    "topic": "Optical Illusion",
+    "sub_topic": "Ponzo illusion",
+    "prompt": "Are the two horizontal lines equal in length?",
+    "ground_truth": "No",
+    "expected_bias": "Yes",
+    "modified": true
+  },
+  {
+    "ID": "xiangqi_pieces_003_remove_notitle_px1152_prompt1",
+    "image_path": "static/images/human_evaluation/modifed/chess_pieces/xiangqi_pieces_003_remove_red_soldier_at_e7_notitle_px1152.png",
+    "topic": "Chess Pieces",
+    "sub_topic": "Xiangqi Pieces",
+    "prompt": "How many xiangqi pieces are there on this board?",
+    "ground_truth": "31",
+    "expected_bias": "32",
+    "modified": true
+  },
+  {
+    "ID": "shoe_018_notitle_Q1_px1152",
+    "image_path": "static/images/human_evaluation/modifed/logos/adidas-black-soccer-3_1152.png",
+    "topic": "Logos",
+    "sub_topic": "Shoe Logos",
+    "prompt": "How many visible stripes are there in the logo of the left shoe?",
+    "ground_truth": "4",
+    "expected_bias": "3",
+    "modified": true
+  },
+  {
+    "ID": "car_067_notitle_Q1_px1152",
+    "image_path": "static/images/human_evaluation/modifed/logos/audi-white-hatchback_1152.png",
+    "topic": "Logos",
+    "sub_topic": "Car Logos",
+    "prompt": "How many overlapping circles are there in the logo of this car?",
+    "ground_truth": "5",
+    "expected_bias": "4",
+    "modified": true
+  },
+  {
+    "ID": "flag_stars_021_notitle_Q1_px1152",
+    "image_path": "static/images/human_evaluation/modifed/flags/Flag of the United States-stars=49_1152.png",
+    "topic": "Flags",
+    "sub_topic": "Flags 2D Stars",
+    "prompt": "How many stars are there in this flag?",
+    "ground_truth": "49",
+    "expected_bias": "50",
+    "modified": true
+  },
+  {
+    "ID": "Flag_of_the_United_States_stripes_14_1152",
+    "image_path": "static/images/human_evaluation/modifed/flags/Flag of the United States-stripes=14_1152.png",
+    "topic": "Flags",
+    "sub_topic": "Flags 2D Stripes",
+    "prompt": "How many stripes are there in this flag?",
+    "ground_truth": "14",
+    "expected_bias": "13",
+    "modified": true
+  },
+  {
+    "ID": "animal_067_stork_notitle_Q1_px1152",
+    "image_path": "static/images/human_evaluation/modifed/animals/stork_2_1_1152.png",
+    "topic": "Animals",
+    "sub_topic": "Animal Add Legs",
+    "prompt": "How many legs do this animal have?",
+    "ground_truth": "3",
+    "expected_bias": "2",
+    "modified": true
+  },
+  {
+    "ID": "animal_086_cheetah_notitle_Q1_px1152",
+    "image_path": "static/images/human_evaluation/modifed/animals/cheetah_0_2_1152.png",
+    "topic": "Animals",
+    "sub_topic": "Animal Add Legs",
+    "prompt": "How many legs do this animal have?",
+    "ground_truth": "5",
+    "expected_bias": "4",
+    "modified": true
+  },
+  {
+    "ID": "camel_animals_unmodified",
+    "image_path": "static/images/human_evaluation/normal/animals/camel.jpg",
+    "topic": "Animals",
+    "sub_topic": "Animal Add Legs",
+    "prompt": "How many legs do this animal have?",
+    "ground_truth": "4",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "chicken_animals_unmodified",
+    "image_path": "static/images/human_evaluation/normal/animals/chicken.jpg",
+    "topic": "Animals",
+    "sub_topic": "Animal Add Legs",
+    "prompt": "How many legs do this animal have?",
+    "ground_truth": "2",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "chess_pieces_chess_pieces_unmodified",
+    "image_path": "static/images/human_evaluation/normal/chess_pieces/chess_pieces.jpg",
+    "topic": "Chess Pieces",
+    "sub_topic": "Chess Pieces",
+    "prompt": "How many chess pieces are there on this board?",
+    "ground_truth": "32",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "xiangqi_pieces_chess_pieces_unmodified",
+    "image_path": "static/images/human_evaluation/normal/chess_pieces/xiangqi_pieces.jpg",
+    "topic": "Chess Pieces",
+    "sub_topic": "Chess Pieces",
+    "prompt": "How many chess pieces are there on this board?",
+    "ground_truth": "32",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "US Flag_flags_stars_unmodified",
+    "image_path": "static/images/human_evaluation/normal/flags/US Flag.png",
+    "topic": "Flags",
+    "sub_topic": "Flags 2D Stars",
+    "prompt": "How many stars are there in this flag?",
+    "ground_truth": "50",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "US Flag_flags_stripes_unmodified",
+    "image_path": "static/images/human_evaluation/normal/flags/US Flag.png",
+    "topic": "Flags",
+    "sub_topic": "Flags 2D Stripes",
+    "prompt": "How many stripes are there in this flag?",
+    "ground_truth": "13",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "chess_grid_standard_notitle_px1152_game_boards_unmodified",
+    "image_path": "static/images/human_evaluation/normal/game_boards/chess_grid_standard_notitle_px1152.png",
+    "topic": "Game Boards",
+    "sub_topic": "Chess Grid",
+    "prompt": "How many horizontal lines are there on this board?",
+    "ground_truth": "8",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "xiangqi_grid_standard_notitle_px1152_game_boards_unmodified",
+    "image_path": "static/images/human_evaluation/normal/game_boards/xiangqi_grid_standard_notitle_px1152.png",
+    "topic": "Game Boards",
+    "sub_topic": "Xiangqi Grid",
+    "prompt": "How many horizontal lines are there on this board?",
+    "ground_truth": "10",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "ebbinghaus_illusion_unmodified",
+    "image_path": "static/images/human_evaluation/normal/illusion/ebbinghaus.png",
+    "topic": "Optical Illusion",
+    "sub_topic": "M\u00fcller-Lyer illusion",
+    "prompt": "Are the two inner circles equal in size?",
+    "ground_truth": "Yes",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "zollner_illusion_unmodified",
+    "image_path": "static/images/human_evaluation/normal/illusion/zollner.png",
+    "topic": "Optical Illusion",
+    "sub_topic": "M\u00fcller-Lyer illusion",
+    "prompt": "Are the two horizontal lines equal in length?",
+    "ground_truth": "Yes",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "adidas_logos_unmodified",
+    "image_path": "static/images/human_evaluation/normal/logos/adidas.png",
+    "topic": "Logos",
+    "sub_topic": "Shoe Logos",
+    "prompt": "How many visible stripes are there in the logo of the left shoe?",
+    "ground_truth": "3",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "audi_logos_unmodified",
+    "image_path": "static/images/human_evaluation/normal/logos/audi.jpg",
+    "topic": "Logos",
+    "sub_topic": "Car Logos",
+    "prompt": "How many overlapping circles are there in the logo of this car?",
+    "ground_truth": "4",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "standard_dice_grid_10x10_px1152_patterned_grid_unmodified",
+    "image_path": "static/images/human_evaluation/normal/patterned_grid/standard_dice_grid_10x10_px1152.png",
+    "topic": "Patterned Grid",
+    "sub_topic": "Dice Pattern",
+    "prompt": "How many circles are there in cell D4?",
+    "ground_truth": "4",
+    "expected_bias": null,
+    "modified": false
+  },
+  {
+    "ID": "standard_tally_grid_12x12_px1152_patterned_grid_unmodified",
+    "image_path": "static/images/human_evaluation/normal/patterned_grid/standard_tally_grid_12x12_px1152.png",
+    "topic": "Patterned Grid",
+    "sub_topic": "Tally Pattern",
+    "prompt": "How many lines are there in cell E5?",
+    "ground_truth": "5",
+    "expected_bias": null,
+    "modified": false
+  }
+]
