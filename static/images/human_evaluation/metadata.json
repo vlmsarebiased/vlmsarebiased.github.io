@@ -11,12 +11,12 @@
   },
   {
     "ID": "dice_012_replace_notitle_px1152_prompt1",
-    "image_path": "static/images/human_evaluation/modifed/patterned_grid/dice_012_replace_D4_notitle_px1152.png",
+    "image_path": "static/images/human_evaluation/modifed/patterned_grid/dice_001_replace_C3_notitle_px1152.png",
     "topic": "Patterned Grid",
     "sub_topic": "Dice Pattern",
-    "prompt": "How many circles are there in cell D4?",
-    "ground_truth": "3",
-    "expected_bias": "4",
+    "prompt": "How many circles are there in cell C3?",
+    "ground_truth": "2",
+    "expected_bias": "3",
     "modified": true
   },
   {
@@ -194,7 +194,7 @@
     "image_path": "static/images/human_evaluation/normal/game_boards/chess_grid_standard_notitle_px1152.png",
     "topic": "Game Boards",
     "sub_topic": "Chess Grid",
-    "prompt": "How many horizontal lines are there on this board?",
+    "prompt": "How many rows are there on this board?",
     "ground_truth": "8",
     "expected_bias": null,
     "modified": false
@@ -250,12 +250,12 @@
     "modified": false
   },
   {
-    "ID": "standard_dice_grid_10x10_px1152_patterned_grid_unmodified",
-    "image_path": "static/images/human_evaluation/normal/patterned_grid/standard_dice_grid_10x10_px1152.png",
+    "ID": "standard_dice_grid_6x6_px1152_patterned_grid_unmodified",
+    "image_path": "static/images/human_evaluation/normal/patterned_grid/standard_dice_grid_6x6_px1152.png",
     "topic": "Patterned Grid",
     "sub_topic": "Dice Pattern",
-    "prompt": "How many circles are there in cell D4?",
-    "ground_truth": "4",
+    "prompt": "How many circles are there in cell C4?",
+    "ground_truth": "3",
     "expected_bias": null,
     "modified": false
   }

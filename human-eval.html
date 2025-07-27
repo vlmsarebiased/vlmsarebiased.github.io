@@ -761,7 +761,7 @@
                             <span id="remaining-q-num"></span> questions remaining
                         </p>
                         <div style="background: var(--border-light); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                            <p style="color: var(--warning); font-weight: 700; font-size: 1rem;">⚡ Next: 3s to read + 3s to answer!</p>
+                            <p style="color: var(--warning); font-weight: 700; font-size: 1rem;">⚡ Next: 3s to read + 4s to answer!</p>
                         </div>
                     </div>
                 </div>
@@ -799,7 +799,7 @@
         // Configuration
         const CONFIG = {
             READING_TIME: 3000, // 3 seconds to read question
-            ANSWER_TIME: 3000, // 3 seconds to answer
+            ANSWER_TIME: 4000, // 4 seconds to answer (reduced from 5s)
             GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyog4AP9-Xzz9__3WnjbFzgKq2284ziEbbA_Sh8yhld-bipwRttqqD_FaFwqXyz2gom/exec'
         };
 
@@ -838,13 +838,13 @@
                     const isIllusionQuestion = q.ground_truth === "Yes" || q.ground_truth === "No";
                     
                     if (isIllusionQuestion) {
-                        // For illusion questions, use Yes/No options
+                        // For illusion questions, use Yes/No options in consistent order
                         return {
                             id: q.ID,
                             image: q.image_path,
                             text: q.prompt,
                             type: 'yes-no',
-                            choices: shuffleArray(['Yes', 'No']),
+                            choices: ['Yes', 'No'], // Fixed order instead of shuffling
                             correctAnswer: q.ground_truth,
                             expected_bias: q.expected_bias,
                             topic: q.topic,
@@ -874,7 +874,7 @@
                             options = [groundTruth - 1, groundTruth, groundTruth + 1, groundTruth + 2];
                         }
                         
-                        // Filter out negative numbers and shuffle options
+                        // Filter out negative numbers
                         options = options.filter(opt => opt > 0);
                         
                         // If we don't have 4 options after filtering, adjust
@@ -883,8 +883,8 @@
                             options.push(maxOption + 1);
                         }
                         
-                        // Shuffle the options order
-                        options = shuffleArray(options);
+                        // Sort options in ascending order instead of shuffling
+                        options.sort((a, b) => a - b);
                         
                         return {
                             id: q.ID,
@@ -901,7 +901,7 @@
                     }
                 });
                 
-                // Shuffle questions order
+                // Shuffle questions order (but not options within questions)
                 questionsData = shuffleArray(questionsData);
                 
                 console.log('Questions loaded and shuffled successfully:', questionsData.length);
@@ -927,10 +927,10 @@
             return [
                 {
                     id: 'sample1',
-                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y3ZmFmYyIgc3Ryb2tlPSIjZTJlOGYwIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSIyMDAiIHk9IjE1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2EwYWVjMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2Ij5TYW1wbGUgSW1hZ2U8L3RleHQ+PC9zdmc+',
+                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y3ZmFmYyIgc3Ryb2tlPSIjZTJlOGYwIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSIyMDAiIHk9IjE1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2EwYWVjMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2Ij5TYW1wbGUgSW1hZ2U8L3RleHQ+PC9zdmc+',
                     text: 'How many objects do you see in this image?',
                     type: 'multiple-choice',
-                    choices: shuffleArray([2, 3, 4, 5]),
+                    choices: [2, 3, 4, 5], // Ordered choices
                     correctAnswer: 3
                 },
                 {
@@ -938,7 +938,7 @@
                     image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y3ZmFmYyIgc3Ryb2tlPSIjZTJlOGYwIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSIyMDAiIHk9IjE1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2EwYWVjMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2Ij5TYW1wbGUgSW1hZ2U8L3RleHQ+PC9zdmc+',
                     text: 'Are the two lines equal in length?',
                     type: 'yes-no',
-                    choices: shuffleArray(['Yes', 'No']),
+                    choices: ['Yes', 'No'], // Fixed order
                     correctAnswer: 'Yes'
                 }
             ];
@@ -1258,19 +1258,19 @@
         function showResults() {
             const { correct, answered, total, details } = calculateScore();
             
-            // Show score as correct/answered, not correct/total
-            document.getElementById('final-score').textContent = `${correct}/${answered}`;
+            // Show score as correct/total, not correct/answered
+            document.getElementById('final-score').textContent = `${correct}/${total}`;
             
             // Update the details text to be clear
             document.getElementById('answered-count').textContent = answered;
             document.getElementById('total-count').textContent = total;
             
-            // Add more detailed breakdown
+            // Add more detailed breakdown - modified to show accuracy as correct/total
             const scoreDetails = document.querySelector('.score-details');
             scoreDetails.innerHTML = `
                 <p>You answered <strong>${answered}</strong> out of <strong>${total}</strong> questions.</p>
                 <p>Of those answered, <strong>${correct}</strong> were correct.</p>
-                <p><strong>Accuracy:</strong> ${answered > 0 ? Math.round((correct/answered)*100) : 0}%</p>
+                <p><strong>Accuracy:</strong> ${Math.round((correct/total)*100)}%</p>
             `;
             
             // Update progress to 100%
@@ -1281,7 +1281,7 @@
             // Submit results
             submitResults(correct, answered, total, details);
         }
-
+        
         // Submit Results
         async function submitResults(correct, answered, total) {
             // Create detailed responses object with question IDs and answers

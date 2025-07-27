@@ -51,7 +51,7 @@
   },
   {
     "ID": "tally_014_remove_notitle_px1152_prompt1",
-    "image_path": "static/images/human_evaluation/modifed/patterned_grid/tally_014_remove_D8_notitle_px1152.png",
+    "image_path": "dice_001_replace_C3_notitle_px1152",
     "topic": "Patterned Grid",
     "sub_topic": "Tally Pattern",
     "prompt": "How many lines are there in cell D8?",
