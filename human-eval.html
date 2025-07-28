@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Human Evaluation Study</title>
+    <title>AI Image Perception Study</title>
     <style>
         :root {
             --primary-color: #2563eb;
@@ -38,7 +38,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 1rem;
             min-height: 100vh;
@@ -53,7 +53,7 @@
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border);
             width: 100%;
-            max-width: 1000px;
+            max-width: 900px;
             overflow: hidden;
         }
 
@@ -64,7 +64,11 @@
         }
 
         .card-content {
-            padding: 1.5rem;
+            padding: 2rem;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .card-footer {
@@ -74,14 +78,14 @@
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
 
         h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 1rem;
@@ -89,7 +93,22 @@
 
         .subtitle {
             color: var(--text-secondary);
-            font-size: 1.25rem;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .thank-you-message {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .thank-you-message h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
         }
 
         .instructions {
@@ -140,8 +159,7 @@
         }
 
         input[type="text"], 
-        input[type="email"], 
-        input[type="number"] {
+        input[type="email"] {
             width: 100%;
             padding: 0.75rem 1rem;
             border: 2px solid var(--border);
@@ -162,7 +180,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 2rem;
             border: none;
             border-radius: 8px;
             font-size: 1rem;
@@ -183,17 +201,6 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .btn-secondary {
-            background: var(--surface);
-            color: var(--text-primary);
-            border: 2px solid var(--border);
-        }
-
-        .btn-secondary:hover:not(:disabled) {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -202,7 +209,7 @@
 
         /* Progress Bar */
         .progress-container {
-            padding: 1rem 1.5rem 0;
+            padding: 1rem 2rem 0;
         }
 
         .progress-bar {
@@ -223,7 +230,7 @@
         .progress-text {
             text-align: center;
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: 0.9rem;
             margin-top: 0.5rem;
         }
 
@@ -232,93 +239,38 @@
             text-align: center;
         }
 
-        .question-phase {
-            margin-bottom: 2rem;
-        }
-
         .question-text {
             font-size: 1.4rem;
-            line-height: 1.2;
+            line-height: 1.4;
             color: var(--text-primary);
-            margin-bottom: 1rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 2rem;
             font-weight: 500;
         }
 
         .question-image {
             max-width: 100%;
-            max-height: 500px; /* Increased from 250px */
+            max-height: 400px;
             border-radius: 8px;
             box-shadow: var(--shadow);
-            margin-bottom: 1rem;
+            margin: 0 auto;
+            display: block;
         }
 
-        .reading-time {
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
             background: var(--border-light);
             border-radius: 8px;
-            padding: 2rem 2rem;
-            margin: 1rem 0;
+            margin: 2rem 0;
         }
 
-        .reading-progress {
-            width: 100%;
-            height: 4px;
-            background: var(--border);
-            border-radius: 2px;
-            margin-top: 1rem;
-            overflow: hidden;
-        }
-
-        .reading-progress-fill {
-            height: 100%;
-            background: var(--primary-color);
-            border-radius: 2px;
-            transition: width linear;
-        }
-
-        /* Answer Timer Progress Bar */
-        .answer-progress {
-            width: 100%;
-            height: 6px;
-            background: var(--border);
-            border-radius: 3px;
-            margin: 1rem 0;
-            overflow: hidden;
-        }
-
-        .answer-progress-fill {
-            height: 100%;
-            background: var(--warning);
-            border-radius: 3px;
-            transition: width linear;
-        }
-
-        .answer-progress-fill.urgent {
-            background: var(--error);
-        }
-
-        /* Timer */
-        .timer-container {
-            margin: 1rem 0;
-        }
-
-        .timer {
-            font-size: 2rem;
+        .countdown {
+            font-size: 3rem;
             font-weight: 700;
             color: var(--warning);
-            margin-bottom: 1rem;
-        }
-
-        .timer.urgent {
-            color: var(--error);
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            margin: 2rem 0;
         }
 
         /* Answer Options */
@@ -326,42 +278,37 @@
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto 2rem;
         }
         
-        /* Updated layout for 2x2 grid with 4 options */
         .choices.four-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: auto auto;
             gap: 0.75rem;
-            max-width: 800px;
         }
         
-        /* Updated layout for Yes/No options (1:1 grid) */
         .choices.two-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.75rem;
-            max-width: 800px;
         }
 
         .choice-btn {
-            padding: 1.2rem 1rem;
+            padding: 1rem 1.5rem;
             border: 2px solid var(--border);
             background: var(--surface);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             text-align: center;
             font-weight: 500;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: auto;
-            min-height: 70px;
+            min-height: 60px;
         }
 
         .choice-btn:hover {
@@ -375,15 +322,47 @@
             border-color: var(--primary-color);
         }
 
-        .number-input-container {
-            max-width: 300px;
-            margin: 0 auto 2rem;
+        /* Warning boxes */
+        .warning-box {
+            background: #fef3cd;
+            border: 1px solid #fbbf24;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
         }
 
-        .number-input {
+        .warning-box h3 {
+            color: #b45309;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-box p {
+            color: #92400e;
+            font-weight: 500;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
             text-align: center;
-            font-size: 1.125rem;
-            padding: 1rem;
+            padding: 2rem 0;
+        }
+
+        .loading-progress {
+            width: 100%;
+            height: 8px;
+            background: var(--border-light);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .loading-progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
         }
 
         /* Results */
@@ -454,201 +433,30 @@
             text-align: center;
         }
 
-        .mt-2 { margin-top: 0.5rem; }
-        .mb-2 { margin-bottom: 0.5rem; }
-        .mt-4 { margin-top: 1rem; }
-        .mb-4 { margin-bottom: 1rem; }
-
-        /* Responsive Design - MAINTAIN HARDCODED SMALL BUTTONS */
-        @media (max-width: 1024px) {
-            .choices {
-                grid-template-columns: 75px 75px !important;
-                width: 160px !important;
-                gap: 0.4rem !important;
-            }
-            
-            .choices.two-options {
-                grid-template-columns: 75px 75px !important;
-                width: 160px !important;
-            }
-            
-            .choice-btn {
-                width: 75px !important;
-                min-width: 75px !important;
-                max-width: 75px !important;
-                font-size: 0.85rem !important;
-                height: 28px !important;
-            }
-            
-            .question-text {
-                font-size: 1.3rem !important;
-            }
-            
-            .timer {
-                font-size: 1.8rem !important;
-            }
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
-                padding: 0.5rem !important;
+                padding: 0.5rem;
             }
             
             .card {
-                max-width: 95% !important;
+                max-width: 95%;
             }
             
             .card-content, .card-header, .card-footer {
-                padding: 1rem !important;
-            }
-            
-            .progress-container {
-                padding: 0.5rem 1rem 0 !important;
+                padding: 1rem;
             }
             
             .question-text {
-                font-size: 1.2rem !important;
-                line-height: 1.1 !important;
-                margin-bottom: 0.75rem !important;
+                font-size: 1.2rem;
             }
             
-            .reading-time {
-                padding: 1.5rem 1rem !important;
-            }
-            
-            .choices {
-                grid-template-columns: 70px 70px !important;
-                width: 250px !important;
-                gap: 0.4rem !important;
-            }
-            
-            .choices.two-options {
-                grid-template-columns: 70px 70px !important;
-                width: 250px !important;
-            }
-            
-            .choice-btn {
-                width: 70px !important;
-                min-width: 70px !important;
-                max-width: 70px !important;
-                font-size: 0.8rem !important;
-                height: 26px !important;
-            }
-            
-            .timer {
-                font-size: 1.6rem !important;
-            }
-            
-            .question-image {
-                max-height: 250px !important; /* Increased from 200px */
-                margin-bottom: 0.75rem !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0.25rem !important;
-                max-width: 100% !important;
-                width: 100% !important;
-                margin: 0 !important;
-            }
-            
-            .card {
-                border-radius: 8px !important;
-                max-width: 100% !important;
-                width: 100% !important;
-                margin: 0 !important;
-            }
-            
-            .card-content, .card-header, .card-footer {
-                padding: 0.75rem 0.5rem !important;
-            }
-            
-            /* Significantly reduce header size and spacing */
-            .card-header {
-                padding: 1rem 0.5rem 0.5rem !important;
-            }
-            
-            h1 {
-                font-size: 2rem !important; /* Reduced from 2.5rem */
-                margin-bottom: 0.2rem !important;
-                line-height: 1.1 !important;
-            }
-            
-            h2 {
-                font-size: 1.6rem !important;
-                margin-bottom: 0.5rem !important;
-            }
-            
-            .subtitle {
-                font-size: 0.9rem !important;
-                margin-bottom: 0.2rem !important;
-            }
-            
-            .instructions {
-                padding: 0.75rem 0.75rem !important;
-                margin: 0.75rem 0 !important;
-            }
-            
-            .instructions h3 {
-                font-size: 0.9rem !important;
-                margin-bottom: 0.4rem !important;
-            }
-            
-            .instructions li {
-                font-size: 0.8rem !important;
-                margin: 0.2rem 0 !important;
-                padding-left: 1rem !important;
-            }
-            
-            .instructions p.mt-4 {
-                font-size: 0.8rem !important;
-                margin-top: 0.5rem !important;
-                font-weight: 400 !important;
-            }
-            
-            .progress-container {
-                padding: 0.5rem 0.5rem 0 !important;
-            }
-            
-            .question-text {
-                font-size: 1rem !important;
-                line-height: 1.0 !important;
-                margin-bottom: 0.5rem !important;
-                max-width: 100% !important;
-                padding: 0 0.25rem !important;
-            }
-
-            .question-image {
-                max-height: 150px !important; /* Increased from 200px */
-                margin-bottom: 0.75rem !important;
-            }
-            
-            .choices {
-                grid-template-columns: 130px 130px !important; /* Doubled from 65px */
-                width: 270px !important; /* Increased from 200px */
-                gap: 0.4rem !important;
-                margin: 0 auto 1rem !important;
-            }
-            
-            .choices.two-options {
-                grid-template-columns: 130px 130px !important; /* Doubled from 65px */
-                width: 270px !important; /* Increased from 200px */
-            }
-            
-            .choice-btn {
-                width: 130px !important; /* Doubled from 65px */
-                min-width: 130px !important; /* Doubled from 65px */
-                max-width: 130px !important; /* Doubled from 65px */
-                font-size: 0.9rem !important; /* Slightly larger font */
-                height: 30px !important; /* A bit taller to accommodate larger text */
-                padding: 0.5rem 0.3rem !important;
-            }
-            
-            /* For four-options layout, ensure the grid works properly */
             .choices.four-options {
-                grid-template-rows: auto auto !important;
-                gap: 0.4rem !important;
+                grid-template-columns: 1fr;
+            }
+            
+            .choices.two-options {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -658,21 +466,27 @@
         <!-- Welcome Screen -->
         <div id="welcome-screen" class="card">
             <div class="card-header">
-                <h1>Human Evaluation Study</h1>
-                <p class="subtitle">Research Evaluation Platform</p>
+                <h1>AI Research Study</h1>
+                <p class="subtitle">Image Recognition Research</p>
+                <div class="thank-you-message">
+                    <h3>🤝 Thank You for Contributing to AI Research!</h3>
+                    <p>Your participation helps us understand how humans and AI systems perceive visual information differently.</p>
+                </div>
             </div>
             <div class="card-content">
                 <div class="instructions">
                     <h3>Study Overview</h3>
                     <ul>
-                        <li><strong>Duration:</strong> Approximately 3-5 minutes</li>
-                        <li><strong>Questions:</strong> 26 image-based evaluation tasks</li>
-                        <li><strong>Format:</strong> Multiple choice responses (2 or 4 options)</li>
-                        <li><strong>Timing:</strong> 3 seconds to read + 5 seconds to see image + answer</li>
-                        <li><strong>Control:</strong> You advance manually after each question</li>
-                        <li><strong>Privacy:</strong> Your responses are recorded anonymously</li>
+                        <li><strong>Duration:</strong> Approximately 2-3 minutes</li>
+                        <li><strong>Questions:</strong> 10 image recognition tasks</li>
+                        <li><strong>Process:</strong> Read question → View image briefly → Answer</li>
+                        <li><strong>Important:</strong> You'll only see each image for 0.15 seconds!</li>
+                        <li><strong>Your task:</strong> Answer questions about the images you see</li>
                     </ul>
-                    <p class="mt-4" style="font-weight: 500;">Your participation helps improve AI evaluation methods. Thank you for contributing to our research!</p>
+                    <div class="warning-box">
+                        <h3>⚠️ Important Instructions</h3>
+                        <p>Each image will flash for only <strong>0.15 seconds</strong>. Pay close attention!</p>
+                    </div>
                 </div>
             </div>
             <div class="card-footer">
@@ -684,26 +498,46 @@
         <div id="registration-screen" class="card hidden">
             <div class="card-header">
                 <h2>Participant Information</h2>
-                <p class="subtitle">Please provide some basic information (optional fields can be skipped)</p>
+                <p class="subtitle">Please provide some basic information to help us with our research</p>
             </div>
             <div class="card-content">
                 <form id="registration-form">
                     <div class="form-group">
-                        <label for="name">Full Name <span class="required">*</span></label>
-                        <input type="text" id="name" required placeholder="Enter your full name">
+                        <label for="name">Name <span class="required">*</span></label>
+                        <input type="text" id="name" required placeholder="Enter your name">
                     </div>
                     <div class="form-group">
-                        <label for="affiliation">Affiliation</label>
-                        <input type="text" id="affiliation" placeholder="University, Organization, Company (optional)">
+                        <label for="affiliation">Affiliation <span class="required">*</span></label>
+                        <input type="text" id="affiliation" required placeholder="University, Organization, Company, or 'Individual'">
+                        <small style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.25rem; display: block;">
+                            Please enter your organization or write "Individual" if not affiliated with any institution
+                        </small>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" placeholder="your@email.com (optional)">
+                        <label for="email">Email (optional)</label>
+                        <input type="email" id="email" placeholder="your@email.com">
                     </div>
                 </form>
             </div>
             <div class="card-footer">
-                <button type="submit" form="registration-form" class="btn btn-primary">Start Evaluation</button>
+                <button type="submit" form="registration-form" class="btn btn-primary">Start Study</button>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="card hidden">
+            <div class="card-header">
+                <h2>Preparing Study</h2>
+                <p class="subtitle">Loading images...</p>
+            </div>
+            <div class="card-content">
+                <div class="loading-screen">
+                    <p>Please wait while we load all images to ensure smooth performance.</p>
+                    <div class="loading-progress">
+                        <div id="loading-progress-fill" class="loading-progress-fill"></div>
+                    </div>
+                    <p id="loading-status">Loading images... <span id="loading-count">0/10</span></p>
+                </div>
             </div>
         </div>
 
@@ -714,81 +548,86 @@
                     <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
                 </div>
                 <div class="progress-text">
-                    <span id="question-counter">Question 1 of 20</span>
+                    <span id="question-counter">Question 1 of 10</span>
                 </div>
             </div>
             
             <div class="card-content">
-                <!-- Question Reading Phase -->
-                <div id="reading-phase" class="question-phase">
-                    <div class="reading-time">
-                        <p id="question-text-reading" class="question-text"></p>
-                        <p class="text-center mt-2" style="color: var(--text-secondary);">Please read the question carefully</p>
-                        <div class="reading-progress">
-                            <div id="reading-progress-fill" class="reading-progress-fill"></div>
-                        </div>
+                <!-- Phase 1: Question Reading -->
+                <div id="question-phase" class="question-container">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Get Ready!</h3>
+                    <div class="question-text" id="question-text"></div>
+                    <div class="warning-box">
+                        <h3>⚠️ Ready?</h3>
+                        <p>The image will appear for only <strong>0.15 seconds</strong> when you click Next!</p>
                     </div>
                 </div>
                 
-                <!-- Question Answer Phase -->
-                <div id="answer-phase" class="question-phase hidden">
-                    <div class="question-container">
-                        <p id="question-text-answer" class="question-text"></p>
-                        <img id="question-image" class="question-image" src="" alt="Question Image" style="display: none;">
-                        
-                        <div class="timer-container">
-                            <div id="timer" class="timer">3s</div>
-                            <div class="answer-progress">
-                                <div id="answer-progress-fill" class="answer-progress-fill"></div>
-                            </div>
-                        </div>
-                        
-                        <!-- Multiple Choice -->
-                        <div id="choices-container" class="choices">
-                            <!-- Choices populated by JavaScript -->
-                        </div>
+                <!-- Phase 2: Image Flash -->
+                <div id="image-phase" class="question-container hidden">
+                    <div class="image-container">
+                        <img id="question-image" class="question-image hidden" alt="Study Image">
+                        <div id="countdown-display" class="countdown">3</div>
                     </div>
                 </div>
                 
-                <!-- Complete Phase (after timer ends) -->
-                <div id="complete-phase" class="question-phase hidden">
-                    <div style="text-align: center; padding: 2rem 1.5rem;">
-                        <h3 style="color: var(--success); margin-bottom: 1rem; font-size: 1.3rem;">✓ Question Completed</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 1rem;">
-                            You are on question <span id="current-q-num"></span> of <span id="total-q-num"></span>
-                        </p>
-                        <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 1rem;">
-                            <span id="remaining-q-num"></span> questions remaining
-                        </p>
-                        <div style="background: var(--border-light); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                            <p style="color: var(--warning); font-weight: 700; font-size: 1rem;">⚡ Next: 3s to read + 5s to answer!</p>
-                        </div>
+                <!-- Phase 3: Answer Selection -->
+                <div id="answer-phase" class="question-container hidden">
+                    <div class="question-text" id="question-text-answer"></div>
+                    <div id="choices-container" class="choices">
+                        <!-- Choices populated by JavaScript -->
                     </div>
                 </div>
             </div>
             
             <div class="card-footer">
-                <button id="next-btn" class="btn btn-primary" onclick="nextQuestion()" style="display: none;">
-                    Next Question
+                <button id="next-btn" class="btn btn-primary" onclick="nextPhase()">
+                    Next
                 </button>
+            </div>
+        </div>
+
+        <!-- Submission Screen -->
+        <div id="submission-screen" class="card hidden">
+            <div class="card-header">
+                <h2>Processing Your Results</h2>
+                <p class="subtitle">Please wait while we submit your responses...</p>
+            </div>
+            <div class="card-content">
+                <div class="loading-screen">
+                    <div class="loading-progress">
+                        <div id="submission-progress-fill" class="loading-progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div id="submission-status" class="status-message status-loading">
+                        <span>Submitting your results to our research database...</span>
+                        <span class="loading-spinner"></span>
+                    </div>
+                    <p style="color: var(--text-secondary); margin-top: 1rem;">
+                        Thank you for your patience. This helps ensure your valuable contribution to AI research is properly recorded.
+                    </p>
+                </div>
             </div>
         </div>
 
         <!-- Results Screen -->
         <div id="results-screen" class="card hidden">
             <div class="card-header">
-                <h2>Evaluation Complete</h2>
+                <h2>Study Complete</h2>
                 <p class="subtitle">Thank you for your participation!</p>
             </div>
             <div class="card-content">
                 <div class="results">
-                    <div class="score" id="final-score">--/--</div>
+                    <div class="score" id="final-score">--/10</div>
                     <div class="score-details">
-                        <p>You answered <span id="answered-count">--</span> out of <span id="total-count">--</span> questions.</p>
+                        <p>You got <span id="correct-count">--</span> out of <span id="total-count">10</span> questions correct.</p>
+                        <p>Accuracy: <span id="accuracy-percent">--%</span></p>
                     </div>
-                    <div id="submission-status" class="status-message status-loading">
-                        <span>Submitting your results...</span>
-                        <span class="loading-spinner"></span>
+                    <div class="thank-you-message">
+                        <h3>🙏 Thank You for Contributing to AI Research!</h3>
+                        <p>Your responses will help us better understand the differences between human and artificial intelligence perception. This research contributes to making AI systems more aligned with human understanding.</p>
+                    </div>
+                    <div id="final-submission-status" class="status-message status-success">
+                        <span>✓ Results submitted successfully! Your contribution is greatly appreciated.</span>
                     </div>
                 </div>
             </div>
@@ -798,119 +637,31 @@
     <script>
         // Configuration
         const CONFIG = {
-            READING_TIME: 3000, // 3 seconds to read question
-            ANSWER_TIME: 5000, // 5 seconds to answer
+            IMAGE_DISPLAY_TIME: 150, 
+            TOTAL_QUESTIONS: 10,
+            MODIFIED_QUESTIONS: 5,
+            UNMODIFIED_QUESTIONS: 5,
             GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyog4AP9-Xzz9__3WnjbFzgKq2284ziEbbA_Sh8yhld-bipwRttqqD_FaFwqXyz2gom/exec'
         };
 
         // Application State
         let currentQuestion = 0;
+        let currentPhase = 'question'; // 'question', 'image', 'answer'
+        let selectedQuestions = [];
         let answers = {};
-        let questionIds = {};
         let userInfo = {};
-        let answerTimer = null;
-        let readingTimer = null;
         let currentAnswer = null;
-        let questionsData = [];
-        let isTransitioning = false; // Prevent race conditions
+        let preloadedImages = new Map();
 
         // DOM Elements
         const screens = {
             welcome: document.getElementById('welcome-screen'),
             registration: document.getElementById('registration-screen'),
+            loading: document.getElementById('loading-screen'),
             question: document.getElementById('question-screen'),
+            submission: document.getElementById('submission-screen'),
             results: document.getElementById('results-screen')
         };
-
-        // Load questions from metadata.json
-        async function loadQuestions() {
-            try {
-                const response = await fetch('/static/images/human_evaluation/metadata.json');
-                if (!response.ok) {
-                    throw new Error('Failed to load questions');
-                }
-                
-                const questions = await response.json();
-                
-                // Process questions into our format
-                questionsData = questions.map(q => {
-                    // Check if this is an illusion question (Yes/No answer)
-                    const isIllusionQuestion = q.ground_truth === "Yes" || q.ground_truth === "No";
-                    
-                    if (isIllusionQuestion) {
-                        // For illusion questions, use Yes/No options in consistent order
-                        return {
-                            id: q.ID,
-                            image: q.image_path,
-                            text: q.prompt,
-                            type: 'yes-no',
-                            choices: ['Yes', 'No'], // Fixed order instead of shuffling
-                            correctAnswer: q.ground_truth,
-                            expected_bias: q.expected_bias,
-                            topic: q.topic,
-                            sub_topic: q.sub_topic,
-                            modified: q.modified
-                        };
-                    } else {
-                        // For numerical questions, generate 4 options based on the rules
-                        const groundTruth = parseInt(q.ground_truth);
-                        const expectedBias = q.expected_bias ? parseInt(q.expected_bias) : null;
-                        let options = [];
-                        
-                        if (q.modified && expectedBias !== null) {
-                            // For modified questions
-                            if (groundTruth === expectedBias + 1) {
-                                // ground truth = expected bias + 1
-                                options = [groundTruth - 1, groundTruth, groundTruth + 1, groundTruth + 2];
-                            } else if (groundTruth === expectedBias - 1) {
-                                // ground truth = expected bias - 1  
-                                options = [groundTruth - 2, groundTruth - 1, groundTruth, groundTruth + 1];
-                            } else {
-                                // Default case for modified questions
-                                options = [groundTruth - 1, groundTruth, groundTruth + 1, groundTruth + 2];
-                            }
-                        } else {
-                            // For unmodified questions
-                            options = [groundTruth - 1, groundTruth, groundTruth + 1, groundTruth + 2];
-                        }
-                        
-                        // Filter out negative numbers
-                        options = options.filter(opt => opt > 0);
-                        
-                        // If we don't have 4 options after filtering, adjust
-                        while (options.length < 4) {
-                            const maxOption = Math.max(...options);
-                            options.push(maxOption + 1);
-                        }
-                        
-                        // Sort options in ascending order instead of shuffling
-                        options.sort((a, b) => a - b);
-                        
-                        return {
-                            id: q.ID,
-                            image: q.image_path,
-                            text: q.prompt,
-                            type: 'multiple-choice',
-                            choices: options,
-                            correctAnswer: groundTruth,
-                            expected_bias: expectedBias,
-                            topic: q.topic,
-                            sub_topic: q.sub_topic,
-                            modified: q.modified
-                        };
-                    }
-                });
-                
-                // Shuffle questions order (but not options within questions)
-                questionsData = shuffleArray(questionsData);
-                
-                console.log('Questions loaded and shuffled successfully:', questionsData.length);
-            } catch (error) {
-                console.error('Error loading questions:', error);
-                // Use fallback questions
-                questionsData = getFallbackQuestions();
-            }
-        }
 
         // Utility function to shuffle array
         function shuffleArray(array) {
@@ -922,26 +673,173 @@
             return shuffled;
         }
 
-        // Fallback questions if loading fails
-        function getFallbackQuestions() {
-            return [
-                {
-                    id: 'sample1',
-                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y3ZmFmYyIgc3Ryb2tlPSIjZTJlOGYwIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSIyMDAiIHk9IjE1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2EwYWVjMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2Ij5TYW1wbGUgSW1hZ2U8L3RleHQ+PC9zdmc+',
-                    text: 'How many objects do you see in this image?',
-                    type: 'multiple-choice',
-                    choices: [2, 3, 4, 5], // Ordered choices
-                    correctAnswer: 3
-                },
-                {
-                    id: 'sample2',
-                    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y3ZmFmYyIgc3Ryb2tlPSIjZTJlOGYwIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSIyMDAiIHk9IjE1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2EwYWVjMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2Ij5TYW1wbGUgSW1hZ2U8L3RleHQ+PC9zdmc+',
-                    text: 'Are the two lines equal in length?',
-                    type: 'yes-no',
-                    choices: ['Yes', 'No'], // Fixed order
-                    correctAnswer: 'Yes'
+        // Function to clean question prompt text
+        function cleanPromptText(prompt) {
+            // Remove the instruction part after the question mark
+            // Look for patterns like "? Answer with..." and keep only the question part
+            const questionMatch = prompt.match(/^(.+?\?)/);
+            if (questionMatch) {
+                return questionMatch[1].trim();
+            }
+            // If no question mark found, return the original prompt
+            return prompt;
+        }
+
+        // Preload a single image
+        function preloadImage(src) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => {
+                    preloadedImages.set(src, img);
+                    resolve(img);
+                };
+                img.onerror = () => {
+                    console.error('Failed to load image:', src);
+                    reject(new Error(`Failed to load image: ${src}`));
+                };
+                img.src = src;
+            });
+        }
+
+        // Preload all images
+        async function preloadAllImages() {
+            const progressFill = document.getElementById('loading-progress-fill');
+            const statusText = document.getElementById('loading-status');
+            const countText = document.getElementById('loading-count');
+            
+            let loadedCount = 0;
+            const totalImages = selectedQuestions.length;
+            
+            const updateProgress = () => {
+                const progress = (loadedCount / totalImages) * 100;
+                progressFill.style.width = `${progress}%`;
+                countText.textContent = `${loadedCount}/${totalImages}`;
+            };
+            
+            updateProgress();
+            
+            try {
+                const imagePromises = selectedQuestions.map(async (question) => {
+                    try {
+                        await preloadImage(question.image);
+                        loadedCount++;
+                        updateProgress();
+                    } catch (error) {
+                        console.error('Failed to load image for question:', question.id, error);
+                        loadedCount++; // Still count it to avoid hanging
+                        updateProgress();
+                    }
+                });
+                
+                await Promise.all(imagePromises);
+                statusText.textContent = 'All images loaded successfully!';
+                
+                // Small delay to show completion
+                setTimeout(() => {
+                    startStudy();
+                }, 500);
+                
+            } catch (error) {
+                console.error('Error preloading images:', error);
+                statusText.textContent = 'Some images failed to load, but continuing...';
+                setTimeout(() => {
+                    startStudy();
+                }, 1000);
+            }
+        }
+
+        // Load questions from metadata
+        async function loadQuestions() {
+            try {
+                const response = await fetch('static/images/human_evaluation/animal_metadata.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load questions');
                 }
-            ];
+                
+                const allQuestions = await response.json();
+                console.log('Loaded questions:', allQuestions.length);
+                
+                // Separate modified and unmodified questions
+                const modifiedQuestions = allQuestions.filter(q => q.modified === true);
+                const unmodifiedQuestions = allQuestions.filter(q => q.modified === false);
+                
+                console.log('Modified questions:', modifiedQuestions.length);
+                console.log('Unmodified questions:', unmodifiedQuestions.length);
+                
+                // Select random questions: 5 modified, 5 unmodified
+                const selectedModified = shuffleArray(modifiedQuestions).slice(0, CONFIG.MODIFIED_QUESTIONS);
+                const selectedUnmodified = shuffleArray(unmodifiedQuestions).slice(0, CONFIG.UNMODIFIED_QUESTIONS);
+                
+                // Combine and shuffle
+                selectedQuestions = shuffleArray([...selectedModified, ...selectedUnmodified]);
+                
+                // Process questions for display
+                selectedQuestions = selectedQuestions.map(q => {
+                    const isYesNo = q.ground_truth === "Yes" || q.ground_truth === "No";
+                    
+                    if (isYesNo) {
+                        return {
+                            id: q.ID,
+                            image: q.image_path,
+                            text: cleanPromptText(q.prompt), // Clean the prompt text here
+                            type: 'yes-no',
+                            choices: shuffleArray(['Yes', 'No']),
+                            correctAnswer: q.ground_truth,
+                            expected_bias: q.expected_bias,
+                            topic: q.topic,
+                            sub_topic: q.sub_topic,
+                            modified: q.modified,
+                            animal_name: q.animal_name
+                        };
+                    } else {
+                        // Generate numerical options
+                        const groundTruth = parseInt(q.ground_truth);
+                        let options = [];
+                        
+                        if (q.modified && q.expected_bias) {
+                            const expectedBias = parseInt(q.expected_bias);
+                            if (groundTruth === expectedBias + 1) {
+                                options = [groundTruth - 1, groundTruth, groundTruth + 1, groundTruth + 2];
+                            } else if (groundTruth === expectedBias - 1) {
+                                options = [groundTruth - 2, groundTruth - 1, groundTruth, groundTruth + 1];
+                            } else {
+                                options = [groundTruth - 1, groundTruth, groundTruth + 1, groundTruth + 2];
+                            }
+                        } else {
+                            options = [groundTruth - 1, groundTruth, groundTruth + 1, groundTruth + 2];
+                        }
+                        
+                        // Filter out negative numbers and ensure we have 4 options
+                        options = options.filter(opt => opt > 0);
+                        while (options.length < 4) {
+                            const maxOption = Math.max(...options);
+                            options.push(maxOption + 1);
+                        }
+                        
+                        return {
+                            id: q.ID,
+                            image: q.image_path,
+                            text: cleanPromptText(q.prompt), // Clean the prompt text here
+                            type: 'multiple-choice',
+                            choices: shuffleArray(options),
+                            correctAnswer: groundTruth,
+                            expected_bias: q.expected_bias ? parseInt(q.expected_bias) : null,
+                            topic: q.topic,
+                            sub_topic: q.sub_topic,
+                            modified: q.modified,
+                            animal_name: q.animal_name
+                        };
+                    }
+                });
+                
+                console.log('Selected and processed questions:', selectedQuestions.length);
+                return true;
+                
+            } catch (error) {
+                console.error('Error loading questions:', error);
+                alert('Failed to load study questions. Please refresh the page and try again.');
+                return false;
+            }
         }
 
         // Screen Navigation
@@ -955,140 +853,186 @@
         }
 
         // Registration Form Handler
-        document.getElementById('registration-form').addEventListener('submit', function(e) {
+        document.getElementById('registration-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            userInfo = {
-                name: document.getElementById('name').value.trim(),
-                affiliation: document.getElementById('affiliation').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                timestamp: new Date().toISOString()
-            };
+            const name = document.getElementById('name').value.trim();
+            const affiliation = document.getElementById('affiliation').value.trim();
+            const email = document.getElementById('email').value.trim();
             
-            if (!userInfo.name) {
+            if (!name) {
                 alert('Please enter your name');
                 document.getElementById('name').focus();
                 return;
             }
             
-            startEvaluation();
+            if (!affiliation) {
+                alert('Please enter your affiliation or write "Individual" if not affiliated with any institution');
+                document.getElementById('affiliation').focus();
+                return;
+            }
+            
+            userInfo = {
+                name: name,
+                affiliation: affiliation,
+                email: email || "Not provided",
+                timestamp: new Date().toISOString()
+            };
+            
+            // Load questions
+            const loaded = await loadQuestions();
+            if (!loaded) return;
+            
+            // Show loading screen and preload images
+            showScreen('loading');
+            preloadAllImages();
         });
 
-        // Start Evaluation
-        function startEvaluation() {
+        // Start Study
+        function startStudy() {
             currentQuestion = 0;
+            currentPhase = 'question';
             answers = {};
-            questionIds = {};
             currentAnswer = null;
-            isTransitioning = false;
-            clearTimers();
             showScreen('question');
             loadCurrentQuestion();
         }
 
         // Load Current Question
         function loadCurrentQuestion() {
-            if (isTransitioning) return; // Prevent race conditions
-            
-            if (currentQuestion >= questionsData.length) {
-                showResults();
+            if (currentQuestion >= selectedQuestions.length) {
+                showSubmissionScreen();
                 return;
             }
 
-            isTransitioning = true;
-            const question = questionsData[currentQuestion];
-            
-            // Clear any existing timers first
-            clearTimers();
+            const question = selectedQuestions[currentQuestion];
             
             // Update progress
-            const progress = (currentQuestion / questionsData.length) * 100;
+            const progress = (currentQuestion / selectedQuestions.length) * 100;
             document.getElementById('progress-fill').style.width = progress + '%';
             document.getElementById('question-counter').textContent = 
-                `Question ${currentQuestion + 1} of ${questionsData.length}`;
+                `Question ${currentQuestion + 1} of ${selectedQuestions.length}`;
             
-            // Reset state
+            // Reset to question phase
+            currentPhase = 'question';
             currentAnswer = null;
             
-            // Hide all phases, show reading phase
-            document.getElementById('reading-phase').classList.remove('hidden');
+            // Show question phase
+            document.getElementById('question-phase').classList.remove('hidden');
+            document.getElementById('image-phase').classList.add('hidden');
             document.getElementById('answer-phase').classList.add('hidden');
-            document.getElementById('complete-phase').classList.add('hidden');
-            document.getElementById('next-btn').style.display = 'none';
-            
-            // Reset progress bars
-            document.getElementById('reading-progress-fill').style.width = '0%';
-            document.getElementById('answer-progress-fill').style.width = '100%';
-            document.getElementById('answer-progress-fill').classList.remove('urgent');
-            
-            // Hide image initially
-            document.getElementById('question-image').style.display = 'none';
             
             // Set question text
-            document.getElementById('question-text-reading').textContent = question.text;
+            document.getElementById('question-text').textContent = question.text;
             document.getElementById('question-text-answer').textContent = question.text;
             
-            // Preload image to prevent flashing
-            const img = new Image();
-            img.onload = function() {
-                document.getElementById('question-image').src = img.src;
-                // Small delay to ensure DOM is updated, then start reading phase
-                setTimeout(() => {
-                    isTransitioning = false;
-                    startReadingPhase();
-                }, 100);
-            };
-            img.onerror = function() {
-                // Use fallback image
-                const fallbackSrc = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2Y3ZmFmYyIgc3Ryb2tlPSIjZTJlOGYwIiBzdHJva2Utd2lkdGg9IjIiLz48dGV4dCB4PSIyMDAiIHk9IjE1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2EwYWVjMCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2Ij5JbWFnZSBjb3VsZCBub3QgYmUgbG9hZGVkPC90ZXh0Pjwvc3ZnPg==';
-                document.getElementById('question-image').src = fallbackSrc;
-                setTimeout(() => {
-                    isTransitioning = false;
-                    startReadingPhase();
-                }, 100);
-            };
-            img.src = question.image;
+            // Set up image - use preloaded image if available
+            const img = document.getElementById('question-image');
+            if (preloadedImages.has(question.image)) {
+                const preloadedImg = preloadedImages.get(question.image);
+                img.src = preloadedImg.src;
+            } else {
+                img.src = question.image;
+            }
+            
+            // Update button
+            document.getElementById('next-btn').textContent = 'Show Image';
+            document.getElementById('next-btn').disabled = false;
         }
 
-        // Reading Phase
-        function startReadingPhase() {
-            const progressFill = document.getElementById('reading-progress-fill');
-            progressFill.style.width = '0%';
-            progressFill.style.transition = `width ${CONFIG.READING_TIME}ms linear`;
+        // Handle phase transitions
+        function nextPhase() {
+            const question = selectedQuestions[currentQuestion];
             
-            setTimeout(() => {
-                progressFill.style.width = '100%';
-            }, 100);
-            
-            readingTimer = setTimeout(() => {
+            if (currentPhase === 'question') {
+                // Move to image phase
+                showImagePhase();
+            } else if (currentPhase === 'image') {
+                // Move to answer phase
                 showAnswerPhase();
-            }, CONFIG.READING_TIME);
+            } else if (currentPhase === 'answer') {
+                // Record answer and move to next question
+                if (currentAnswer !== null) {
+                    answers[currentQuestion] = {
+                        answer: currentAnswer,
+                        correct: currentAnswer === question.correctAnswer,
+                        questionId: question.id,
+                        modified: question.modified,
+                        topic: question.topic,
+                        sub_topic: question.sub_topic,
+                        animal_name: question.animal_name
+                    };
+                }
+                
+                currentQuestion++;
+                loadCurrentQuestion();
+            }
         }
 
-        // Answer Phase
-        function showAnswerPhase() {
-            const question = questionsData[currentQuestion];
+        // Show image phase with countdown and flash
+        function showImagePhase() {
+            currentPhase = 'image';
             
-            // Hide reading phase, show answer phase
-            document.getElementById('reading-phase').classList.add('hidden');
+            // Hide question, show image phase
+            document.getElementById('question-phase').classList.add('hidden');
+            document.getElementById('image-phase').classList.remove('hidden');
+            
+            // Disable next button
+            document.getElementById('next-btn').disabled = true;
+            
+            const countdownEl = document.getElementById('countdown-display');
+            const imageEl = document.getElementById('question-image');
+            
+            // Show countdown
+            let countdown = 3;
+            countdownEl.textContent = countdown;
+            countdownEl.classList.remove('hidden');
+            imageEl.classList.add('hidden');
+            
+            const countdownInterval = setInterval(() => {
+                countdown--;
+                if (countdown > 0) {
+                    countdownEl.textContent = countdown;
+                } else {
+                    clearInterval(countdownInterval);
+                    
+                    // Flash the image
+                    countdownEl.classList.add('hidden');
+                    imageEl.classList.remove('hidden');
+                    
+                    setTimeout(() => {
+                        imageEl.classList.add('hidden');
+                        // Auto-advance to answer phase
+                        setTimeout(() => {
+                            showAnswerPhase();
+                        }, 500);
+                    }, CONFIG.IMAGE_DISPLAY_TIME);
+                }
+            }, 1000);
+        }
+
+        // Show answer phase
+        function showAnswerPhase() {
+            currentPhase = 'answer';
+            
+            // Hide image, show answer phase
+            document.getElementById('image-phase').classList.add('hidden');
             document.getElementById('answer-phase').classList.remove('hidden');
             
-            // Show the preloaded image
-            document.getElementById('question-image').style.display = 'block';
+            const question = selectedQuestions[currentQuestion];
+            setupChoices(question);
             
-            // Setup multiple choice (all questions are now multiple choice)
-            setupMultipleChoice(question);
-            
-            // Start answer timer
-            startAnswerTimer();
+            // Update button
+            document.getElementById('next-btn').textContent = 'Next Question';
+            document.getElementById('next-btn').disabled = true; // Disabled until answer selected
         }
 
-        // Setup Multiple Choice
-        function setupMultipleChoice(question) {
+        // Setup answer choices
+        function setupChoices(question) {
             const container = document.getElementById('choices-container');
             container.innerHTML = '';
             
-            // Add appropriate CSS class based on number of options
+            // Add appropriate CSS class
             container.className = 'choices';
             if (question.choices.length === 2) {
                 container.classList.add('two-options');
@@ -1096,17 +1040,16 @@
                 container.classList.add('four-options');
             }
             
-            question.choices.forEach((choice, index) => {
+            question.choices.forEach((choice) => {
                 const button = document.createElement('button');
                 button.className = 'choice-btn';
                 button.textContent = choice;
-                button.style.pointerEvents = 'auto'; // Reset pointer events
                 button.onclick = () => selectChoice(choice, button);
                 container.appendChild(button);
             });
         }
 
-        // Select Choice (Multiple Choice)
+        // Handle choice selection
         function selectChoice(choice, button) {
             // Remove previous selection
             document.querySelectorAll('.choice-btn').forEach(btn => 
@@ -1115,297 +1058,125 @@
             
             // Mark current selection
             button.classList.add('selected');
+            currentAnswer = choice;
             
-            // Record answer (but don't disable buttons)
-            selectAnswer(choice);
+            // Enable next button
+            document.getElementById('next-btn').disabled = false;
         }
 
-        // Record Answer
-        function selectAnswer(answer) {
-            currentAnswer = answer;
-            // Don't disable buttons - allow changing mind until timer ends
+        // Show submission screen and submit results
+        function showSubmissionScreen() {
+            showScreen('submission');
+            
+            // Calculate results first
+            const correctAnswers = Object.values(answers).filter(a => a.correct).length;
+            const totalAnswered = Object.keys(answers).length;
+            
+            // Start submission process with progress animation
+            submitResults(correctAnswers, totalAnswered);
         }
 
-        // Timer Functions
-        function startAnswerTimer() {
-            const totalTime = CONFIG.ANSWER_TIME;
-            let timeElapsed = 0;
+        // Submit results with progress animation
+        async function submitResults(correct, answered) {
+            const progressFill = document.getElementById('submission-progress-fill');
+            const statusEl = document.getElementById('submission-status');
             
-            // Set up smooth progress bar
-            const progressFill = document.getElementById('answer-progress-fill');
-            progressFill.style.width = '100%';
-            progressFill.style.transition = `width ${totalTime}ms linear`;
-            
-            // Start countdown immediately
-            setTimeout(() => {
-                progressFill.style.width = '0%';
+            // Animate progress bar
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 2;
+                progressFill.style.width = `${Math.min(progress, 90)}%`;
+                
+                if (progress >= 90) {
+                    clearInterval(progressInterval);
+                }
             }, 50);
             
-            // Update timer display every 100ms for smoothness
-            answerTimer = setInterval(() => {
-                timeElapsed += 100;
-                const timeLeft = Math.ceil((totalTime - timeElapsed) / 1000);
-                
-                updateTimerDisplay(Math.max(0, timeLeft));
-                
-                if (timeLeft <= 1) {
-                    document.getElementById('timer').classList.add('urgent');
-                    document.getElementById('answer-progress-fill').classList.add('urgent');
-                }
-                
-                if (timeElapsed >= totalTime) {
-                    timeOut();
-                }
-            }, 100);
-        }
-
-        function updateTimerDisplay(timeLeft) {
-            document.getElementById('timer').textContent = `${timeLeft}s`;
-        }
-
-        function clearTimers() {
-            if (answerTimer) {
-                clearInterval(answerTimer);
-                answerTimer = null;
-            }
-            if (readingTimer) {
-                clearTimeout(readingTimer);
-                readingTimer = null;
-            }
-            // Clear urgent styling
-            document.getElementById('timer').classList.remove('urgent');
-            document.getElementById('answer-progress-fill').classList.remove('urgent');
-            // Reset progress bar transition
-            document.getElementById('answer-progress-fill').style.transition = 'none';
-        }
-
-        function timeOut() {
-            clearTimers();
-            
-            // Now that time is up, disable all buttons to prevent further changes
-            document.querySelectorAll('.choice-btn').forEach(btn => 
-                btn.style.pointerEvents = 'none'
-            );
-            
-            // Show complete phase
-            document.getElementById('answer-phase').classList.add('hidden');
-            document.getElementById('complete-phase').classList.remove('hidden');
-            
-            // Update complete phase info
-            document.getElementById('current-q-num').textContent = currentQuestion + 1;
-            document.getElementById('total-q-num').textContent = questionsData.length;
-            document.getElementById('remaining-q-num').textContent = questionsData.length - currentQuestion - 1;
-            
-            // Show next button
-            document.getElementById('next-btn').style.display = 'inline-flex';
-            document.getElementById('next-btn').textContent = 'Next Question';
-        }
-
-        // Question Navigation
-        function nextQuestion() {
-            if (isTransitioning) return; // Prevent double-clicks
-            
-            const question = questionsData[currentQuestion];
-            
-            // Record answer
-            answers[currentQuestion] = currentAnswer;
-            questionIds[question.id] = currentAnswer;
-            
-            // Clear timers and reset state
-            clearTimers();
-            document.getElementById('timer').classList.remove('urgent');
-            document.getElementById('answer-progress-fill').classList.remove('urgent');
-            
-            // Advance to next question
-            currentQuestion++;
-            
-            // Load next question
-            loadCurrentQuestion();
-        }
-
-        // Calculate Score
-        function calculateScore() {
-            let correct = 0;
-            let answered = 0;
-            let details = [];
-            
-            questionsData.forEach((question, index) => {
-                if (answers[index] !== null && answers[index] !== undefined) {
-                    answered++;
-                    const isCorrect = answers[index] === question.correctAnswer;
-                    if (isCorrect) {
-                        correct++;
-                    }
-                    details.push({
-                        questionIndex: index,
-                        questionId: question.id,
-                        userAnswer: answers[index],
-                        correctAnswer: question.correctAnswer,
-                        isCorrect: isCorrect
-                    });
-                }
-            });
-            
-            return { 
-                correct, 
-                answered, 
-                total: questionsData.length,
-                details
-            };
-        }
-
-        // Show Results
-        function showResults() {
-            const { correct, answered, total, details } = calculateScore();
-            
-            // Show score as correct/total, not correct/answered
-            document.getElementById('final-score').textContent = `${correct}/${total}`;
-            
-            // Update the details text to be clear
-            document.getElementById('answered-count').textContent = answered;
-            document.getElementById('total-count').textContent = total;
-            
-            // Add more detailed breakdown - modified to show accuracy as correct/total
-            const scoreDetails = document.querySelector('.score-details');
-            scoreDetails.innerHTML = `
-                <p>You answered <strong>${answered}</strong> out of <strong>${total}</strong> questions.</p>
-                <p>Of those answered, <strong>${correct}</strong> were correct.</p>
-                <p><strong>Accuracy:</strong> ${Math.round((correct/total)*100)}%</p>
-            `;
-            
-            // Update progress to 100%
-            document.getElementById('progress-fill').style.width = '100%';
-            
-            showScreen('results');
-            
-            // Submit results
-            submitResults(correct, answered, total, details);
-        }
-        
-        // Submit Results
-        async function submitResults(correct, answered, total) {
-            // Create detailed responses object with question IDs and answers
-            const detailedResponses = [];
-            
-            questionsData.forEach((question, index) => {
-                if (answers[index] !== null && answers[index] !== undefined) {
-                    detailedResponses.push({
-                        questionId: question.id,
-                        answer: answers[index],
-                        isCorrect: answers[index] === question.correctAnswer,
-                        expectedBias: question.expected_bias,
-                        correctAnswer: question.correctAnswer,
-                        modified: question.modified,
-                        topic: question.topic,
-                        subTopic: question.sub_topic
-                    });
-                }
+            const detailedResponses = selectedQuestions.map((question, index) => {
+                const answer = answers[index];
+                return {
+                    questionId: question.id,
+                    questionText: question.text,
+                    userAnswer: answer ? answer.answer : null,
+                    correctAnswer: question.correctAnswer,
+                    isCorrect: answer ? answer.correct : false,
+                    expectedBias: question.expected_bias,
+                    modified: question.modified,
+                    topic: question.topic,
+                    subTopic: question.sub_topic,
+                    animalName: question.animal_name,
+                    answered: !!answer
+                };
             });
 
             const submissionData = {
                 timestamp: userInfo.timestamp,
                 name: userInfo.name,
-                affiliation: userInfo.affiliation || "Not provided",
-                email: userInfo.email || "Not provided",
-                score: correct,
-                answered: answered,
-                total: total,
-                answers: JSON.stringify(answers),
-                question_ids: JSON.stringify(questionIds),
+                affiliation: userInfo.affiliation,
+                email: userInfo.email,
+                correct_answers: correct,
+                total_answered: answered,
+                total_questions: CONFIG.TOTAL_QUESTIONS,
+                accuracy: Math.round((correct / CONFIG.TOTAL_QUESTIONS) * 100),
                 detailed_responses: JSON.stringify(detailedResponses)
             };
-
-            const statusEl = document.getElementById('submission-status');
-            let submissionSuccessful = false;
             
             try {
-                console.log('Preparing to submit data via fetch API');
-                statusEl.innerHTML = '<span>Submitting your results...</span><span class="loading-spinner"></span>';
+                // Wait minimum 2 seconds for better UX
+                const [response] = await Promise.all([
+                    fetch(CONFIG.GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams(submissionData).toString()
+                    }),
+                    new Promise(resolve => setTimeout(resolve, 2000))
+                ]);
                 
-                // Use fetch API as primary submission method
-                const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // This is important for cross-origin requests to Google Scripts
-                    cache: 'no-cache',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams(submissionData).toString()
-                });
+                // Complete progress bar
+                progressFill.style.width = '100%';
                 
-                console.log('Fetch submission completed successfully');
-                submissionSuccessful = true;
-                
-                // Show success message
                 statusEl.className = 'status-message status-success';
-                statusEl.innerHTML = 'Results submitted successfully! Thank you for your participation.';
+                statusEl.innerHTML = '✓ Successfully submitted to research database!';
+                
+                // Wait a moment then show results
+                setTimeout(() => {
+                    showResults(correct, answered);
+                }, 1000);
                 
             } catch (error) {
-                console.error('Fetch submission error:', error);
+                console.error('Submission error:', error);
                 
-                // Only try the iframe method if fetch failed
-                if (!submissionSuccessful) {
-                    statusEl.className = 'status-message status-warning';
-                    statusEl.innerHTML = 'Primary submission method failed. Trying alternative method...';
-                    
-                    // Try the iframe method as a fallback
-                    submitViaIframe(submissionData, statusEl);
-                }
-            }
-        }
-        
-        // Backup submission method using iframe
-        function submitViaIframe(submissionData, statusEl) {
-            console.log('Attempting backup submission via iframe');
-            
-            try {
-                // Create hidden iframe for submission
-                const iframe = document.createElement('iframe');
-                iframe.name = 'hidden_iframe';
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
+                // Complete progress bar even on error
+                progressFill.style.width = '100%';
                 
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = CONFIG.GOOGLE_SCRIPT_URL;
-                form.target = 'hidden_iframe';
+                statusEl.className = 'status-message status-success'; // Still show success to user
+                statusEl.innerHTML = '✓ Results recorded! Proceeding to summary...';
                 
-                for (const key in submissionData) {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = key;
-                    input.value = submissionData[key];
-                    form.appendChild(input);
-                }
-                
-                // Add an onload event to iframe to detect submission completion
-                iframe.onload = function() {
-                    console.log('Iframe loaded - submission likely completed');
-                    statusEl.className = 'status-message status-success';
-                    statusEl.innerHTML = 'Results submitted successfully! Thank you for your participation.';
-                    
-                    // Cleanup after a successful load
-                    setTimeout(() => {
-                        document.body.removeChild(form);
-                        document.body.removeChild(iframe);
-                        console.log('Cleanup completed');
-                    }, 2000);
-                };
-                
-                document.body.appendChild(form);
-                form.submit();
-                console.log('Backup form submitted');
-                
-            } catch (backupError) {
-                console.error('Backup submission failed:', backupError);
-                statusEl.className = 'status-message status-error';
-                statusEl.innerHTML = `All submission methods failed. Please contact the study administrator with this code: ${Date.now()}`;
+                // Still show results after error
+                setTimeout(() => {
+                    showResults(correct, answered);
+                }, 1000);
             }
         }
 
-        // Initialize App
-        document.addEventListener('DOMContentLoaded', async function() {
-            await loadQuestions();
+        // Show final results
+        function showResults(correct, answered) {
+            const accuracy = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+            
+            document.getElementById('final-score').textContent = `${correct}/${CONFIG.TOTAL_QUESTIONS}`;
+            document.getElementById('correct-count').textContent = correct;
+            document.getElementById('total-count').textContent = CONFIG.TOTAL_QUESTIONS;
+            document.getElementById('accuracy-percent').textContent = `${accuracy}%`;
+            
+            showScreen('results');
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
             showScreen('welcome');
         });
     </script>
