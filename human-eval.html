@@ -143,8 +143,35 @@
             left: 0;
         }
 
+        .sharing-notice {
+            background: #fef3cd;
+            border: 2px solid #fbbf24;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .sharing-notice h3 {
+            color: #b45309;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .sharing-notice p {
+            color: #92400e;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
         .form-group {
             margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
         label {
@@ -159,7 +186,8 @@
         }
 
         input[type="text"], 
-        input[type="email"] {
+        input[type="email"],
+        select {
             width: 100%;
             padding: 0.75rem 1rem;
             border: 2px solid var(--border);
@@ -169,7 +197,12 @@
             background: var(--surface);
         }
 
-        input:focus {
+        select {
+            cursor: pointer;
+        }
+
+        input:focus,
+        select:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
@@ -273,6 +306,26 @@
             margin: 2rem 0;
         }
 
+        .timing-notice {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .timing-notice h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .timing-notice .display-time {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+
         /* Answer Options */
         .choices {
             display: flex;
@@ -339,6 +392,25 @@
 
         .warning-box p {
             color: #92400e;
+            font-weight: 500;
+        }
+
+        .repeat-warning {
+            background: #fee2e2;
+            border: 2px solid #f87171;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .repeat-warning h3 {
+            color: #dc2626;
+            margin-bottom: 0.5rem;
+        }
+
+        .repeat-warning p {
+            color: #dc2626;
             font-weight: 500;
         }
 
@@ -458,6 +530,10 @@
             .choices.two-options {
                 grid-template-columns: 1fr;
             }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -480,13 +556,21 @@
                         <li><strong>Duration:</strong> Approximately 2-3 minutes</li>
                         <li><strong>Questions:</strong> 10 image recognition tasks</li>
                         <li><strong>Process:</strong> Read question → View image briefly → Answer</li>
-                        <li><strong>Important:</strong> You'll only see each image for 0.1 seconds!</li>
+                        <li><strong>Image Display Time:</strong> Will be randomly assigned (0.2-2 seconds)</li>
                         <li><strong>Your task:</strong> Answer questions about the images you see</li>
                     </ul>
-                    <div class="warning-box">
-                        <h3>⚠️ Important Instructions</h3>
-                        <p>Each image will flash for only <strong>0.1 seconds</strong>. Pay close attention!</p>
-                    </div>
+                </div>
+
+                <div class="sharing-notice">
+                    <h3>📢 Important Sharing Guidelines</h3>
+                    <p>• You may share this study with others, but please ensure participants take it seriously for high-quality research data.</p>
+                    <p>• <strong>Please DO NOT discuss the specific purpose or research intentions of this study</strong> with potential participants before they complete it.</p>
+                    <p>• This helps maintain the validity of our research findings.</p>
+                </div>
+
+                <div class="repeat-warning">
+                    <h3>⚠️ One-Time Participation Only</h3>
+                    <p>Please take this study only once. Multiple attempts from the same person can affect our research results.</p>
                 </div>
             </div>
             <div class="card-footer">
@@ -502,25 +586,86 @@
             </div>
             <div class="card-content">
                 <form id="registration-form">
-                    <div class="form-group">
-                        <label for="name">Name <span class="required">*</span></label>
-                        <input type="text" id="name" required placeholder="Enter your name">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age">Age <span class="required">*</span></label>
+                            <select id="age" required>
+                                <option value="">Select your age range</option>
+                                <option value="Under 18">Under 18</option>
+                                <option value="18–24">18–24</option>
+                                <option value="25–34">25–34</option>
+                                <option value="35–44">35–44</option>
+                                <option value="45–54">45–54</option>
+                                <option value="55–64">55–64</option>
+                                <option value="65 or older">65 or older</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gender">Gender <span class="required">*</span></label>
+                            <select id="gender" required>
+                                <option value="">Select your gender</option>
+                                <option value="Man">Man</option>
+                                <option value="Woman">Woman</option>
+                                <option value="Non-binary / Third gender">Non-binary / Third gender</option>
+                                <option value="Prefer not to say">Prefer not to say</option>
+                            </select>
+                        </div>
                     </div>
+
                     <div class="form-group">
-                        <label for="affiliation">Affiliation <span class="required">*</span></label>
-                        <input type="text" id="affiliation" required placeholder="University, Organization, Company, or 'Individual'">
-                        <small style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.25rem; display: block;">
-                            Please enter your organization or write "Individual" if not affiliated with any institution
-                        </small>
+                        <label for="education">Education Level <span class="required">*</span></label>
+                        <select id="education" required>
+                            <option value="">Select your education level</option>
+                            <option value="No formal education">No formal education</option>
+                            <option value="Primary education (elementary school)">Primary education (elementary school)</option>
+                            <option value="Secondary education (high school or equivalent)">Secondary education (high school or equivalent)</option>
+                            <option value="Some college / university, no degree">Some college / university, no degree</option>
+                            <option value="Associate degree / diploma">Associate degree / diploma</option>
+                            <option value="Bachelor's degree">Bachelor's degree</option>
+                            <option value="Master's degree">Master's degree</option>
+                            <option value="Doctorate / PhD / professional degree">Doctorate / PhD / professional degree</option>
+                            <option value="Prefer not to say">Prefer not to say</option>
+                        </select>
                     </div>
+
                     <div class="form-group">
                         <label for="email">Email (optional)</label>
                         <input type="email" id="email" placeholder="your@email.com">
+                        <small style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.25rem; display: block;">
+                            If you'd like updates about our research findings
+                        </small>
                     </div>
                 </form>
             </div>
             <div class="card-footer">
-                <button type="submit" form="registration-form" class="btn btn-primary">Start Study</button>
+                <button type="submit" form="registration-form" class="btn btn-primary">Continue to Study Setup</button>
+            </div>
+        </div>
+
+        <!-- Study Setup Screen -->
+        <div id="setup-screen" class="card hidden">
+            <div class="card-header">
+                <h2>Study Configuration</h2>
+                <p class="subtitle">Your personalized study parameters have been set</p>
+            </div>
+            <div class="card-content">
+                <div class="timing-notice">
+                    <h3>🕐 Your Image Display Time</h3>
+                    <div class="display-time" id="assigned-time">-- seconds</div>
+                    <p>Each image will be shown for exactly this amount of time. Please pay close attention!</p>
+                </div>
+                
+                <div class="warning-box">
+                    <h3>⚠️ Important Reminders</h3>
+                    <p>• Images will appear for only the time shown above</p>
+                    <p>• Try to focus and answer as accurately as possible</p>
+                    <p>• There are 10 questions total</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" onclick="startLoading()">Start Study</button>
             </div>
         </div>
 
@@ -559,7 +704,7 @@
                     <div class="question-text" id="question-text"></div>
                     <div class="warning-box">
                         <h3>⚠️ Ready?</h3>
-                        <p>The image will appear for only <strong>0.1 seconds</strong> when you click Next!</p>
+                        <p>The image will appear for <strong><span id="current-display-time">-- seconds</span></strong> when you click Next!</p>
                     </div>
                 </div>
                 
@@ -621,10 +766,17 @@
                     <div class="score-details">
                         <p>You got <span id="correct-count">--</span> out of <span id="total-count">10</span> questions correct.</p>
                         <p>Accuracy: <span id="accuracy-percent">--%</span></p>
+                        <p>Your display time was: <strong><span id="final-display-time">-- seconds</span></strong></p>
                     </div>
                     <div class="thank-you-message">
                         <h3>🙏 Thank You for Contributing to AI Research!</h3>
                         <p>Your responses will help us better understand the differences between human and artificial intelligence perception. This research contributes to making AI systems more aligned with human understanding.</p>
+                    </div>
+                    <div class="sharing-notice">
+                        <h3>📢 Sharing This Study</h3>
+                        <p>• Feel free to share this study with others who might be interested in contributing to AI research.</p>
+                        <p>• <strong>Please remember:</strong> Don't discuss the specific research purpose or your experience with the questions before they participate.</p>
+                        <p>• Each person should only participate once for valid research data.</p>
                     </div>
                     <div id="final-submission-status" class="status-message status-success">
                         <span>✓ Results submitted successfully! Your contribution is greatly appreciated.</span>
@@ -637,11 +789,11 @@
     <script>
         // Configuration
         const CONFIG = {
-            IMAGE_DISPLAY_TIME: 100, 
+            POSSIBLE_DISPLAY_TIMES: [0.2, 0.5, 1.0, 2.0], // in seconds
             TOTAL_QUESTIONS: 10,
             MODIFIED_QUESTIONS: 5,
             UNMODIFIED_QUESTIONS: 5,
-            GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyog4AP9-Xzz9__3WnjbFzgKq2284ziEbbA_Sh8yhld-bipwRttqqD_FaFwqXyz2gom/exec'
+            GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwZ-b11SfYcSl4KmBkJ1cglRbOI2QRKMmeDUcY14f4WhB3D1VCD3Ewb5b2SDgLQ1FoI/exec'
         };
 
         // Application State
@@ -649,14 +801,19 @@
         let currentPhase = 'question'; // 'question', 'image', 'answer'
         let selectedQuestions = [];
         let answers = {};
+        let questionTimings = {}; // Track timing for each question
         let userInfo = {};
         let currentAnswer = null;
         let preloadedImages = new Map();
+        let assignedDisplayTime = 0; // Will be randomly assigned
+        let studyStartTime = null;
+        let currentQuestionStartTime = null;
 
         // DOM Elements
         const screens = {
             welcome: document.getElementById('welcome-screen'),
             registration: document.getElementById('registration-screen'),
+            setup: document.getElementById('setup-screen'),
             loading: document.getElementById('loading-screen'),
             question: document.getElementById('question-screen'),
             submission: document.getElementById('submission-screen'),
@@ -683,6 +840,18 @@
             }
             // If no question mark found, return the original prompt
             return prompt;
+        }
+
+        // Assign random display time
+        function assignRandomDisplayTime() {
+            const randomIndex = Math.floor(Math.random() * CONFIG.POSSIBLE_DISPLAY_TIMES.length);
+            assignedDisplayTime = CONFIG.POSSIBLE_DISPLAY_TIMES[randomIndex];
+            console.log(`Assigned display time: ${assignedDisplayTime} seconds`);
+            
+            // Update UI elements
+            document.getElementById('assigned-time').textContent = `${assignedDisplayTime} seconds`;
+            document.getElementById('current-display-time').textContent = `${assignedDisplayTime} seconds`;
+            document.getElementById('final-display-time').textContent = `${assignedDisplayTime} seconds`;
         }
 
         // Preload a single image
@@ -856,44 +1025,64 @@
         document.getElementById('registration-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const name = document.getElementById('name').value.trim();
-            const affiliation = document.getElementById('affiliation').value.trim();
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('gender').value;
+            const education = document.getElementById('education').value;
             const email = document.getElementById('email').value.trim();
             
-            if (!name) {
-                alert('Please enter your name');
-                document.getElementById('name').focus();
+            if (!age) {
+                alert('Please select your age range');
+                document.getElementById('age').focus();
                 return;
             }
             
-            if (!affiliation) {
-                alert('Please enter your affiliation or write "Individual" if not affiliated with any institution');
-                document.getElementById('affiliation').focus();
+            if (!gender) {
+                alert('Please select your gender');
+                document.getElementById('gender').focus();
+                return;
+            }
+            
+            if (!education) {
+                alert('Please select your education level');
+                document.getElementById('education').focus();
                 return;
             }
             
             userInfo = {
-                name: name,
-                affiliation: affiliation,
+                age: age,
+                gender: gender,
+                education: education,
                 email: email || "Not provided",
                 timestamp: new Date().toISOString()
             };
             
-            // Load questions
-            const loaded = await loadQuestions();
-            if (!loaded) return;
+            // Assign random display time
+            assignRandomDisplayTime();
             
-            // Show loading screen and preload images
-            showScreen('loading');
-            preloadAllImages();
+            // Show setup screen
+            showScreen('setup');
         });
+
+        // Start loading process
+        function startLoading() {
+            // Load questions first
+            loadQuestions().then(loaded => {
+                if (loaded) {
+                    // Show loading screen and preload images
+                    showScreen('loading');
+                    preloadAllImages();
+                }
+            });
+        }
 
         // Start Study
         function startStudy() {
             currentQuestion = 0;
             currentPhase = 'question';
             answers = {};
+            questionTimings = {};
             currentAnswer = null;
+            studyStartTime = Date.now();
             showScreen('question');
             loadCurrentQuestion();
         }
@@ -906,6 +1095,7 @@
             }
 
             const question = selectedQuestions[currentQuestion];
+            currentQuestionStartTime = Date.now();
             
             // Update progress
             const progress = (currentQuestion / selectedQuestions.length) * 100;
@@ -951,7 +1141,18 @@
                 // Move to answer phase
                 showAnswerPhase();
             } else if (currentPhase === 'answer') {
-                // Record answer and move to next question
+                // Record answer and timing, then move to next question
+                const questionEndTime = Date.now();
+                const totalQuestionTime = questionEndTime - currentQuestionStartTime;
+                
+                questionTimings[currentQuestion] = {
+                    questionId: question.id,
+                    totalTime: totalQuestionTime,
+                    displayTime: assignedDisplayTime,
+                    startTime: currentQuestionStartTime,
+                    endTime: questionEndTime
+                };
+                
                 if (currentAnswer !== null) {
                     answers[currentQuestion] = {
                         answer: currentAnswer,
@@ -1006,7 +1207,7 @@
                         setTimeout(() => {
                             showAnswerPhase();
                         }, 500);
-                    }, CONFIG.IMAGE_DISPLAY_TIME);
+                    }, assignedDisplayTime * 1000); // Convert to milliseconds
                 }
             }, 1000);
         }
@@ -1094,6 +1295,7 @@
             
             const detailedResponses = selectedQuestions.map((question, index) => {
                 const answer = answers[index];
+                const timing = questionTimings[index];
                 return {
                     questionId: question.id,
                     questionText: question.text,
@@ -1105,19 +1307,31 @@
                     topic: question.topic,
                     subTopic: question.sub_topic,
                     animalName: question.animal_name,
-                    answered: !!answer
+                    answered: !!answer,
+                    totalQuestionTime: timing ? timing.totalTime : null,
+                    displayTime: assignedDisplayTime,
+                    questionStartTime: timing ? timing.startTime : null,
+                    questionEndTime: timing ? timing.endTime : null
                 };
             });
 
+            const studyEndTime = Date.now();
+            const totalStudyTime = studyEndTime - studyStartTime;
+
             const submissionData = {
                 timestamp: userInfo.timestamp,
-                name: userInfo.name,
-                affiliation: userInfo.affiliation,
+                age: userInfo.age,
+                gender: userInfo.gender,
+                education: userInfo.education,
                 email: userInfo.email,
                 correct_answers: correct,
                 total_answered: answered,
                 total_questions: CONFIG.TOTAL_QUESTIONS,
                 accuracy: Math.round((correct / CONFIG.TOTAL_QUESTIONS) * 100),
+                assigned_display_time: assignedDisplayTime,
+                total_study_time: totalStudyTime,
+                study_start_time: studyStartTime,
+                study_end_time: studyEndTime,
                 detailed_responses: JSON.stringify(detailedResponses)
             };
             
