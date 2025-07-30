@@ -537,6 +537,83 @@
             text-align: center;
         }
 
+        /* Data collection complete notice - enhanced and consolidated */
+        .data-collection-notice {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 0 0 2rem 0;
+            text-align: center;
+            font-weight: 500;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .data-collection-notice h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .data-collection-notice p {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .data-collection-notice a {
+            color: #fecaca;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        .data-collection-notice a:hover {
+            color: white;
+        }
+        
+        .data-collection-notice .sub-text {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin: 1rem 0;
+        }
+
+        .large-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            background-color: #047857;
+            transition: all 0.3s;
+        }
+        
+        .large-btn:hover {
+            background-color: #065f46;
+            transform: translateY(-2px);
+        }
+        
+        /* Study closed overlay */
+        .study-closed-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .study-closed-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 600px;
+            text-align: center;
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
@@ -571,46 +648,30 @@
 </head>
 <body>
     <div class="container">
-        <!-- Welcome Screen -->
+        <!-- Welcome Screen with simplified notice -->
         <div id="welcome-screen" class="card">
             <div class="card-header">
                 <h1>AI Research Study</h1>
                 <p class="subtitle">Image Recognition Research</p>
-                <div class="thank-you-message">
-                    <h3>🤝 Thank You for Contributing to AI Research!</h3>
-                    <p>Your participation helps us understand how humans and AI systems perceive visual information differently.</p>
-                </div>
             </div>
             <div class="card-content">
-                <div class="instructions">
-                    <h3>Study Overview</h3>
-                    <ul>
-                        <li><strong>Duration:</strong> Approximately 2-3 minutes</li>
-                        <li><strong>Questions:</strong> 10 image recognition tasks</li>
-                        <li><strong>Process:</strong> Read question → View image briefly → Answer</li>
-                        <li><strong>Image Display Time:</strong> Will be randomly assigned (0.2-2 seconds)</li>
-                        <li><strong>Your task:</strong> Answer questions about the images you see</li>
-                    </ul>
-                </div>
-
-                <div class="sharing-notice">
-                    <h3>📢 Important Sharing Guidelines</h3>
-                    <p>• You may share this study with others, but please ensure participants take it seriously for high-quality research data.</p>
-                    <p>• <strong>Please DO NOT discuss the specific purpose or research intentions of this study</strong> with potential participants before they complete it.</p>
-                    <p>• This helps maintain the validity of our research findings.</p>
-                </div>
-
-                <div class="repeat-warning">
-                    <h3>⚠️ One-Time Participation Only</h3>
-                    <p>Please take this study only once. Multiple attempts from the same person can affect our research results.</p>
+                <div class="data-collection-notice">
+                    <h3>🎉 Data Collection Complete</h3>
+                    <p>Thank you for your interest in our research on how humans and AI systems perceive visual information.</p>
+                    <p><strong>This study is now closed</strong> as we have collected sufficient data for our analysis.</p>
+                    <p class="sub-text">We're grateful for the community's interest and participation in advancing AI research.</p>
+                    <p>To learn more about our findings and research:</p>
+                    <a href="https://vlmsarebiased.github.io/" target="_blank" class="btn btn-primary large-btn">
+                        Visit vlmsarebiased.github.io
+                    </a>
                 </div>
             </div>
             <div class="card-footer">
-                <button class="btn btn-primary" onclick="showRegistration()">Begin Study</button>
+                <a href="https://vlmsarebiased.github.io/" target="_blank" class="btn btn-primary">View Research Findings</a>
             </div>
         </div>
 
-        <!-- Registration Form -->
+        <!-- Other screens kept but hidden -->
         <div id="registration-screen" class="card hidden">
             <div class="card-header">
                 <h2>Participant Information</h2>
@@ -1054,7 +1115,9 @@
         }
 
         function showRegistration() {
-            showScreen('registration');
+            // Override the normal function to prevent study start
+            window.open('https://vlmsarebiased.github.io/', '_blank');
+            return false;
         }
 
         // Registration Form Handler
@@ -1425,9 +1488,29 @@
             showScreen('results');
         }
 
-        // Initialize app
+        // Initialize app - only show welcome screen with closed notice
         document.addEventListener('DOMContentLoaded', function() {
             showScreen('welcome');
+            
+            // Disable form submission and prevent study start
+            const form = document.getElementById('registration-form');
+            if (form) {
+                form.onsubmit = function(e) {
+                    e.preventDefault();
+                    return false;
+                };
+            }
+            
+            // Redirect all buttons to the research website
+            document.querySelectorAll('.btn').forEach(btn => {
+                if (btn.textContent === "Begin Study") {
+                    btn.textContent = "View Research Findings";
+                    btn.onclick = function() {
+                        window.open('https://vlmsarebiased.github.io/', '_blank');
+                        return false;
+                    };
+                }
+            });
         });
     </script>
 </body>
