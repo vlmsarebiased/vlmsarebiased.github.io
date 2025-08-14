@@ -1493,7 +1493,7 @@ background: #ffffff;
               <div class="image-description">VLMs fail on 6 counting tasks and one low-level vision task across seven domains</div>
             </div>
             <div class="figure-caption">
-               VLMs fail on 6 counting tasks (a–e & g) and one low-level vision task (f). State-of-the-art models achieve perfect performance on original images but catastrophically fail when objects are subtly modified, defaulting to memorized knowledge rather than actual visual analysis.
+               VLMs fail on 6 counting tasks (a–e & g) and one low-level vision task (f). State-of-the-art models achieve perfect performance on original images but fail when objects are subtly modified, defaulting to memorized knowledge rather than actual visual analysis.
             </div>
           </div>
         </div>
@@ -1531,7 +1531,7 @@ background: #ffffff;
           </div>
 
           <div class="key-insight">
-            <p><strong><i class="fas fa-lightbulb"></i> The Core Issue:</strong> VLMs suffer from severe confirmation bias. When they see familiar objects, they default to memorized knowledge instead of performing actual visual analysis. This isn't a minor glitch - it's a fundamental flaw in how these models process visual information.</p>
+            <p><strong><i class="fas fa-lightbulb"></i> The Core Issue:</strong> VLMs suffer from severe confirmation bias. When they see familiar objects, they default to memorized knowledge instead of performing actual visual analysis. This isn't a minor glitch, it's a fundamental flaw in how these models process multimodal information.</p>
           </div>
         </div>
 
@@ -1576,19 +1576,21 @@ background: #ffffff;
                   <li><strong>Q2:</strong> "Count the visible stripes" → "3" ✗ (should be "4")</li>
                   <li><strong>Q3:</strong> "Is this the Adidas logo?" → "Yes" ✗ (should be "No")</li>
                 </ul>
-                <p><em>Result: 17.05% average accuracy - catastrophic failure!</em></p>
+                <p><em>Result: 17.05% average accuracy on counterfactual images</em></p>
+
               </div>
             </div>
           </div>
 
           <div class="key-insight">
-            <p><strong><i class="fas fa-lightbulb"></i> The Critical Insight:</strong> The gap between Step 1 (100% accuracy) and Step 2 (17% accuracy) proves that VLMs are not actually "seeing" - they're retrieving memorized associations. When the visual evidence contradicts their training data, they consistently choose memorized knowledge over what's actually in the image.</p>
+            <p><strong><i class="fas fa-lightbulb"></i> Key Observation:</strong> The gap between Step 1 (100% accuracy) and Step 2 (17% accuracy) indicates that VLMs consistently retrieve memorized associations when visual evidence contradicts training data.</p>
+
           </div>
         </div>
 
         <div class="content-section">
           <h2><i class="fas fa-images icon-large"></i>Interactive Failure Gallery</h2>
-          <p>Explore examples from all 7 domains where state-of-the-art VLMs fail spectacularly.</p>
+          <p>Examples from all 7 domains showing systematic VLM failures on counterfactual images.</p>
           
           <div class="slideshow-container">
             <div class="slideshow-header">
@@ -1868,21 +1870,21 @@ background: #ffffff;
             </div>
           </div>
 
-          <div class="key-insight">
-            <p><strong><i class="fas fa-target"></i> This is the smoking gun:</strong> If models were simply bad at vision, we'd expect random errors. Instead, we see systematic bias toward "correct" textbook answers, proving they're overriding visual information with memorized facts.</p>
-          </div>
+         <div class="key-insight">
+          <p><strong><i class="fas fa-target"></i> Key Finding:</strong> 75.70% of all errors were bias-aligned, meaning models gave the expected answer based on prior knowledge rather than random mistakes. This systematic pattern indicates models consistently output memorized knowledge over visual evidence.</p>
+        </div>
         </div>
 
         <div class="content-section">
           <h2><i class="fas fa-chart-bar icon-large"></i>All Models Fail Equally</h2>
-          <p>We tested five state-of-the-art models. The results are consistently terrible across the board:</p>
+          <p>We tested 5 state-of-the-art models. The results are consistently fail across the board:</p>
           
           <div class="research-table">
             <div class="table-content">
               <div class="comparison-table">
                 <table>
                   <caption style="font-size: 1.1rem; color: #333; padding: 1rem; text-align: left; line-height: 1.6;">
-                    All VLMs achieve <span class="truth-value">100%</span> on identification and counting tasks with unmodified images, showing that they fully recognize the original version but fail on the counting questions on the modified images (i.e., counterfactuals) in VLMBias. The mean accuracy of five state-of-the-art VLMs on our seven tasks is <span class="error-value">17.05%</span>. o4-mini achieves the highest accuracy (20.25%) which however is still low. VLMs with "thinking" capabilities (o4-mini, o3) only slightly outperform non-thinking models (Gemini-2.5 Pro, Sonnet-3.7, GPT-4.1).
+                    All VLMs achieve <span class="truth-value">100%</span> on identification and counting tasks with unmodified images, showing that they fully recognize the original version but fail on the counting questions on the modified images (i.e., counterfactuals) in VLMBias. The mean accuracy of five state-of-the-art VLMs on our seven tasks is <span class="error-value">17.05%</span>. o4-mini achieves the highest accuracy (20.25%) which however is still low. VLMs with thinking capabilities (o4-mini, o3, Gemini 2.5 Pro) only slightly outperform non-thinking models (Sonnet-3.7, GPT-4.1).
                   </caption>
                   <thead>
                     <tr>
@@ -1981,44 +1983,22 @@ background: #ffffff;
           </div>
 
           <div class="key-insight">
-            <p><strong><i class="fas fa-target"></i> Key Finding:</strong> 75.70% of all errors were "bias-aligned" - meaning models gave the expected answer based on prior knowledge rather than random mistakes. This proves they're not just bad at vision; they're actively ignoring what they see.</p>
+            <p><strong><i class="fas fa-target"></i> Key Finding:</strong> 75.70% of all errors were bias-aligned, meaning models gave the expected answer based on prior knowledge rather than random mistakes. This proves they're not just bad at vision; they're actively ignoring what they see.</p>
           </div>
         </div>
 
         <div class="content-section">
-          <h2><i class="fas fa-lightbulb icon-large"></i>Why This Matters</h2>
+          <h2><i class="fas fa-chart-bar icon-large"></i>Implications</h2>
           
-          <div class="columns">
-            <div class="column is-6">
-              <div class="failure-showcase">
-                <h3><i class="fas fa-exclamation-triangle"></i> Immediate Concerns</h3>
-                <ul>
-                  <li><strong>Medical Imaging:</strong> Missing tumors that don't match training patterns.</li>
-                  <li><strong>Autonomous Vehicles:</strong> Failing to see modified road signs.</li>
-                  <li><strong>Quality Control:</strong> Missing defects in manufactured goods.</li>
-                  <li><strong>Security:</strong> Fooled by simple visual modifications.</li>
-                  <li><strong>Website/App Control:</strong> If user interfaces change subtly (buttons, layouts, or icons), biased models may fail to perform tasks correctly, unable to adapt to minor visual modifications.</li>
-                </ul>
-              </div>
-            </div>
-            <div class="column is-6">
-              <div class="key-insight">
-                <h3><i class="fas fa-lightbulb"></i> Deeper Implications</h3>
-                <ul>
-                  <li><strong>False Confidence:</strong> Models are wrong but certain.</li>
-                  <li><strong>Brittleness:</strong> Tiny changes cause complete failure.</li>
-                  <li><strong>Training Flaws:</strong> Memorization over understanding.</li>
-                  <li><strong>Evaluation Gap:</strong> Benchmarks miss real-world failure modes.</li>
-                </ul>
-              </div>
-            </div>
+          <div class="key-insight">
+            <h3><i class="fas fa-database"></i> Documented Limitations</h3>
+            <p>The research identified specific failure modes where VLMs achieve 100% accuracy on original images but only 17.05% accuracy on counterfactual images.</p>
           </div>
 
           <div class="stat-highlight">
-            <h3><i class="fas fa-search"></i> The Bottom Line</h3>
+            <h3><i class="fas fa-search"></i> Research Findings</h3>
             <p class="is-size-4">
-              Current VLMs are sophisticated pattern matching systems, not visual reasoning systems. 
-              They excel at recognizing familiar patterns but fail catastrophically when those patterns are even slightly modified.
+              VLMs consistently defaulted to memorized knowledge rather than analyzing visual modifications across 7 diverse domains.
             </p>
           </div>
         </div>
@@ -2042,8 +2022,8 @@ background: #ffffff;
           </div>
 
           <div class="quote-block">
-            <p><strong>Sobering Reality:</strong> Even with explicit instructions to ignore prior knowledge and focus on visual details, models barely improved. The bias is deeply embedded in how they process visual information.</p>
-          </div>
+          <p><strong>Research Result:</strong> Instructing VLMs to ignore prior knowledge and focus on visual details improved accuracy by only +1.87 points, while double-checking improved accuracy by +2.70 points.</p>
+        </div>
         </div>
 
         <div class="content-section">
@@ -2066,71 +2046,30 @@ background: #ffffff;
           </div>
         </div>
 
-        <div class="content-section">
-          <h2><i class="fas fa-road icon-large"></i>What Comes Next?</h2>
-          
-          <div class="key-insight">
-            <h3><i class="fas fa-target"></i> Immediate Actions Needed</h3>
-            <p>
-              The AI community needs to acknowledge that current VLMs have fundamental limitations. 
-              We need better evaluation methods that test actual visual reasoning, not just pattern recognition.
-            </p>
-          </div>
-
-          <div class="columns">
-            <div class="column is-6">
-              <h3><i class="fas fa-flask"></i> Research Directions</h3>
-              <ul>
-                <li>Develop training methods that emphasize visual analysis over memorization.</li>
-                <li>Create evaluation benchmarks that test robustness to modifications.</li>
-                <li>Build models that can explicitly separate prior knowledge from visual evidence.</li>
-                <li>Investigate multi-modal reasoning architectures.</li>
-              </ul>
-            </div>
-            <div class="column is-6">
-              <h3><i class="fas fa-cogs"></i> Practical Solutions</h3>
-              <ul>
-                <li>Implement uncertainty quantification for visual tasks.</li>
-                <li>Develop hybrid systems combining vision models with explicit counting modules.</li>
-                <li>Create domain-specific fine-tuning approaches.</li>
-                <li>Build better human-AI collaboration interfaces.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
 
         <div class="content-section">
-          <h2><i class="fas fa-flag-checkered icon-large"></i>The Takeaway</h2>
+          <h2><i class="fas fa-flag-checkered icon-large"></i>Summary of Findings</h2>
           
           <div class="stat-highlight">
-            <p class="is-size-3 has-text-weight-bold">VLMs aren't as smart as we thought.</p>
+            <p class="is-size-3 has-text-weight-bold">Key Results</p>
             <p class="is-size-5">
-              They're incredibly sophisticated at recognizing patterns they've seen before, 
-              but they fundamentally lack the ability to perform basic visual analysis when faced with novel variations.
+              5 state-of-the-art VLMs achieved 100% accuracy on unmodified images but averaged 17.05% accuracy on counterfactual images.
             </p>
           </div>
 
           <div class="key-insight">
             <p>
-              <strong>This research reveals a critical blind spot in AI development.</strong> 
-              As we deploy these systems in high-stakes applications, we must understand their limitations. 
-              A model that can describe complex scenes but can't count legs on a modified animal is not truly "seeing" - 
-              it's performing very sophisticated pattern matching.
+              <strong>Primary Contribution:</strong> 
+              This study documents systematic visual bias in VLMs through objective counting tasks, demonstrating that models rely on memorized knowledge rather than visual analysis when familiar objects are modified.
             </p>
           </div>
 
           <div class="quote-block">
             <p class="is-size-5">
-              "The most dangerous thing about current VLMs isn't that they fail - it's that they fail confidently, 
-              giving no indication that they're relying on memorized knowledge rather than actual visual analysis."
+              VLMs fail consistently in counting visual elements when they are strongly biased towards the subject, with 75.70% of errors being bias-aligned rather than random
             </p>
           </div>
         </div>
-
-      </div>
-    </div>
-  </div>
-</section>
 
 <footer class="footer">
   <div class="container">
