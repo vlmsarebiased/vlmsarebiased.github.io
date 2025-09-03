@@ -2333,16 +2333,15 @@ function initializeGallery() {
         });
     }
     
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        displayCategory(currentCategoryIndex);
-      }, 250);
-    });
-        
-    displayCategory(0);
-  }
+    if (!isTouchDevice && window.innerWidth > 1024) {
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          displayCategory(currentCategoryIndex);
+        }, 300);
+      });
+    }
 
   function createFilterButtons() {
     const taskIcons = { 'Animals': 'fas fa-paw', 'Logos': 'fas fa-tag', 'Flags': 'fas fa-flag', 'Chess Pieces': 'fas fa-chess', 'Game Boards': 'fas fa-dice', 'Optical Illusions': 'fas fa-eye', 'Patterned Grids': 'fas fa-th' };
