@@ -9,6 +9,14 @@
     gtag('js', new Date());
 
     gtag('config', 'G-R57GVTJBR9');
+
+    function trackAuthorThread() {
+      gtag('event', 'click', {
+        'event_category': 'Author Thread',
+        'event_label': 'Author Thread Dropdown',
+        'value': 1
+      });
+    }
   </script>
 
   <!-- Enhanced tracking for research project -->
@@ -91,6 +99,25 @@ h1, h2, h3, h4, h5 {
   margin-top: 1.5em;
   margin-bottom: 0.5em;
   color: #1a237e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Prevent any element from causing horizontal scroll */
+* {
+  max-width: 100%;
+}
+
+/* Exception for tables that need to scroll */
+table, .research-table, .comparison-table {
+  max-width: none;
 }
 
 .container {
@@ -920,6 +947,61 @@ background: #ffffff;
       color: #1a237e;
     }
 
+    .author-thread-btn {
+      cursor: pointer;
+      position: relative !important;
+    }
+    /* Ensure dropdown appears above other elements */
+    .author-thread-btn .author-menu {
+      position: absolute !important;
+    }
+  
+    .author-thread-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .author-menu {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 240px;
+      box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.15);
+      border-radius: 8px;
+      z-index: 1001;
+      top: calc(100% + 5px);
+      left: 50%;
+      transform: translateX(-50%);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+    
+    .author-menu a {
+      color: #4a5568 !important;
+      padding: 12px 16px;
+      text-decoration: none !important;
+      display: block;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+      border-bottom: 1px solid #f1f5f9;
+      background: white !important;
+      border-radius: 0 !important;
+      margin: 0 !important;
+      border-left: none !important;
+      border-right: none !important;
+      border-top: none !important;
+      font-weight: 400 !important;
+    }
+    
+    .author-menu a:last-child {
+      border-bottom: none;
+    }
+    
+    .author-menu a:hover {
+      background-color: #f8fafc !important;
+      color: #2d3748 !important;
+    }
+
     .news-content a {
       color: #3182ce;
       text-decoration: none;
@@ -988,7 +1070,8 @@ background: #ffffff;
     .footer-text a { color: #3b82f6; text-decoration: none; }
     .footer-text a:hover { text-decoration: underline; }
 
-@media (max-width: 768px) {
+    @media (max-width: 768px) {
+
   /* Make ALL images responsive on mobile */
   img {
     max-width: 100% !important;
@@ -1066,6 +1149,9 @@ background: #ffffff;
     word-break: break-word;
   }
 
+  
+  
+  
   /* Hero section responsive */
   .hero {
     width: 100%;
@@ -1360,6 +1446,70 @@ background: #ffffff;
     max-width: 100% !important;
   }
 }
+
+/* iPad and tablet fixes */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Ensure no horizontal overflow */
+  body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+  
+  /* Make sure all containers fit */
+  .container {
+    max-width: 100% !important;
+    padding: 0 1rem !important;
+    box-sizing: border-box;
+  }
+  
+  /* Tables need horizontal scroll on iPad */
+  .research-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .comparison-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .comparison-table table {
+    min-width: 700px; /* Slightly smaller than desktop but larger than mobile */
+    font-size: 0.9rem;
+  }
+  
+  /* Gallery fixes for iPad */
+  .gallery-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden;
+  }
+  
+  .gallery-container {
+    padding: 1rem !important;
+    overflow-x: hidden;
+  }
+  
+  /* Make sure images don't overflow */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Research figures responsive on iPad */
+  .research-figure img,
+  .research-figure-medium img {
+    max-width: 90% !important;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+
 </style>
 </head>
 <body>
@@ -1391,39 +1541,40 @@ background: #ffffff;
         </div>
         
         <div class="mt-4 has-text-centered">
-          <div class="buttons is-centered">
-            <a href="https://arxiv.org/abs/2505.23941" class="button is-rounded is-dark" target="_blank" rel="noopener noreferrer" onclick="trackPaperDownload()">
-              <span class="icon">
-                <i class="fas fa-file-pdf"></i>
-              </span>
-              <span>Paper</span>
-            </a>
-            <a href="https://github.com/anvo25/vlms-are-biased" class="button is-rounded is-dark" target="_blank" rel="noopener noreferrer" onclick="trackCodeVisit()">
-              <span class="icon">
-                <i class="fab fa-github"></i>
-              </span>
-              <span>Code</span>
-            </a>
-            <a href="https://huggingface.co/datasets/anvo25/vlms-are-biased" class="button is-rounded is-dark" target="_blank" rel="noopener noreferrer" onclick="trackDatasetVisit()">
-              <span class="icon">
-                <i class="fas fa-database"></i>
-              </span>
-              <span>Dataset</span>
-            </a>
+          <div class="mt-4 has-text-centered">
+            <!-- First row: Paper, Code, Dataset -->
+            <div class="buttons is-centered">
+              <a href="https://arxiv.org/abs/2505.23941" class="button is-rounded is-dark" target="_blank" rel="noopener noreferrer" onclick="trackPaperDownload()">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>Paper</span>
+              </a>
+              <a href="https://github.com/anvo25/vlms-are-biased" class="button is-rounded is-dark" target="_blank" rel="noopener noreferrer" onclick="trackCodeVisit()">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code</span>
+              </a>
+              <a href="https://huggingface.co/datasets/anvo25/vlms-are-biased" class="button is-rounded is-dark" target="_blank" rel="noopener noreferrer" onclick="trackDatasetVisit()">
+                <span class="icon"><i class="fas fa-database"></i></span>
+                <span>Dataset</span>
+              </a>
+            </div>
             
-            <br>
-            <a href="#example-gallery-section" class="button is-rounded is-examples" onclick="trackExamplesVisit()">
-                <span class="icon">
-                    <i class="fas fa-play-circle"></i>
-                </span>
+            
+              <!-- Second row: Test It Yourself, Author Thread, Discuss/Question -->
+            <div class="buttons is-centered">
+              <a href="#example-gallery-section" class="button is-rounded is-examples" onclick="trackExamplesVisit()">
+                <span class="icon"><i class="fas fa-play-circle"></i></span>
                 <span>Test It Yourself</span>
-            </a>
-            <a href="https://x.com/an_vo12/status/1943715159559545186" class="button is-rounded is-discussion" target="_blank" rel="noopener noreferrer" onclick="trackDiscussionVisit()">
-              <span class="icon">
-                <i class="fas fa-comments"></i>
-              </span>
-              <span>Discuss with Authors</span>
-            </a>
+              </a>
+              <div class="button is-rounded is-discussion author-thread-btn" onclick="toggleAuthorMenu()">
+                <span class="icon"><i class="fas fa-users"></i></span>
+                <span>Author Thread</span>
+              </div>
+              <a href="https://github.com/anvo25/vlms-are-biased/issues" class="button is-rounded is-discussion" target="_blank" rel="noopener noreferrer" onclick="trackDiscussionVisit()">
+                <span class="icon"><i class="fas fa-comments"></i></span>
+                <span>Discuss/Question</span>
+              </a>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -2254,16 +2405,15 @@ function initializeGallery() {
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
             
-            // Mobile: full width for vertical stacking
-            if (window.innerWidth <= 768) {
-                galleryItem.style.width = '100%';
-                galleryItem.style.margin = '0 0 0.5rem 0';
-            } else {
-                // Desktop: horizontal layout
-                const gapValue = '1.5rem';
-                galleryItem.style.width = `calc((100% - (${itemsPerView - 1} * ${gapValue})) / ${itemsPerView})`;
-            }
-
+            // Mobile AND iPad: full width for vertical stacking
+          if (window.innerWidth <= 1024) {
+            galleryItem.style.width = '100%';
+            galleryItem.style.margin = '0 0 0.5rem 0';
+          } else {
+            // Desktop: horizontal layout
+            const gapValue = '1.5rem';
+            galleryItem.style.width = `calc((100% - (${itemsPerView - 1} * ${gapValue})) / ${itemsPerView})`;
+          }
             galleryItem.innerHTML = `
               <div class="example-card">
                 <div class="example-image">
@@ -2332,12 +2482,12 @@ function initializeGallery() {
 
   // Also update the startAutoPlay function:
   function startAutoPlay() {
-      if (isPaused) return;
-      clearInterval(autoSlideInterval);
-      
-      // Longer intervals on mobile
-      const interval = window.innerWidth <= 768 ? 7000 : 5000;
-      autoSlideInterval = setInterval(() => changeCategory(1), interval);
+    // Don't start auto-play on touch devices (mobile)
+    if (isPaused || isTouchDevice) return;
+    clearInterval(autoSlideInterval);
+    
+    const interval = 5000; // Only desktop now
+    autoSlideInterval = setInterval(() => changeCategory(1), interval);
   }
 
   function pauseAutoPlay() {
@@ -2346,10 +2496,9 @@ function initializeGallery() {
   }
   
   function getItemsPerView() {
-  if (window.innerWidth <= 768) return 4; // Show 4 items stacked on mobile
-  if (window.innerWidth <= 1024) return 2;
-  return 4;
-}
+    if (window.innerWidth <= 1024) return 4; // Show 4 items stacked on mobile AND iPad
+    return 4; // Desktop horizontal layout
+  }
 
   galleryContainer.addEventListener('click', async function(e) {
     const promptButton = e.target.closest('.copy-prompt-btn');
@@ -2533,6 +2682,38 @@ function setupSmoothScrolling() {
       }
     });
   });
+}
+
+function toggleAuthorMenu() {
+  const existingMenu = document.querySelector('.author-menu');
+  if (existingMenu) {
+    existingMenu.remove();
+    return;
+  }
+
+  const authorBtn = document.querySelector('.author-thread-btn');
+  
+  const menu = document.createElement('div');
+  menu.className = 'author-menu';
+  menu.style.display = 'block';
+  menu.innerHTML = `
+    <a href="https://github.com/anvo25/vlms-are-biased/issues" target="_blank" rel="noopener noreferrer">An Vo's Thread</a>
+    <a href="https://x.com/anh_ng8/status/1929682381683712340" target="_blank" rel="noopener noreferrer">Anh Nguyen's Thread</a>
+    <a href="https://x.com/anh_ng8/status/1953560741367197762" target="_blank" rel="noopener noreferrer">Anh Nguyen's Thread (GPT-5)</a>
+  `;
+
+  // Append to button
+  authorBtn.appendChild(menu);
+
+  // Close menu when clicking elsewhere
+  setTimeout(() => {
+    document.addEventListener('click', function closeMenu(e) {
+      if (!authorBtn.contains(e.target)) {
+        menu.remove();
+        document.removeEventListener('click', closeMenu);
+      }
+    });
+  }, 10);
 }
 </script>
 
