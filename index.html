@@ -2329,8 +2329,14 @@ function initializeGallery() {
         });
     }
     
-    window.addEventListener('resize', () => displayCategory(currentCategoryIndex));
-    
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        displayCategory(currentCategoryIndex);
+      }, 250);
+    });
+        
     displayCategory(0);
   }
 
