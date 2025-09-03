@@ -2329,15 +2329,14 @@ function initializeGallery() {
         });
     }
     
-    if (!isTouchDevice) {
-      let resizeTimeout;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          displayCategory(currentCategoryIndex);
-        }, 250);
-      });
-    }
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        displayCategory(currentCategoryIndex);
+      }, 250);
+    });
+        
     displayCategory(0);
   }
 
