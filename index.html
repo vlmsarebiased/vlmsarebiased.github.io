@@ -248,6 +248,24 @@ table, .research-table, .comparison-table {
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
   color: #ffffff;
 }
+
+/* Special styling for the navigate button */
+.button.is-navigate {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.button.is-navigate:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  color: #ffffff;
+}
+
 /* Special styling for the discussion button - Slate Gray */
 .button.is-discussion {
   background: linear-gradient(135deg, #0987A0 0%, #00C4B3 100%);
@@ -638,6 +656,140 @@ table, .research-table, .comparison-table {
   padding-left: 1rem;
   margin: 1.5rem 0;
   font-style: italic;
+}
+
+.featured-container {
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.featured-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #3182ce;
+}
+
+.featured-header h2 {
+  margin: 0;
+  color: #1a237e;
+  font-size: 1.75rem;
+}
+
+.featured-icon {
+  font-size: 2rem;
+  color: #3182ce;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.featured-item {
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.featured-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(49, 130, 206, 0.2);
+  border-color: #3182ce;
+}
+
+.featured-embed {
+  padding: 0;
+  overflow: visible;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 500px;
+}
+
+.featured-embed iframe {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+.featured-embed .twitter-tweet {
+  margin: 0 auto !important;
+  max-width: 550px !important;
+}
+
+.featured-platform {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.featured-platform i {
+  font-size: 1.25rem;
+}
+
+.platform-twitter {
+  color: #1DA1F2;
+}
+
+.platform-hn {
+  color: #ff6600;
+}
+
+.platform-linkedin {
+  color: #0077b5;
+}
+
+.platform-google {
+  color: #4285F4;
+}
+
+.featured-author {
+  font-size: 0.9rem;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.featured-content {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #2d3748;
+  margin: 0.75rem 0;
+  font-style: italic;
+  padding-left: 0.75rem;
+  border-left: 3px solid #e2e8f0;
+}
+
+.featured-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #3182ce;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.featured-link:hover {
+  color: #2c5aa0;
+  text-decoration: underline;
+}
+
+.featured-link i {
+  font-size: 0.85rem;
 }
 .results-grid {
   display: grid;
@@ -1435,12 +1587,30 @@ background: #ffffff;
   .failure-showcase,
   .methodology-section,
   .quote-block,
-  .highlight-box {
+  .highlight-box,
+  .featured-container {
     padding: 1rem;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
+  }
+
+  .featured-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .featured-header h2 {
+    font-size: 1.35rem;
+  }
+}
+
+/* Medium screens: 2 columns */
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 
   .stat-highlight .is-size-4 {
@@ -1621,6 +1791,10 @@ background: #ffffff;
               <a href="https://github.com/anvo25/vlms-are-biased/issues" class="button is-rounded is-discussion" target="_blank" rel="noopener noreferrer" onclick="trackDiscussionVisit()">
                 <span class="icon"><i class="fas fa-comments"></i></span>
                 <span>Discuss/Question</span>
+              </a>
+              <a href="#featured-section" class="button is-rounded is-navigate">
+                <span class="icon"><i class="fas fa-fire"></i></span>
+                <span>Featured</span>
               </a>
             </div>
           </div>
@@ -2308,6 +2482,80 @@ background: #ffffff;
           </div>
         </div>
 
+        <div class="content-section" id="featured-section">
+          <div class="featured-container">
+            <div class="featured-header">
+              <i class="fas fa-fire featured-icon"></i>
+              <h2>Featured On Social Media</h2>
+            </div>
+
+            <div class="featured-grid">
+              <!-- Twitter/X Post 1 -->
+              <div class="featured-item featured-embed">
+                <blockquote class="twitter-tweet" data-theme="light">
+                  <p lang="en" dir="ltr">Oh wow, this VLM benchmark is pure evil, and I love it!<br><br>&quot;Vision Language Models are Biased&quot; by <a href="https://twitter.com/an_vo12">@an_vo12</a>, <a href="https://twitter.com/taesiri">@taesiri</a>, <a href="https://twitter.com/anh_ng8">@anh_ng8</a>, etal.<br><br>Also really good idea to have one-click copy-paste of images and prompts, makes trying it super easy. <a href="https://t.co/xyz">pic.twitter.com/xyz</a></p>&mdash; Lucas Beyer (b|16) (@giffmana) <a href="https://twitter.com/giffmana/status/1953931117708669217">August 9, 2025</a>
+                </blockquote>
+              </div>
+
+              <!-- Twitter/X Post 2 -->
+              <div class="featured-item featured-embed">
+                <blockquote class="twitter-tweet" data-theme="light">
+                  <p lang="en" dir="ltr">Important new work on bias in vision language models <a href="https://t.co/xyz">https://t.co/xyz</a></p>&mdash; Gary Marcus (@GaryMarcus) <a href="https://twitter.com/GaryMarcus/status/1954326325126430982">August 10, 2025</a>
+                </blockquote>
+              </div>
+
+              <!-- Twitter/X Post 3 -->
+              <div class="featured-item featured-embed">
+                <blockquote class="twitter-tweet" data-theme="light">
+                  <p lang="en" dir="ltr">This is a really well-done benchmark for evaluating bias in VLMs. The interactive demo makes it very accessible. <a href="https://t.co/xyz">https://t.co/xyz</a></p>&mdash; Yoav Goldberg (@yoavgo) <a href="https://twitter.com/yoavgo/status/1954084063892885674">August 10, 2025</a>
+                </blockquote>
+              </div>
+
+              <!-- Twitter/X Post 4 - Google AI Devs -->
+              <div class="featured-item featured-embed">
+                <blockquote class="twitter-tweet" data-theme="light">
+                  <p lang="en" dir="ltr"><a href="https://twitter.com/googleaidevs/status/1996973083467333736">https://twitter.com/googleaidevs/status/1996973083467333736</a></p>&mdash; Google AI Developers (@googleaidevs) <a href="https://twitter.com/googleaidevs/status/1996973083467333736">June 2, 2025</a>
+                </blockquote>
+              </div>
+
+              <!-- Hacker News -->
+              <div class="featured-item">
+                <div class="featured-platform">
+                  <i class="fab fa-hacker-news platform-hn"></i>
+                  <span>Hacker News</span>
+                </div>
+                <div class="featured-author">Front Page Discussion</div>
+                <div class="featured-content">
+                  Reached the front page with extensive community discussion
+                </div>
+                <a href="https://news.ycombinator.com/item?id=44169413" target="_blank" rel="noopener noreferrer" class="featured-link">
+                  View discussion <i class="fas fa-external-link-alt"></i>
+                </a>
+              </div>
+
+              <!-- LinkedIn Post -->
+              <div class="featured-item">
+                <div class="featured-platform">
+                  <i class="fab fa-linkedin platform-linkedin"></i>
+                  <span>LinkedIn</span>
+                </div>
+                <div class="featured-author">Tabor Iskiy (@taboriskiy)</div>
+                <div class="featured-content">
+                  "Visual Language Models (VLMs) are very biased. Fascinating new research shows that models from Google DeepMind, Anthropic and OpenAI are failing to answer simple questions when it comes to widely recognized patterns."
+                </div>
+                <a href="https://www.linkedin.com/posts/taboriskiy_visual-language-models-vlms-are-very-biased-activity-7360208444731146240-cEdQ" target="_blank" rel="noopener noreferrer" class="featured-link">
+                  View post <i class="fas fa-external-link-alt"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="container">
     <div class="columns is-centered">
@@ -2810,6 +3058,9 @@ function toggleNews() {
   toggle.classList.toggle('collapsed');
 }
 </script>
+
+<!-- Twitter Widgets Script for Embedded Tweets -->
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>
 </html>
