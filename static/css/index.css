@@ -1007,3 +1007,13 @@ h2.title:hover .anchor,
   color: #555;
   font-size: 0.95rem;
 }
+
+.news-list .source-icon {
+  margin-right: 0.45rem;
+}
+
+.source-icon.is-wordmark {
+  width: auto;
+  height: 0.95em;
+  border-radius: 0;
+}
