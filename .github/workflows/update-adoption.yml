@@ -1,0 +1,36 @@
+name: Update VLMBias adoption
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # every Monday 06:00 UTC
+  workflow_dispatch:       # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pdftotext
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      - name: Refresh counts and find new candidates
+        env:
+          S2_API_KEY: ${{ secrets.S2_API_KEY }}
+        run: python3 scripts/update_adoption.py --report "$RUNNER_TEMP/report.md"
+
+      - name: Open or update the pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: auto/update-adoption
+          delete-branch: true
+          title: 'Weekly VLMBias adoption update'
+          body-path: ${{ runner.temp }}/report.md
+          commit-message: 'Update VLMBias adoption counts'
+          add-paths: |
+            static/js/adoption-data.js
+            scripts/adoption_reviewed.json

@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=20261011w">
+  <link rel="stylesheet" href="./static/css/index.css?v=20261109f">
   <link rel="icon" href="./static/icons/assumption.png" type="image/png">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -138,6 +138,15 @@
             </div>
           </div>
 
+          <div class="stat-strip" aria-label="VLMBias adoption">
+            <a class="stat" href="#model-cards"><span class="stat-num" data-adopt="cards">4</span><span class="stat-label">frontier model cards</span></a>
+            <a class="stat" href="#model-cards"><span class="stat-num" data-adopt="models">17</span><span class="stat-label">models evaluated by frontier labs</span></a>
+            <a class="stat" href="#papers-using"><span class="stat-num" data-adopt="citations">80+</span><span class="stat-label">citations</span></a>
+            <a class="stat" href="#papers-using"><span class="stat-num" data-adopt="papers">12</span><span class="stat-label">papers evaluate on it</span></a>
+            <a class="stat" href="#papers-using"><span class="stat-num" data-adopt="frameworks">3</span><span class="stat-label">eval frameworks</span></a>
+          </div>
+          <p class="stat-asof">Last updated <span data-adopt="updated">Nov 9, 2026</span></p>
+
           <div class="impact-strip">
             <div class="impact-row">
               <span class="impact-label">Used by</span>
@@ -150,6 +159,7 @@
             <div class="impact-row">
               <span class="impact-label">Available in</span>
               <a class="impact-chip" href="https://github.com/EvolvingLMMs-Lab/lmms-eval/tree/main/lmms_eval/tasks/vlms_are_biased" target="_blank" rel="noopener noreferrer"><img class="is-wordmark" src="./static/icons/sources/lmms-lab-wordmark.png" alt=""/>lmms-eval</a>
+              <a class="impact-chip" href="https://github.com/open-compass/VLMEvalKit" target="_blank" rel="noopener noreferrer"><i class="fas fa-toolbox chip-fa" aria-hidden="true"></i>VLMEvalKit</a>
               <a class="impact-chip" href="https://evalscope.readthedocs.io/en/latest/benchmarks/vlms_are_biased.html" target="_blank" rel="noopener noreferrer"><img src="./static/icons/sources/evalscope.png" alt=""/>EvalScope</a>
             </div>
             <div class="impact-row">
@@ -200,12 +210,13 @@
         <h2 class="title is-3" id="news">News<a class="anchor" href="#news" aria-label="Link to this section"><i class="fas fa-link"></i></a></h2>
         <div class="news-scroll" tabindex="0" aria-label="News">
         <ul class="news-list">
+          <li><span class="news-date">Nov 2026</span><span><img class="source-icon" src="./static/icons/assumption.png" alt=""/>New <a href="#used-by">adoption tracker</a>: 4 frontier model cards, 12 papers, and 3 evaluation frameworks now use VLMBias.</span></li>
           <li><span class="news-date">Oct 2026</span><span><img class="source-icon" src="./static/icons/models/openai.png" alt=""/>We tested <b>GPT-6 Astra</b>. It reaches 84% on VLMBias, but on most of its mistakes it still gives the memorized answer, often without reasoning at all. See the <a href="#gpt-6-astra">results</a>.</span></li>
           <li><span class="news-date">Oct 2026</span><span><img class="source-icon" src="./static/icons/sources/evalscope.png" alt=""/>Now available in <b>EvalScope</b>, ModelScope&rsquo;s open-source evaluation framework. See the <a href="https://evalscope.readthedocs.io/en/latest/benchmarks/vlms_are_biased.html" target="_blank" rel="noopener noreferrer">VLMs Are Biased benchmark page</a>.</span></li>
           <li><span class="news-date">Aug 2026</span><span><img class="source-icon" src="./static/icons/sources/qwen.ai.png" alt=""/>Used by <b>Alibaba Qwen</b> to evaluate
-            <a href="https://qwen.ai/blog?id=qwen3.8" target="_blank" rel="noopener noreferrer">Qwen3.8</a>.</span></li>
+            <a href="https://qwen.ai/blog?id=qwen3.8" target="_blank" rel="noopener noreferrer">Qwen3.8</a>. Qwen3.8-Max scores 88.3%, the highest reported so far.</span></li>
           <li><span class="news-date">Jul 2026</span><span><img class="source-icon" src="./static/icons/sources/kimi.ai.jpg" alt=""/>Used by <b>Moonshot AI</b> as a source benchmark for
-            <a href="https://www.kimi.ai/blog/perception-bench" target="_blank" rel="noopener noreferrer">PerceptionBench</a>.</span></li>
+            <a href="https://www.kimi.ai/blog/perception-bench" target="_blank" rel="noopener noreferrer">PerceptionBench</a>, which the Kimi K3 model card reports.</span></li>
           <li><span class="news-date">Mar 2026</span><span><img class="source-icon" src="./static/icons/sources/news.sky.com.png" alt=""/>Featured on <b>Sky News</b> in a
             <a href="#sky-news">film</a> and
             <a href="https://news.sky.com/story/ai-could-be-giving-us-lethal-edge-in-iran-war-but-there-are-dangers-13514784" target="_blank" rel="noopener noreferrer">article</a>
@@ -221,7 +232,7 @@
           <li><span class="news-date">Dec 2025</span><span><img class="source-icon is-wordmark" src="./static/icons/sources/lmms-lab-wordmark.png" alt=""/>Now officially supported in
             <a href="https://github.com/EvolvingLMMs-Lab/lmms-eval/tree/main/lmms_eval/tasks/vlms_are_biased" target="_blank" rel="noopener noreferrer">lmms-eval</a>,
             so you can run the benchmark out of the box on many VLMs.</span></li>
-          <li><span class="news-date">Dec 2025</span><span><img class="source-icon" src="./static/icons/sources/deepmind.com.png" alt=""/>Used by <b>Google DeepMind</b> to evaluate Gemini 3 Pro. See
+          <li><span class="news-date">Dec 2025</span><span><img class="source-icon" src="./static/icons/sources/deepmind.com.png" alt=""/>Used by <b>Google DeepMind</b> to evaluate Gemini 3 Pro, which scores 50.6%. See
             <a href="https://blog.google/technology/developers/gemini-3-pro-vision" target="_blank" rel="noopener noreferrer">Gemini 3 Pro: the frontier of vision AI</a>.</span></li>
           <li><span class="news-date">Nov 2025</span><span><img class="source-icon" src="./static/icons/sources/arxiv.org.png" alt=""/>Version 3 of the <a href="https://arxiv.org/abs/2505.23941" target="_blank" rel="noopener noreferrer">paper</a> released.</span></li>
           <li><span class="news-date">Sep 2025</span><span><img class="source-icon" src="./static/icons/sources/arxiv.org.png" alt=""/>Version 2 of the <a href="https://arxiv.org/abs/2505.23941" target="_blank" rel="noopener noreferrer">paper</a> released.</span></li>
@@ -1030,28 +1041,66 @@
           like it.
         </p>
 
-        <!-- Impact. -->
+        <!-- Impact. Numbers, chart, table and lists are rendered from static/js/adoption-data.js. -->
         <h2 class="title is-3" id="used-by">Who uses VLMBias<a class="anchor" href="#used-by" aria-label="Link to this section"><i class="fas fa-link"></i></a></h2>
-        <ul class="source-list">
-          <li><img class="source-icon" src="./static/icons/sources/kimi.ai.jpg" alt=""/><b>Moonshot AI</b> used VLMBias as a
-            source benchmark for <a href="https://www.kimi.ai/blog/perception-bench" target="_blank" rel="noopener noreferrer">PerceptionBench</a> (2026).</li>
-          <li><img class="source-icon" src="./static/icons/sources/qwen.ai.png" alt=""/><b>Alibaba Qwen</b> used it to evaluate
-            <a href="https://qwen.ai/blog?id=qwen3.8" target="_blank" rel="noopener noreferrer">Qwen3.8</a> (2026).</li>
-          <li><img class="source-icon" src="./static/icons/sources/seed.bytedance.com.png" alt=""/><b>ByteDance</b> used it to evaluate
-            <a href="https://seed.bytedance.com/en/blog/seed-2-0-official-launch" target="_blank" rel="noopener noreferrer">Seed 2.0</a> (2026) and
-            <a href="https://seed.bytedance.com/en/blog/official-release-of-seed1-8-a-generalized-agentic-model" target="_blank" rel="noopener noreferrer">Seed 1.8</a> (2025).</li>
-          <li><img class="source-icon" src="./static/icons/sources/deepmind.com.png" alt=""/><b>Google DeepMind</b> used it to evaluate
-            <a href="https://blog.google/technology/developers/gemini-3-pro-vision" target="_blank" rel="noopener noreferrer">Gemini 3 Pro</a>
-            and shared the results <a href="https://twitter.com/googleaidevs/status/1996973083467333736" target="_blank" rel="noopener noreferrer">on X</a> (2025).</li>
+        <p>
+          <b><span data-adopt="cards">4</span> frontier model cards</b> report
+          VLMBias scores for <b><span data-adopt="models">17</span> models</b>, <b><span data-adopt="papers">12</span> papers</b>
+          run experiments on it, and <b><span data-adopt="frameworks">3</span> open-source frameworks</b> support it.
+        </p>
+        <p class="adopt-note">
+          <b>Last updated <span data-adopt="updated">Nov 9, 2026</span>.</b>
+          Citation counts refresh automatically every week from Semantic Scholar and OpenAlex.
+          Model cards and papers are added by hand, only after we confirm that they report results on VLMBias.
+        </p>
+        <details class="viz-table adopt-log-box">
+          <summary>Update history</summary>
+          <ul class="adopt-log" id="adoption-log"></ul>
+        </details>
+
+        <h3 class="title is-4" id="model-cards">Model cards that report VLMBias<a class="anchor" href="#model-cards" aria-label="Link to this section"><i class="fas fa-link"></i></a></h3>
+        <p class="viz-title">VLMBias accuracy (%) of each lab's own model, as reported in its release</p>
+        <div class="adopt-chart" id="adoption-chart" role="list" aria-label="VLMBias accuracy reported in model cards">
+          <noscript>Gemini 3 Pro 50.6 (Dec 2025), Seed1.8 62.0 (Dec 2025), Seed2.0 Pro 77.4 (Feb 2026), Qwen3.8-Max 88.3 (Aug 2026).</noscript>
+        </div>
+        <details class="viz-table">
+          <summary>Show every score in each card</summary>
+          <div class="table-container">
+          <table class="table is-fullwidth is-narrow evidence-table adopt-table">
+            <thead>
+            <tr><th>Release</th><th>Lab</th><th>Source</th><th>Lab&rsquo;s model</th><th>VLMBias</th><th>Other models in the same table</th></tr>
+            </thead>
+            <tbody id="adoption-table"></tbody>
+          </table>
+          </div>
+          <p class="adopt-note">
+            Scores are copied from each card&rsquo;s own table. Each lab runs its own evaluation, so the same model can
+            score differently across cards (e.g., Claude Opus 4.5 gets 32.7 in Google&rsquo;s table and 21.4 in ByteDance&rsquo;s).
+          </p>
+        </details>
+        <ul class="source-list" id="adoption-derived">
           <li><img class="source-icon" src="./static/icons/sources/moondream.ai.png" alt=""/><b>Moondream</b> used our examples to show
             reduced counting bias through grounded reasoning in its
             <a href="https://moondream.ai/blog/moondream-2025-06-21-release" target="_blank" rel="noopener noreferrer">2025-06-21 release</a>.</li>
         </ul>
+
+        <h3 class="title is-4" id="papers-using">Papers that evaluate on VLMBias<a class="anchor" href="#papers-using" aria-label="Link to this section"><i class="fas fa-link"></i></a></h3>
         <p>
-          VLMBias is also available in two open-source evaluation frameworks,
-          <a href="https://github.com/EvolvingLMMs-Lab/lmms-eval/tree/main/lmms_eval/tasks/vlms_are_biased" target="_blank" rel="noopener noreferrer">lmms-eval</a>
-          and <a href="https://evalscope.readthedocs.io/en/latest/benchmarks/vlms_are_biased.html" target="_blank" rel="noopener noreferrer">EvalScope</a>
-          (ModelScope), so you can run it on many VLMs out of the box.
+          VLMBias has <span data-adopt="citations-exact">82</span> citations
+          (<a href="https://www.semanticscholar.org/arxiv/2505.23941" target="_blank" rel="noopener noreferrer">Semantic Scholar</a>,
+          <a href="https://openalex.org/W4414855608" target="_blank" rel="noopener noreferrer">OpenAlex</a>).
+          These <span data-adopt="papers">12</span> papers go further and run experiments on VLMBias data.
+        </p>
+        <div class="news-scroll adopt-papers-scroll" tabindex="0" aria-label="Papers that evaluate on VLMBias">
+          <ul class="adopt-papers" id="adoption-papers"></ul>
+        </div>
+
+        <p>
+          VLMBias is also available in <span data-adopt="frameworks">3</span> open-source evaluation frameworks,
+          <span id="adoption-frameworks"><a href="https://github.com/EvolvingLMMs-Lab/lmms-eval/tree/main/lmms_eval/tasks/vlms_are_biased" target="_blank" rel="noopener noreferrer">lmms-eval</a>,
+          <a href="https://github.com/open-compass/VLMEvalKit" target="_blank" rel="noopener noreferrer">VLMEvalKit</a>, and
+          <a href="https://evalscope.readthedocs.io/en/latest/benchmarks/vlms_are_biased.html" target="_blank" rel="noopener noreferrer">EvalScope</a></span>,
+          so you can run it on many VLMs out of the box.
         </p>
         <figure class="post-figure">
           <img loading="lazy" src="./static/images/moondream_example.png"
@@ -1152,6 +1201,8 @@
 </footer>
 
 <script src="./static/js/gallery.js?v=20261011c"></script>
+<script src="./static/js/adoption-data.js?v=20261109c"></script>
+<script src="./static/js/adoption.js?v=20261109d"></script>
 <script src="./static/js/astra-data.js?v=20261011b"></script>
 <script src="./static/js/astra-gallery.js?v=20261011b"></script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
