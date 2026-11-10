@@ -37,9 +37,9 @@
     ]},
     { key: "illusions", name: "Optical illusions", icon: "fas fa-eye", items: [
       { image: "task6_optical_illusion/ebbinghaus/Ebbinghaus_017_str3_diff0p7_notitle_px1152.png", question: "Are the two red circles equal in size? " + YESNO, truth: "No", bias: "Yes" },
-      { image: "task6_optical_illusion/muller_lyer/MullerLyer_023_str50_diff0p5_notitle_px1152.png", question: "Are the two horizontal lines equal in length? " + YESNO, truth: "No", bias: "Yes" },
-      { image: "task6_optical_illusion/zollner/Zollner_022_strneg75_diffneg2p5_notitle_px1152.png", question: "Are the two horizontal lines parallel? " + YESNO, truth: "No", bias: "Yes" },
-      { image: "task6_optical_illusion/ponzo/Ponzo_023_str18_diff0p25_notitle_px1152.png", question: "Are the two horizontal lines equal in length? " + YESNO, truth: "No", bias: "Yes" }
+      { image: "task6_optical_illusion/muller_lyer/MullerLyer_023_str50_diff0p5_notitle_px1152.png", question: "Are the two red lines equal in length? " + YESNO, truth: "No", bias: "Yes" },
+      { image: "task6_optical_illusion/zollner/Zollner_022_strneg75_diffneg2p5_notitle_px1152.png", question: "Are the two red lines parallel? " + YESNO, truth: "No", bias: "Yes" },
+      { image: "task6_optical_illusion/ponzo/Ponzo_023_str18_diff0p25_notitle_px1152.png", question: "Are the two red lines equal in length? " + YESNO, truth: "No", bias: "Yes" }
     ]},
     { key: "grids", name: "Patterned grids", icon: "fas fa-th", items: [
       { image: "task7_patterned_grid/dice/dice_001_remove_C3_notitle_px1152.png", question: "How many circles are there in cell C3? " + COUNT, truth: "2", bias: "3" },
