@@ -4,14 +4,15 @@
 // Each model card lists the VLMBias scores exactly as printed in that card's own table;
 // the same model can differ across cards because each lab runs its own evaluation.
 window.VLMBIAS_ADOPTION = {
-  "updated": "2026-11-09",
+  "updated": "2026-11-16",
   "citations": {
     "semantic_scholar": 79,
-    "openalex": 82,
+    "openalex": 84,
     "semantic_scholar_url": "https://www.semanticscholar.org/arxiv/2505.23941",
     "openalex_url": "https://openalex.org/W4414855608"
   },
   "log": [
+    {"date": "2026-11-16", "text": "Citations: OpenAlex 82 → 84."},
     {"date": "2026-11-09", "text": "Started the tracker: 4 model cards (Gemini 3 Pro, Seed1.8, Seed2.0, Qwen3.8), 12 papers, 3 frameworks. Citations: 79 on Semantic Scholar, 82 on OpenAlex."}
   ],
   "model_cards": [
